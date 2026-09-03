@@ -49,7 +49,7 @@ signed off** — packaging a pipeline that doesn't work yet wastes days.
 
 ```
 Phase 0  Kaggle spike        — prove the 4 models load and run on free GPU      [DONE — all 4 features + full dub chain (9/9 stages) proven on real GPU]
-Phase 1  Core engine         — the 4 pipelines as a clean importable package    [WRITTEN; two real bugs found+fixed in translate.py via the mirrored spike script; no live GPU run of the actual package yet, only the spike script it's mirrored from]
+Phase 1  Core engine         — the 4 pipelines as a clean importable package    [DONE — the real package (not a mirror) ran all 4 pipelines on real GPU, 2 more real bugs found+fixed]
 Phase 2  Gradio UI           — the app a non-technical user actually sees       [DONE — premium redesign, verified in-browser across all 4 tabs, no GPU needed]
 Phase 3  Packaging           — one-click installers per OS                      [DRAFTED, NOT RUN]
 Phase 4  CI + Release        — GitHub Actions builds all 3 OSes, publishes      [WRITTEN, NEVER RUN — no push yet]
@@ -637,12 +637,13 @@ demonstrated, not merely written.
 - [ ] espeak-ng bundling path confirmed (§7.3) — worked via `apt-get install espeak-ng` on Kaggle; **packaged-app bundling (no apt available) still unverified**
 - [x] Timings recorded in kaggle/results/README.md — VRAM (P0.7) not captured in phase0_spike; dub_test.py does capture peak VRAM per stage if that run completed, check its perf_summary.json
 
-**Phase 1 — engine** (all written against the Phase 0-verified API calls; none browser/GPU-tested yet)
-- [x] `device.py`, `paths.py`, `models.py` with resumable progress downloads (huggingface_hub snapshot_download)
-- [x] `audio.py` with bundled-ffmpeg resolution
-- [x] `tts.py`, `clone.py`, `isolate.py` — written; **no CPU smoke test has actually been run yet**, that's the next concrete step
-- [x] `translate.py` with a license-cleared model (Opus-MT primary, M2M100 fallback)
-- [x] `dub.py` with the §6.4 timing algorithm — logic mirrors kaggle/dub_test/dub_test.py; **confirm that spike passed before trusting this file**
+**Phase 1 — engine** — DONE, GPU-verified against the real package, 2026-09-04
+(`kaggle/package_test/`, results in `kaggle/results/phase1_real_package_test/`)
+- [x] `device.py`, `paths.py`, `models.py` with resumable progress downloads (huggingface_hub snapshot_download) — exercised for real (models.ensure()'s download path actually ran on Kaggle)
+- [x] `audio.py` with bundled-ffmpeg resolution — the system-PATH fallback branch verified (Kaggle's apt-installed ffmpeg, not a bundled binary)
+- [x] `tts.py`, `clone.py` (incl. real Demucs denoise-reference step), `isolate.py` — all three run for real on GPU and pass
+- [x] `translate.py` with a license-cleared model (Opus-MT primary, M2M100 fallback) — exercised inside the real dub() run, produced correct Spanish
+- [x] `dub.py` with the §6.4 timing algorithm — runs for real end to end (video in, translated+re-voiced video out); one real bug found and fixed (see kaggle/results/README.md's phase1 section): dub() didn't check the source clip had enough voice audio to serve as its own cloning reference before calling clone.clone()
 
 **Phase 2 — UI**
 - [x] 4-tab Gradio Blocks app, `127.0.0.1`, `share=False` — `src/vocalith/ui/app.py`

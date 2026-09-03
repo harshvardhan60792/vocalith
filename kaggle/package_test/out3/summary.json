@@ -1,0 +1,6 @@
+{
+  "tts": true,
+  "clone": true,
+  "isolate": true,
+  "dub": true
+}

@@ -1,0 +1,11 @@
+1
+00:00:00,000 --> 00:00:04,080
+Esta es la verdadera tubería de doblaje que habla inglés antes de la traducción.
+
+2
+00:00:04,820 --> 00:00:08,560
+Necesita correr el tiempo suficiente para producir más de seis segundos de audio de voz,
+
+3
+00:00:09,040 --> 00:00:13,000
+ya que esa pista de voz se duplica como su propia referencia de clonación para revocación.

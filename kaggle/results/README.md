@@ -1,3 +1,32 @@
+## phase1_real_package_test/ — DONE, 2026-09-04, kernel v3, Tesla P100
+
+The Phase 0 spikes (`pipeline_test`, `dub_test`) proved the *logic* works by mirroring
+it into standalone scripts -- they never imported the actual `src/vocalith/` package.
+This closes that gap: uploaded the real package as a Kaggle dataset
+(`harshu60792/vocalith-package-src`) and ran its actual `tts.synthesize()`,
+`clone.clone()` (including the real Demucs denoise-reference step), `isolate.isolate()`,
+and `dub.dub()` functions directly, unmodified, exactly as the shipped app calls them.
+
+**Result: all 4 pass.** Real Spanish output from the real `dub()` function:
+*"Esta es la verdadera tubería de doblaje que habla inglés antes de la traducción..."*
+
+Two real bugs found and fixed by this run (not spike-script artifacts -- these were in
+the actual shipped code and would have shipped broken):
+1. **v1→v2:** the dataset upload flattened the `vocalith/` folder (files landed directly
+   at the dataset root, no wrapper folder) -- `import vocalith` failed. Fixed by finding
+   the package root via an unambiguous marker file (`paths.py`) and symlinking it to a
+   dir literally named `vocalith` before adjusting `sys.path`.
+2. **v2→v3:** `dub.dub()` called `clone.clone()` without first checking the source
+   clip's voice track was long enough to serve as its own cloning reference -- a short
+   clip produced a confusing generic "upload a reference sample" error in a context
+   where the user never manually uploaded one. Fixed in `src/vocalith/pipelines/dub.py`
+   with a clear, dubbing-specific error message, and verified by lengthening the test
+   clip to actually exercise the success path too.
+
+Kaggle dataset source lives at `kaggle/package_test/vocalith_dataset/` (gitignored,
+transient -- re-copy from `src/vocalith/` and re-upload via `kaggle datasets version`
+if this needs re-running after further changes).
+
 # Kaggle spike results
 
 Saved so nobody has to re-run Kaggle GPU time to see this project's pipeline actually
