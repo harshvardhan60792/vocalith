@@ -5,6 +5,9 @@
 # (bash chokes on the trailing \r). See kaggle/results/README.md's Linux packaging
 # test section for the exact failure this caused.
 *.sh text eol=lf
+# .py tolerates CRLF fine at runtime (Python's universal-newline handling) -- this
+# is consistency, not a functional fix like the .sh rule above.
+*.py text eol=lf
 
 # Windows scripts keep CRLF -- that's their native, correct line ending.
 *.ps1 text eol=crlf
