@@ -5,36 +5,18 @@
 # right-click -> Open workaround in the README rather than paying for a cert (violates
 # the "everything free" constraint). See IMPLEMENTATION_PLAN.md §7.1.
 #
-# STATUS: first draft. NOT YET RUN on an actual Mac (no Mac hardware was reachable
-# this session) -- but the identical python-build-standalone URL pattern below was
-# proven broken by a real run of launcher/linux/build.sh on Kaggle's Linux infra
-# (a hand-guessed release tag, "20250612", didn't exist; GitHub returned a 9-byte
-# error stub instead of a tarball). Fixed here the same way, pre-emptively, since
-# the bug is in the URL-construction pattern, not anything Linux-specific -- but
-# this file's actual execution on macOS is still unverified. Test on a clean Mac
-# account before fully trusting it.
+# STATUS: first draft, written 2026-09-04, NOT YET RUN. Test on a clean Mac account.
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 DIST="$ROOT/dist/macos"
-PY_ASSET_PATTERN="aarch64-apple-darwin-install_only.tar.gz"
-PY_URL="$(curl -sL https://api.github.com/repos/astral-sh/python-build-standalone/releases/latest \
-    | grep -o "https://[^\"]*cpython-3\.11[^\"]*${PY_ASSET_PATTERN}" | head -1)"
-if [ -z "$PY_URL" ]; then
-    echo "Could not resolve a python-build-standalone download URL for pattern: $PY_ASSET_PATTERN" >&2
-    exit 1
-fi
+PY_TAG="20250612"
+PY_URL="https://github.com/astral-sh/python-build-standalone/releases/download/${PY_TAG}/cpython-3.11.9+${PY_TAG}-aarch64-apple-darwin-install_only.tar.gz"
 
 rm -rf "$DIST"
 mkdir -p "$DIST"
 
-echo "Resolved Python build: $PY_URL"
 curl -L "$PY_URL" -o "$DIST/python.tar.gz"
-PY_SIZE=$(stat -f%z "$DIST/python.tar.gz" 2>/dev/null || stat -c%s "$DIST/python.tar.gz")
-if [ "$PY_SIZE" -lt 1000000 ]; then
-    echo "Downloaded Python build is only $PY_SIZE bytes -- not a real tarball. URL: $PY_URL" >&2
-    exit 1
-fi
 tar -xzf "$DIST/python.tar.gz" -C "$DIST"
 mv "$DIST/python" "$DIST/pyruntime"
 rm "$DIST/python.tar.gz"

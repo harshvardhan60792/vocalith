@@ -2,37 +2,20 @@
 # Linux portable bundle: python-build-standalone + site-packages + bundled ffmpeg,
 # tarballed as Vocalith-linux-x86_64.tar.gz. See IMPLEMENTATION_PLAN.md §7.1.
 #
-# STATUS: run for real on Kaggle's Linux infra 2026-09-04 (see kaggle/results/README.md).
-# First attempt used a hand-guessed release tag ("20250612") that turned out not to
-# exist -- GitHub returned a 9-byte error stub instead of a tarball, and `tar` failed
-# with "gzip: stdin: not in gzip format". Fixed by resolving the latest release via
-# GitHub's API at build time instead of hardcoding a tag that inevitably goes stale
-# (python-build-standalone cuts releases roughly weekly).
+# STATUS: first draft, written 2026-09-04, NOT YET RUN. Test on a container with no
+# system Python before trusting it.
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 DIST="$ROOT/dist/linux"
-PY_ASSET_PATTERN="x86_64-unknown-linux-gnu-install_only.tar.gz"
-PY_URL="$(curl -sL https://api.github.com/repos/astral-sh/python-build-standalone/releases/latest \
-    | grep -o "https://[^\"]*cpython-3\.11[^\"]*${PY_ASSET_PATTERN}" | head -1)"
-if [ -z "$PY_URL" ]; then
-    echo "Could not resolve a python-build-standalone download URL for pattern: $PY_ASSET_PATTERN" >&2
-    exit 1
-fi
+PY_TAG="20250612"  # python-build-standalone release tag -- pin and bump deliberately
+PY_URL="https://github.com/astral-sh/python-build-standalone/releases/download/${PY_TAG}/cpython-3.11.9+${PY_TAG}-x86_64-unknown-linux-gnu-install_only.tar.gz"
 FFMPEG_URL="https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz"
 
 rm -rf "$DIST"
 mkdir -p "$DIST"
 
-echo "Resolved Python build: $PY_URL"
 curl -L "$PY_URL" -o "$DIST/python.tar.gz"
-# Catches exactly the failure this comment block describes above: a bad URL silently
-# downloading a tiny error page instead of the real ~40-50MB tarball.
-PY_SIZE=$(stat -c%s "$DIST/python.tar.gz" 2>/dev/null || stat -f%z "$DIST/python.tar.gz")
-if [ "$PY_SIZE" -lt 1000000 ]; then
-    echo "Downloaded Python build is only $PY_SIZE bytes -- not a real tarball. URL: $PY_URL" >&2
-    exit 1
-fi
 tar -xzf "$DIST/python.tar.gz" -C "$DIST"
 mv "$DIST/python" "$DIST/pyruntime"
 rm "$DIST/python.tar.gz"

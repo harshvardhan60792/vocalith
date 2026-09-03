@@ -1,0 +1,46 @@
+[{"stream_name":"stdout","time":1.051128992,"data":"Found repo slice at: /kaggle/input/datasets/harshu60792/vocalith-repo-slice\n"}
+,{"stream_name":"stdout","time":1.051191907,"data":"$ mkdir -p /kaggle/working/repo\n"}
+,{"stream_name":"stdout","time":1.070971237,"data":"  (exit code 0)\n"}
+,{"stream_name":"stdout","time":1.071093949,"data":"$ cp -r /kaggle/input/datasets/harshu60792/vocalith-repo-slice/src /kaggle/input/datasets/harshu60792/vocalith-repo-slice/launcher /kaggle/input/datasets/harshu60792/vocalith-repo-slice/pyproject.toml /kaggle/working/repo/\n"}
+,{"stream_name":"stdout","time":1.157075942,"data":"  (exit code 0)\n"}
+,{"stream_name":"stdout","time":1.157104022,"data":"$ chmod +x /kaggle/working/repo/launcher/linux/build.sh\n"}
+,{"stream_name":"stdout","time":1.162336248,"data":"  (exit code 0)\n"}
+,{"stream_name":"stdout","time":1.162361989,"data":"$ ls -la /kaggle/working/repo\n"}
+,{"stream_name":"stdout","time":1.205493266,"data":"total 20\n"}
+,{"stream_name":"stdout","time":1.205527244,"data":"drwxr-xr-x 4 root root 4096 Sep  3 23:23 .\n"}
+,{"stream_name":"stdout","time":1.205533137,"data":"drwxr-xr-x 3 root root 4096 Sep  3 23:23 ..\n"}
+,{"stream_name":"stdout","time":1.205537931,"data":"drwxr-xr-x 5 root root 4096 Sep  3 23:23 launcher\n"}
+,{"stream_name":"stdout","time":1.205542647,"data":"-rw-r--r-- 1 root root 2070 Sep  3 23:23 pyproject.toml\n"}
+,{"stream_name":"stdout","time":1.205547341,"data":"drwxr-xr-x 3 root root 4096 Sep  3 23:23 src\n"}
+,{"stream_name":"stdout","time":1.20555232,"data":"\n"}
+,{"stream_name":"stdout","time":1.205555785,"data":"  (exit code 0)\n"}
+,{"stream_name":"stdout","time":1.205558811,"data":"\n"}
+,{"stream_name":"stdout","time":1.205561738,"data":"===== Running launcher/linux/build.sh =====\n"}
+,{"stream_name":"stdout","time":1.205564768,"data":"$ bash launcher/linux/build.sh\n"}
+,{"stream_name":"stdout","time":1.60943166,"data":"  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current\n"}
+,{"stream_name":"stdout","time":1.609467322,"data":"                                 Dload  Upload   Total   Spent    Left  Speed\n"}
+,{"stream_name":"stdout","time":1.6094739759999999,"data":"\n"}
+,{"stream_name":"stdout","time":1.609477643,"data":"  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\n"}
+,{"stream_name":"stdout","time":1.609480998,"data":"  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\n"}
+,{"stream_name":"stdout","time":1.60948453,"data":"100     9  100     9    0     0     41      0 --:--:-- --:--:-- --:--:--    41\n"}
+,{"stream_name":"stdout","time":1.609489347,"data":"\n"}
+,{"stream_name":"stdout","time":1.60949377,"data":"gzip: stdin: not in gzip format\n"}
+,{"stream_name":"stdout","time":1.60949835,"data":"tar: Child returned status 1\n"}
+,{"stream_name":"stdout","time":1.609502781,"data":"tar: Error is not recoverable: exiting now\n"}
+,{"stream_name":"stdout","time":1.609507136,"data":"\n"}
+,{"stream_name":"stdout","time":1.609511412,"data":"  (exit code 2)\n"}
+,{"stream_name":"stdout","time":1.609515623,"data":"build.sh finished in 0s, exit code 2\n"}
+,{"stream_name":"stdout","time":1.6095199359999999,"data":"BUILD FAILED or did not produce the expected tarball.\n"}
+,{"stream_name":"stdout","time":1.609524634,"data":"$ find /kaggle/working/repo/dist -maxdepth 3 2\u003e/dev/null || echo 'no dist dir'\n"}
+,{"stream_name":"stdout","time":1.6161642189999998,"data":"/kaggle/working/repo/dist\n"}
+,{"stream_name":"stdout","time":1.616198679,"data":"/kaggle/working/repo/dist/linux\n"}
+,{"stream_name":"stdout","time":1.616204615,"data":"/kaggle/working/repo/dist/linux/python.tar.gz\n"}
+,{"stream_name":"stdout","time":1.61622619,"data":"\n"}
+,{"stream_name":"stdout","time":1.616231609,"data":"  (exit code 0)\n"}
+,{"stream_name":"stderr","time":4.604255641,"data":"/usr/local/lib/python3.12/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":4.604335311,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":5.067346289,"data":"/usr/local/lib/python3.12/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":5.067375329,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":6.966097985,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":8.696235847,"data":"[NbConvertApp] Writing 287664 bytes to __results__.html\n"}
+]
