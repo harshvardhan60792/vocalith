@@ -661,7 +661,11 @@ demonstrated, not merely written.
 - [ ] `launcher/windows/build.ps1`'s .exe shim is a TODO stub (currently a .bat) — needs a real no-console shim
 
 **Phase 4 — CI/release** — workflows written, never executed (no push has happened)
-- [ ] `ci.yml` green on CPU — untested locally too; run `pytest tests/` before trusting it
+- [x] `ci.yml`'s two real steps verified locally, 2026-09-04: `ruff check` (found 64
+      real lint errors on first run — see the lint-pinning commit — now clean) and
+      `pytest tests/` (9/9 passing). The workflow file itself has still never executed
+      inside actual GitHub Actions (needs a push, which needs the user's go-ahead) —
+      but the commands it runs are now proven, not just assumed.
 - [ ] `release.yml` produces 3 assets + checksums on a tag
 - [ ] A tagged pre-release downloaded and run by someone who did not build it
 - [ ] **Requires user go-ahead to push to a GitHub remote** — do not push autonomously even under a "finish the project" instruction; that crosses into publishing/sending, which needs per-action confirmation
