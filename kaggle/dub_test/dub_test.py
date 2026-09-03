@@ -48,9 +48,23 @@ def setup():
     sh(f"{sys.executable} -m pip install -q demucs")
     sh(f"{sys.executable} -m pip install -q openai-whisper")
     sh(f"{sys.executable} -m pip install -q sentencepiece")
+    # realign torch trio (chatterbox pins torch==2.6.0, orphaning Kaggle's torchvision)
     sh(f"{sys.executable} -m pip install -q torch==2.6.0 torchvision==0.21.0 torchaudio==2.6.0")
+    # librosa (pulled in above) can drag numpy to a version ABI-incompatible with
+    # numpy's own compiled extensions and other packages built against numpy<2.
+    # Force it back down and reinstall so every C extension agrees on one ABI.
+    sh(f"{sys.executable} -m pip install -q 'numpy<2.0' --force-reinstall --no-deps")
 
 stage("setup", setup)
+
+def check_imports():
+    import torch, torchvision, numpy as np
+    from torchvision.ops import nms  # canary: catches the torch/torchvision pin mismatch
+    from transformers import AlbertModel  # canary: catches the numpy ABI mismatch (kokoro's import path)
+    print("torch", torch.__version__, "| torchvision", torchvision.__version__, "| numpy", np.__version__)
+    print("import canaries OK")
+
+stage("import_check", check_imports)
 
 import torch
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"

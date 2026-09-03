@@ -586,8 +586,12 @@ demonstrated, not merely written.
 
 **Immediate next steps for whoever resumes this** (in order):
 1. Check `kaggle/results/README.md` — finish/verify the P0.8 dub spike if it's not done.
-2. `pip install -e .` locally, `pytest tests/` (should pass, no GPU needed), then
-   `python launcher/main.py` and actually click through all four tabs.
+2. `pytest tests/` already verified passing (9/9, CPU-only, no GPU needed) on 2026-09-04 —
+   note: local dev machine ran Python 3.14, outside the pinned 3.10-3.13 range, so tests
+   were run via `PYTHONPATH=src pytest tests/` rather than an editable install; do a real
+   `pip install -e .` on an in-range Python before trusting packaging. Then
+   `python launcher/main.py` and actually click through all four tabs — **this has not
+   been done yet** and is the biggest remaining unknown in the whole project.
 3. Fix whatever the above turns up — this is real code that has never been executed,
    treat first-run bugs as expected, not a sign anything is wrong with the approach.
 4. Only after 1-3: attempt a packaging script, on the OS it targets, and update its
