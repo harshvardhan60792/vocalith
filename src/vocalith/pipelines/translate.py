@@ -31,12 +31,16 @@ def _load_translator(src: str, tgt: str, device: str):
     from huggingface_hub.utils import HfHubHTTPError
 
     device_idx = 0 if device == "cuda" else -1
+    # transformers requires the explicit "translation_XX_to_YY" task format -- a bare
+    # "translation" raises KeyError (confirmed on the exact transformers version pulled
+    # by this project's pins, see kaggle/results/README.md's dub-chain spike).
+    task = f"translation_{src}_to_{tgt}"
     try:
-        translator = hf_pipeline("translation", model=_opus_mt_id(src, tgt), device=device_idx)
-    except (HfHubHTTPError, OSError):
+        translator = hf_pipeline(task, model=_opus_mt_id(src, tgt), device=device_idx)
+    except (HfHubHTTPError, OSError, KeyError):
         # no Opus-MT checkpoint for this pair -- fall back to M2M100 (MIT, all pairs)
         translator = hf_pipeline(
-            "translation", model="facebook/m2m100_418M", device=device_idx,
+            task, model="facebook/m2m100_418M", device=device_idx,
             src_lang=src, tgt_lang=tgt,
         )
     _translator_cache[key] = translator

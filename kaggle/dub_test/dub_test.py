@@ -139,7 +139,11 @@ TRANSLATED = []
 def translate():
     sh(f"{sys.executable} -m pip install -q sentencepiece")
     from transformers import pipeline as hf_pipeline
-    translator = hf_pipeline("translation", model="Helsinki-NLP/opus-mt-en-es",
+    # transformers requires the explicit "translation_XX_to_YY" task format now --
+    # bare "translation" raises KeyError: "Invalid translation task translation,
+    # use 'translation_XX_to_YY' format" (found by this exact run, v6). Same fix
+    # applied to src/vocalith/pipelines/translate.py.
+    translator = hf_pipeline("translation_en_to_es", model="Helsinki-NLP/opus-mt-en-es",
                               device=0 if DEVICE == "cuda" else -1)
     for seg in SEGMENTS:
         out = translator(seg["text"])[0]["translation_text"]
