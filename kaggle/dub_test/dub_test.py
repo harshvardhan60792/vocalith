@@ -138,15 +138,22 @@ stage("whisper_transcribe", transcribe)
 TRANSLATED = []
 def translate():
     sh(f"{sys.executable} -m pip install -q sentencepiece")
-    from transformers import pipeline as hf_pipeline
-    # transformers requires the explicit "translation_XX_to_YY" task format now --
-    # bare "translation" raises KeyError: "Invalid translation task translation,
-    # use 'translation_XX_to_YY' format" (found by this exact run, v6). Same fix
-    # applied to src/vocalith/pipelines/translate.py.
-    translator = hf_pipeline("translation_en_to_es", model="Helsinki-NLP/opus-mt-en-es",
-                              device=0 if DEVICE == "cuda" else -1)
+    # v6 fix (bare "translation" -> KeyError) was necessary but not sufficient: v7 hit
+    # a SECOND, different bug -- transformers 5.2.0 dropped "translation" from its
+    # pipeline task registry entirely (KeyError: 'translation' from inside check_task
+    # itself, not from the task-string parsing). Bypassing the pipeline() wrapper
+    # entirely and using AutoTokenizer + AutoModelForSeq2SeqLM directly (tokenize ->
+    # generate -> decode) sidesteps the registry altogether -- same fix applied to
+    # src/vocalith/pipelines/translate.py, this mirrors it exactly.
+    import torch
+    from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
+    tokenizer = AutoTokenizer.from_pretrained("Helsinki-NLP/opus-mt-en-es")
+    model = AutoModelForSeq2SeqLM.from_pretrained("Helsinki-NLP/opus-mt-en-es").to(DEVICE).eval()
     for seg in SEGMENTS:
-        out = translator(seg["text"])[0]["translation_text"]
+        inputs = tokenizer([seg["text"]], return_tensors="pt", padding=True).to(DEVICE)
+        with torch.no_grad():
+            out_ids = model.generate(**inputs)
+        out = tokenizer.batch_decode(out_ids, skip_special_tokens=True)[0]
         TRANSLATED.append({**seg, "translated": out})
         print(f"[{seg['start']:.1f}-{seg['end']:.1f}] {seg['text']!r} -> {out!r}")
     with open(f"{OUT}/segments_translated.json", "w") as f:

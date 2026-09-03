@@ -5,8 +5,13 @@ Primary: Helsinki-NLP Opus-MT (Apache-2.0 / CC-BY-4.0, per-pair, ~300MB, best qu
 Fallback: M2M100-418M (MIT, one model covers all pairs, lower quality) when no
 Opus-MT checkpoint exists for the requested language pair.
 
-Opus-MT API verified against the exact call shape (transformers `pipeline("translation")`)
-used in the Kaggle dub-chain spike, 2026-09-04.
+Uses AutoTokenizer + AutoModelForSeq2SeqLM directly rather than transformers'
+`pipeline("translation_XX_to_YY")` wrapper. The wrapper turned out to be a moving
+target: transformers 5.2.0 (pulled in by this project's other pins on the Kaggle
+dub-chain spike, 2026-09-04) raises `KeyError: 'translation'` because that pipeline
+task was removed from its registry -- the wrapper's job is just tokenize -> generate
+-> decode, which is stable, documented, low-level API across transformers versions.
+See kaggle/results/README.md for the two failed pipeline()-based attempts this replaced.
 """
 from __future__ import annotations
 from typing import Callable, Optional
@@ -15,43 +20,55 @@ from ..device import pick_device
 
 ProgressCB = Optional[Callable[[float, str], None]]
 
-_translator_cache: dict[str, object] = {}
+_translator_cache: dict[str, tuple] = {}  # key -> (tokenizer, model, is_m2m100: bool)
 
 
 def _opus_mt_id(src: str, tgt: str) -> str:
     return f"Helsinki-NLP/opus-mt-{src}-{tgt}"
 
 
-def _load_translator(src: str, tgt: str, device: str):
+def _load_translator(src: str, tgt: str, device: str) -> tuple:
     key = f"{src}-{tgt}:{device}"
     if key in _translator_cache:
         return _translator_cache[key]
 
-    from transformers import pipeline as hf_pipeline
+    from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
     from huggingface_hub.utils import HfHubHTTPError
 
-    device_idx = 0 if device == "cuda" else -1
-    # transformers requires the explicit "translation_XX_to_YY" task format -- a bare
-    # "translation" raises KeyError (confirmed on the exact transformers version pulled
-    # by this project's pins, see kaggle/results/README.md's dub-chain spike).
-    task = f"translation_{src}_to_{tgt}"
     try:
-        translator = hf_pipeline(task, model=_opus_mt_id(src, tgt), device=device_idx)
-    except (HfHubHTTPError, OSError, KeyError):
+        tokenizer = AutoTokenizer.from_pretrained(_opus_mt_id(src, tgt))
+        model = AutoModelForSeq2SeqLM.from_pretrained(_opus_mt_id(src, tgt))
+        is_m2m100 = False
+    except (HfHubHTTPError, OSError):
         # no Opus-MT checkpoint for this pair -- fall back to M2M100 (MIT, all pairs)
-        translator = hf_pipeline(
-            task, model="facebook/m2m100_418M", device=device_idx,
-            src_lang=src, tgt_lang=tgt,
-        )
-    _translator_cache[key] = translator
-    return translator
+        tokenizer = AutoTokenizer.from_pretrained("facebook/m2m100_418M")
+        model = AutoModelForSeq2SeqLM.from_pretrained("facebook/m2m100_418M")
+        tokenizer.src_lang = src
+        is_m2m100 = True
+
+    model = model.to(device).eval()
+    result = (tokenizer, model, is_m2m100)
+    _translator_cache[key] = result
+    return result
+
+
+def _generate(texts: list[str], tokenizer, model, tgt: str, is_m2m100: bool, device: str) -> list[str]:
+    import torch
+    if not texts:
+        return []
+    inputs = tokenizer(texts, return_tensors="pt", padding=True, truncation=True).to(device)
+    gen_kwargs = {}
+    if is_m2m100:
+        gen_kwargs["forced_bos_token_id"] = tokenizer.get_lang_id(tgt)
+    with torch.no_grad():
+        out_ids = model.generate(**inputs, **gen_kwargs)
+    return tokenizer.batch_decode(out_ids, skip_special_tokens=True)
 
 
 def translate_text(text: str, src: str, tgt: str, device: str | None = None) -> str:
     device = device or pick_device()
-    translator = _load_translator(src, tgt, device)
-    out = translator(text)[0]
-    return out.get("translation_text") or out.get("generated_text", "")
+    tokenizer, model, is_m2m100 = _load_translator(src, tgt, device)
+    return _generate([text], tokenizer, model, tgt, is_m2m100, device)[0]
 
 
 def translate_segments(segments: list[dict], src: str, tgt: str,
@@ -59,14 +76,14 @@ def translate_segments(segments: list[dict], src: str, tgt: str,
     device = device or pick_device()
     if progress_cb:
         progress_cb(0.05, "Loading translation model…")
-    translator = _load_translator(src, tgt, device)
-    out = []
-    for i, seg in enumerate(segments):
-        translated = translator(seg["text"])[0]
-        text = translated.get("translation_text") or translated.get("generated_text", "")
-        out.append({**seg, "translated": text})
-        if progress_cb:
-            progress_cb(min(0.95, (i + 1) / max(len(segments), 1)), f"Translating segment {i+1}/{len(segments)}…")
+    tokenizer, model, is_m2m100 = _load_translator(src, tgt, device)
+
+    if progress_cb:
+        progress_cb(0.2, f"Translating {len(segments)} segment(s)…")
+    texts = [seg["text"] for seg in segments]
+    translated = _generate(texts, tokenizer, model, tgt, is_m2m100, device)
+
+    out = [{**seg, "translated": t} for seg, t in zip(segments, translated)]
     if progress_cb:
         progress_cb(1.0, "Done")
     return out
