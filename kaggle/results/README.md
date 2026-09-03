@@ -33,27 +33,73 @@ re-running this spike.**
 Files: `audio-toolkit-pipeline-test.log` (full run log), `tts_out.wav`, `clone_out.wav`,
 `noisy_mix.wav`, `demucs_out/` (separated stems), `transcript.txt`.
 
-## phase0_dub_spike/ — full dubbing chain (P0.8)
+## phase0_dub_spike/ — full dubbing chain (P0.8) — 2026-09-04, kernel v6, Tesla P100
 
-Status: **queued/running as of 2026-09-04 night** — see IMPLEMENTATION_PLAN.md task
-checklist for current state. `kaggle/dub_test/dub_test.py` builds a synthetic video
-(Kokoro speech over a tone bed), then runs the complete chain: extract audio → Demucs
-split → Whisper word-timestamps → Opus-MT translate (en→es) → Chatterbox re-voice per
-segment → clamped pitch-preserving time-stretch → place on original timeline → remix
-with bed → mux into video → emit .srt. Its logic is mirrored directly in
-`src/vocalith/pipelines/dub.py`.
+`kaggle/dub_test/dub_test.py` builds a synthetic video (Kokoro speech over a tone bed),
+then runs the complete chain: extract audio → Demucs split → Whisper word-timestamps →
+Opus-MT translate (en→es) → Chatterbox re-voice per segment → clamped pitch-preserving
+time-stretch → place on original timeline → remix with bed → mux into video → emit
+.srt. Its logic is mirrored directly in `src/vocalith/pipelines/dub.py`.
 
-**If this folder is empty or this section still says "queued" when you pick up this
-project: the run either didn't finish or wasn't downloaded yet.** Re-run it with:
+**Result: 8 of 9 stages passed on v6**, producing a real `dubbed_video.mp4` with correct
+per-segment timing (one segment needed 1.28x stretch, clamped to the 1.25x cap — exactly
+the warning path in §6.4 working as designed) and an aligned `.srt`. The one failure —
+`translate` — turned out to be a real bug, not a spike-only issue: **transformers now
+requires the explicit `"translation_XX_to_YY"` task string; a bare `"translation"` raises
+`KeyError`.** Fixed in both `dub_test.py` and, more importantly, in the actual
+`src/vocalith/pipelines/translate.py` — this would have silently broken dubbing's
+translation step in the shipped app (Chatterbox's own fallback-to-English logic masked
+it well enough in the spike that only 1 of 9 stages showed red). v7 re-runs with the fix;
+check this file's status line below for whether it landed.
+
+| Stage | Time (v6) | Notes |
+|---|---|---|
+| setup | 318s | one-time per session |
+| build_input (Kokoro) | 31s | 1.25 GB peak VRAM |
+| extract_audio (ffmpeg) | 0.2s | |
+| demucs_split | 9s | |
+| whisper_transcribe | 11s | 0.49 GB peak VRAM |
+| translate | — | **failed on v6, fixed for v7** — see above |
+| chatterbox_revoice | 67s | 3.76 GB peak VRAM (per-segment; 4 segments) |
+| align_and_mix | 5s | |
+| mux_and_srt | 0.3s | |
+
+**v7 status:** _fill in after it lands — check `kaggle/dub_test/out7/perf_summary.json`
+and the log for whether `translate` now passes and the .srt actually contains Spanish._
+
+Four earlier attempts (v1–v5) failed before v6, each teaching something real, not just
+retries of the same thing — worth reading if a similar "works standalone, fails in this
+script" symptom shows up again:
+1. **v1:** same torch/torchvision mismatch as pipeline_test.py's original bug, in a
+   script that was supposed to already have the fix applied — the fix line was correct,
+   but nothing had verified it actually ran.
+2. **v2:** added an `import_check` diagnostic stage to catch v1's bug faster — the
+   diagnostic itself broke the very thing it was checking (details in v3/v4 below).
+3. **v3:** tried `--force-reinstall --no-deps` per-package instead of one combined
+   install — didn't help, because the real cause was elsewhere.
+4. **v4:** added `pip show` + a fresh-subprocess canary for direct evidence. The
+   subprocess canary passed every time; the in-process check failed every time.
+   That was the actual clue.
+5. **Root cause (confirmed before v6):** `stage()`'s own VRAM-tracking helper did
+   `import torch` on *every* call — including the very first `stage("setup", setup)`
+   call, which ran `import torch` **before** `setup()` had reinstalled the correct
+   torch/torchvision pin. That cached the OLD Kaggle-default torch in `sys.modules`;
+   every later `import torch` in-process (including torchvision's first-ever import,
+   deep inside kokoro's import chain) then registered against that stale module
+   instead of the correctly-pinned one now on disk — even though `pip show` and a
+   fresh subprocess both correctly showed the pinned versions the entire time. Fixed
+   by running `setup()` directly, not through `stage()` — matches
+   `kaggle/pipeline_test/test.py`'s original working shape exactly.
+
+**Re-run instructions**, if a future change needs re-verification:
 
 ```bash
 export KAGGLE_API_TOKEN="<key from kaggle/kaggle.json>"
 export PATH="$PATH:$HOME/AppData/Roaming/Python/Python314/Scripts"  # Windows CLI location
+kaggle kernels push -p kaggle/dub_test
 kaggle kernels status harshu60792/audio-toolkit-dub-test
 kaggle kernels output harshu60792/audio-toolkit-dub-test -p kaggle/dub_test/out
 ```
-
-If it's not yet pushed at all: `kaggle kernels push -p kaggle/dub_test`.
 
 **Kaggle GPU quota is 30 hrs/week and does not carry over — don't re-run spikes that
 already passed.** Check this README before spending GPU time.

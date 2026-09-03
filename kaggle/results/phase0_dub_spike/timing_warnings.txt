@@ -1,0 +1,1 @@
+seg@0.0s: wanted stretch 1.28x, clamped to 1.25x

@@ -1,0 +1,23 @@
+{
+  "timings_sec": {
+    "setup": 318.1,
+    "build_input": 30.6,
+    "extract_audio": 0.2,
+    "demucs_split": 9.0,
+    "whisper_transcribe": 10.8,
+    "translate": 4.4,
+    "chatterbox_revoice": 67.4,
+    "align_and_mix": 5.1,
+    "mux_and_srt": 0.3
+  },
+  "peak_vram_gb": {
+    "build_input": 1.25,
+    "extract_audio": 0.01,
+    "demucs_split": 0.01,
+    "whisper_transcribe": 0.49,
+    "chatterbox_revoice": 3.76,
+    "align_and_mix": 0.1,
+    "mux_and_srt": 0.1
+  },
+  "device": "cuda"
+}

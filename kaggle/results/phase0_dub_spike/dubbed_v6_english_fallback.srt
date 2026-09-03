@@ -1,0 +1,15 @@
+1
+00:00:00,000 --> 00:00:02,100
+Welcome to this short demonstration.
+
+2
+00:00:02,700 --> 00:00:05,560
+Today we are testing a fully local dubbing pipeline.
+
+3
+00:00:06,040 --> 00:00:11,020
+It transcribes speech, translates it, and revises it in the original speaker's voice.
+
+4
+00:00:11,600 --> 00:00:14,600
+The timing should match the original as closely as possible.
