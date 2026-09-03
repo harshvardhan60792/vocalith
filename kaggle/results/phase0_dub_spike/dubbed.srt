@@ -1,0 +1,15 @@
+1
+00:00:00,000 --> 00:00:02,100
+Bienvenidos a esta breve demostración.
+
+2
+00:00:02,800 --> 00:00:05,560
+Hoy estamos probando una tubería de doblaje totalmente local.
+
+3
+00:00:06,040 --> 00:00:11,040
+Transcribe el discurso, lo traduce y lo revisa en la voz del orador original.
+
+4
+00:00:11,560 --> 00:00:14,620
+El tiempo debe coincidir con el original lo más cerca posible.

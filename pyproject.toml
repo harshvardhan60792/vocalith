@@ -39,9 +39,9 @@ build-backend = "setuptools.build_meta"
 where = ["src"]
 
 [tool.setuptools.package-data]
-# vendored fonts/anime.js for the UI (design.py inlines these at runtime) -- not .py
-# files, so setuptools won't include them by default. See src/vocalith/ui/design.py.
-vocalith = ["ui/static/fonts/*.woff2", "ui/static/js/*.js"]
+# vendored anime.js for the UI (design.py inlines it at runtime) -- not a .py file,
+# so setuptools won't include it by default. See src/vocalith/ui/design.py.
+vocalith = ["ui/static/js/*.js"]
 
 [tool.ruff]
 line-length = 100

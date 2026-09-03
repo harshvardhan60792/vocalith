@@ -33,7 +33,26 @@ re-running this spike.**
 Files: `audio-toolkit-pipeline-test.log` (full run log), `tts_out.wav`, `clone_out.wav`,
 `noisy_mix.wav`, `demucs_out/` (separated stems), `transcript.txt`.
 
-## phase0_dub_spike/ — full dubbing chain (P0.8) — 2026-09-04, kernel v6, Tesla P100
+## phase0_dub_spike/ — full dubbing chain (P0.8) — DONE, 2026-09-04, kernel v8, Tesla P100
+
+**All 9 stages passed.** Real `dubbed_video.mp4`, correct Spanish translation, correctly
+timed `.srt`:
+
+```
+Bienvenidos a esta breve demostración.
+Hoy estamos probando una tubería de doblaje totalmente local.
+Transcribe el discurso, lo traduce y lo revisa en la voz del orador original.
+El tiempo debe coincidir con el original lo más cerca posible.
+```
+
+Three segments hit the 1.25x stretch cap (wanted 1.6-1.7x) — expected and correctly
+handled: Spanish translations run longer than their English source, §6.4's clamp-and-warn
+design is exactly what's supposed to happen here, not a bug. It took 8 kernel pushes
+(v1-v8) and two distinct real bugs found along the way (both already fixed in the actual
+`src/vocalith/pipelines/` code, not just the spike) -- full blow-by-blow kept below because
+the debugging path is worth more to a future agent than just the final green run.
+
+### Superseded below: the v6 run (8/9 stages, English-fallback dub) that led here
 
 `kaggle/dub_test/dub_test.py` builds a synthetic video (Kokoro speech over a tone bed),
 then runs the complete chain: extract audio → Demucs split → Whisper word-timestamps →
@@ -59,15 +78,25 @@ check this file's status line below for whether it landed.
 | extract_audio (ffmpeg) | 0.2s | |
 | demucs_split | 9s | |
 | whisper_transcribe | 11s | 0.49 GB peak VRAM |
-| translate | — | **failed on v6, fixed for v7** — see above |
+| translate | — | failed on v6 — see below |
 | chatterbox_revoice | 67s | 3.76 GB peak VRAM (per-segment; 4 segments) |
 | align_and_mix | 5s | |
 | mux_and_srt | 0.3s | |
 
-**v7 status:** _fill in after it lands — check `kaggle/dub_test/out7/perf_summary.json`
-and the log for whether `translate` now passes and the .srt actually contains Spanish._
+**v7 hit a *second*, different translate bug.** The `"translation_XX_to_YY"` task-string
+fix was necessary but not sufficient: transformers 5.2.0 turned out to have dropped
+`"translation"` from its pipeline task registry entirely (`KeyError: 'translation'`
+raised from inside `check_task` itself, not from parsing the task string this time).
+**Real fix (v8, passing): stop using `pipeline("translation_...")` at all** — it's just
+tokenize → generate → decode underneath, so `translate.py` now calls
+`AutoTokenizer`/`AutoModelForSeq2SeqLM` directly, which sidesteps the pipeline registry
+entirely and is stable, documented, low-level API regardless of which pipeline task
+names a given transformers version supports. Applied to both `dub_test.py` and
+`src/vocalith/pipelines/translate.py`. **v8 passed all 9 stages** — see the top of this
+section for the actual translated output.
 
-Four earlier attempts (v1–v5) failed before v6, each teaching something real, not just
+Four earlier attempts (v1–v5) failed before v6 even got translate() itself to run, each
+teaching something real, not just
 retries of the same thing — worth reading if a similar "works standalone, fails in this
 script" symptom shows up again:
 1. **v1:** same torch/torchvision mismatch as pipeline_test.py's original bug, in a

@@ -1,50 +1,32 @@
 """The premium visual layer: design tokens, typography, motion.
 
-Everything here is self-contained -- fonts and anime.js are read from static/ and
-inlined as base64/text directly into the page HTML (via head=/css= on gr.Blocks).
-No CDN links, no runtime network calls: this app promises nothing leaves the
-machine, and that promise extends to its own UI chrome, not just user audio.
+Everything here is self-contained -- anime.js is read from static/ and inlined as
+text directly into the page HTML (via head=/css= on gr.Blocks). No CDN links, no
+runtime network calls: this app promises nothing leaves the machine, and that
+promise extends to its own UI chrome, not just user audio.
 
-Design direction (the brief: "stop looking like a generic AI-generated SaaS site"):
-- No purple/blue gradient, no Inter-everywhere, no centered-hero-with-blob-illustration,
-  no uniform rounded-card-with-soft-shadow grid, no emoji, no "Unlock the power of..." copy.
-- Instead: a warm, confident, editorial palette (near-black + off-white + a single
-  copper accent -- audio-equipment coded, not SaaS-dashboard coded), one distinctive
-  serif for display moments (Fraunces) against a plain system-ui body face, thin
-  1px borders instead of drop shadows, generous asymmetric whitespace, a subtle
-  grain texture for depth, and small-caps tracked-out "eyebrow" labels -- a genuine
-  editorial-site signature, not a generic AI-site one.
+Design direction, in order of how it evolved this session:
+1. Dark mode, warm copper accent, serif display type -- "stop looking generic AI."
+2. Neutral near-black + a single recording-light red -- "copper reads as coffee slop."
+3. Light mode modeled on ElevenLabs' actual site -- "use platforms like that as the base."
+4. This pass: back to dark, modeled directly on the Linear/Vercel/Raycast school of
+   dark developer-tool design -- the most consistently cited "this is what premium
+   dark SaaS looks like" reference class. Near-black background (not pure black),
+   off-white text (not pure white), ONE indigo-violet accent used sparingly, subtle
+   1px low-contrast borders instead of shadows, tight 8-10px rounded-rect shapes (not
+   full pills -- that read as ElevenLabs-specific, not the broader dark-SaaS norm),
+   generous negative space, small tracked-out uppercase labels. Every structural CSS
+   fix found earlier in this session (the body.dark specificity collision, the
+   background shorthand+longhand bug that silently dropped background-color, the
+   floating file-type badge's own dark default, the dropdown wrap's own dark
+   default, targeting Gradio's real `.selected` class on radio labels) carries
+   forward unchanged -- those are correctness fixes, not style choices, and apply
+   regardless of the palette on top of them.
 """
 from __future__ import annotations
-import base64
 from pathlib import Path
 
 _STATIC = Path(__file__).parent / "static"
-
-
-def _b64(path: Path) -> str:
-    return base64.b64encode(path.read_bytes()).decode("ascii")
-
-
-def _font_face_css() -> str:
-    serif_600 = _b64(_STATIC / "fonts" / "fraunces-600.woff2")
-    serif_italic = _b64(_STATIC / "fonts" / "fraunces-500-italic.woff2")
-    return f"""
-@font-face {{
-    font-family: 'Fraunces';
-    font-style: normal;
-    font-weight: 600;
-    font-display: swap;
-    src: url(data:font/woff2;base64,{serif_600}) format('woff2');
-}}
-@font-face {{
-    font-family: 'Fraunces';
-    font-style: italic;
-    font-weight: 500;
-    font-display: swap;
-    src: url(data:font/woff2;base64,{serif_italic}) format('woff2');
-}}
-"""
 
 
 def head_script() -> str:
@@ -69,132 +51,138 @@ def pulse_js(selector: str = ".vx-dot") -> str:
     return f"() => {{ window.vxPulse && window.vxPulse('{selector}'); }}"
 
 
-CSS = _font_face_css() + r"""
+CSS = r"""
 :root {
-    --bg: #14120F;
-    --bg-elevated: #1B1814;
-    --bg-input: #201C17;
-    --bg-input-focus: #241F19;
-    --text: #F2ECE0;
-    --text-dim: #A79E8C;
-    --text-faint: #6F6656;
-    --accent: #D98A4A;
-    --accent-hover: #E9A164;
-    --accent-ink: #1A1108;
-    --border: #2C2822;
-    --border-strong: #423C32;
-    --serif: 'Fraunces', Georgia, 'Iowan Old Style', serif;
-    --sans: -apple-system, 'Segoe UI Variable', 'Segoe UI', system-ui, 'Helvetica Neue', Arial, sans-serif;
-    --radius: 8px;
-    --radius-lg: 14px;
+    --vx-bg: #09090B;
+    --vx-bg-elevated: #131316;
+    --vx-bg-input: #17171B;
+    --vx-bg-input-focus: #1B1B20;
+    --vx-text: #EDEEF0;
+    --vx-text-dim: #8A8F98;
+    --vx-text-faint: #5C6066;
+    --vx-accent: #5E6AD2;
+    --vx-accent-hover: #7B85E8;
+    --vx-accent-ink: #FFFFFF;
+    --vx-border: #232327;
+    --vx-border-strong: #3A3A40;
+    --vx-ink: #EDEEF0;
+    --vx-ink-hover: #FFFFFF;
+    --vx-sans: -apple-system, 'Segoe UI Variable', 'Segoe UI', system-ui, 'Helvetica Neue', Arial, sans-serif;
+    --vx-radius: 8px;
+    --vx-radius-lg: 14px;
+    --vx-pill: 999px;
 }
 
+/* Gradio adds a `dark` class to <body> when the OS prefers dark color-scheme, and
+   its own dark-mode rule for .gradio-container has the same specificity as a plain
+   `.gradio-container` selector -- so on a dark-preference OS, Gradio's rule silently
+   won regardless of !important (same specificity ties broken by source order, and
+   Gradio's own stylesheet loads first but its rule still matched second-fight-wins
+   in testing). Matching `body.dark .gradio-container` explicitly guarantees this
+   theme applies regardless of the user's OS light/dark preference -- deliberate:
+   Vocalith's design is one fixed look, not an OS-following light/dark pair (yet). */
+body.dark .gradio-container,
 .gradio-container {
-    background: var(--bg) !important;
+    /* background-color + background-image as separate longhands, NOT the `background`
+       shorthand -- shorthand followed by a background-image override in the same rule
+       silently dropped background-color from the serialized declaration entirely
+       (verified via the live CSSOM, not a guess); this is the fix, not a style choice. */
+    background-color: var(--vx-bg) !important;
     background-image:
-        radial-gradient(ellipse 900px 500px at 15% -10%, rgba(217,138,74,0.10), transparent 60%),
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E") !important;
-    color: var(--text) !important;
-    font-family: var(--sans) !important;
+        radial-gradient(ellipse 800px 420px at 85% -15%, rgba(94,106,210,0.10), transparent 60%) !important;
+    color: var(--vx-text) !important;
+    font-family: var(--vx-sans) !important;
     max-width: 980px !important;
 }
 
 body, .gradio-container * {
-    font-family: var(--sans);
+    font-family: var(--vx-sans);
 }
 
-/* ---------- Hero ---------- */
+/* ---------- Hero: bold geometric grotesk stand-in (heavy system sans), not serif -- */
 @keyframes vx-rise {
     from { opacity: 0; transform: translateY(14px); }
     to   { opacity: 1; transform: translateY(0); }
 }
-/* CSS-driven entrance, not JS-driven: a JS timing hiccup or a blocked script must
-   never be able to leave hero content permanently invisible -- it did, once,
-   during development (anime.js ran before Gradio had mounted the DOM). Guaranteed
-   animation belongs in CSS; anime.js is reserved below for a non-critical flourish. */
 .vx-eyebrow {
-    font-family: var(--sans);
     font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.16em;
+    font-weight: 700;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--accent);
-    margin: 0 0 10px 0;
+    color: var(--vx-accent);
+    margin: 0 0 12px 0;
     animation: vx-rise 0.5s cubic-bezier(.2,.8,.2,1) both;
 }
 .vx-hero h1 {
-    font-family: var(--serif) !important;
-    font-weight: 600 !important;
-    font-size: 3.1rem !important;
-    line-height: 1.05 !important;
-    letter-spacing: -0.01em;
-    color: var(--text) !important;
-    margin: 0 0 14px 0 !important;
+    font-weight: 800 !important;
+    font-size: 3.15rem !important;
+    line-height: 1.03 !important;
+    letter-spacing: -0.02em;
+    color: var(--vx-ink) !important;
+    margin: 0 0 16px 0 !important;
     animation: vx-rise 0.65s cubic-bezier(.2,.8,.2,1) 0.12s both;
 }
 .vx-hero .vx-tagline {
-    font-family: var(--serif);
-    font-style: italic;
-    font-weight: 500;
-    font-size: 1.22rem;
-    color: var(--text-dim);
-    max-width: 46ch;
-    line-height: 1.5;
+    font-weight: 400;
+    font-size: 1.12rem;
+    color: var(--vx-text-dim);
+    max-width: 48ch;
+    line-height: 1.55;
     margin: 0 0 4px 0;
     animation: vx-rise 0.55s cubic-bezier(.2,.8,.2,1) 0.26s both;
 }
-.vx-hero .vx-tagline em { color: var(--accent); font-style: italic; }
+.vx-hero .vx-tagline em { color: var(--vx-text); font-style: normal; font-weight: 600; }
 
 .vx-banner {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    font-family: var(--sans) !important;
     font-size: 0.82rem;
-    color: var(--text-faint) !important;
-    border: 1px solid var(--border);
-    border-radius: 999px;
-    padding: 5px 14px 5px 10px;
-    margin-top: 18px;
+    color: var(--vx-text-dim) !important;
+    background: var(--vx-bg-elevated);
+    border: 1px solid var(--vx-border);
+    border-radius: var(--vx-pill);
+    padding: 6px 16px 6px 12px;
+    margin-top: 20px;
     animation: vx-rise 0.45s cubic-bezier(.2,.8,.2,1) 0.38s both;
 }
 .vx-banner .vx-dot {
     width: 7px; height: 7px; border-radius: 50%;
-    background: var(--accent);
-    box-shadow: 0 0 0 3px rgba(217,138,74,0.18);
+    background: var(--vx-accent);
+    box-shadow: 0 0 0 3px rgba(94,106,210,0.25);
 }
-.vx-banner strong { color: var(--text); font-weight: 600; }
+.vx-banner strong { color: var(--vx-ink); font-weight: 700; }
 
-/* ---------- Tabs as an editorial nav, not default gradio pills ---------- */
+/* ---------- Tabs: pill-segmented control, ElevenLabs' category-selector pattern --- */
 [role="tablist"] {
-    border-bottom: 1px solid var(--border) !important;
-    gap: 28px !important;
-    padding-bottom: 0 !important;
+    display: inline-flex !important;
+    background: var(--vx-bg-elevated) !important;
+    border: 1px solid var(--vx-border) !important;
+    border-radius: 10px !important;
+    padding: 4px !important;
+    gap: 2px !important;
     margin: 40px 0 30px 0 !important;
-    background: transparent !important;
+    width: fit-content;
 }
 [role="tab"] {
-    font-family: var(--sans) !important;
-    font-size: 0.92rem !important;
-    font-weight: 500 !important;
-    color: var(--text-faint) !important;
+    font-size: 0.9rem !important;
+    font-weight: 600 !important;
+    color: var(--vx-text-dim) !important;
     background: transparent !important;
     border: none !important;
-    border-bottom: 2px solid transparent !important;
-    padding: 0 0 14px 0 !important;
+    border-radius: 7px !important;
+    padding: 8px 18px !important;
     margin: 0 !important;
-    border-radius: 0 !important;
-    transition: color 0.2s ease, border-color 0.2s ease;
+    transition: color 0.15s ease, background 0.15s ease;
 }
-[role="tab"]:hover {
-    color: var(--text) !important;
-}
+[role="tab"]:hover { color: var(--vx-text) !important; }
 [role="tab"][aria-selected="true"] {
-    color: var(--text) !important;
-    border-bottom-color: var(--accent) !important;
+    color: var(--vx-text) !important;
+    background: var(--vx-bg-input) !important;
+    box-shadow: inset 0 0 0 1px var(--vx-border-strong);
 }
 
-/* ---------- Surfaces: thin borders instead of soft-shadow cards ---------- */
+/* ---------- Surfaces ---------- */
 .gradio-container .block,
 .gradio-container .form {
     background: transparent !important;
@@ -202,113 +190,119 @@ body, .gradio-container * {
     box-shadow: none !important;
 }
 label.svelte-1gfkn6j, .gr-form label, label {
-    font-family: var(--sans) !important;
     font-size: 0.78rem !important;
-    font-weight: 600 !important;
-    letter-spacing: 0.03em !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.02em !important;
     text-transform: uppercase;
-    color: var(--text-faint) !important;
+    color: var(--vx-text-dim) !important;
 }
 
 input, textarea, select,
 .gradio-container input[type="text"],
 .gradio-container input[type="number"] {
-    background: var(--bg-input) !important;
-    border: 1px solid var(--border) !important;
-    border-radius: var(--radius) !important;
-    color: var(--text) !important;
-    font-family: var(--sans) !important;
-    transition: border-color 0.15s ease, background 0.15s ease;
+    background: var(--vx-bg-input) !important;
+    border: 1px solid var(--vx-border-strong) !important;
+    border-radius: var(--vx-radius) !important;
+    color: var(--vx-text) !important;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 input:focus, textarea:focus, select:focus {
-    border-color: var(--accent) !important;
-    background: var(--bg-input-focus) !important;
-    box-shadow: 0 0 0 3px rgba(217,138,74,0.12) !important;
+    border-color: var(--vx-accent) !important;
+    box-shadow: 0 0 0 3px rgba(94,106,210,0.20) !important;
+}
+
+/* Floating file-type badge on Audio/File components (the small label with an icon
+   pinned over the drop zone's top-left corner) -- a different component from the
+   plain <label> above, with its own dark background by default. */
+.gradio-container [data-testid="block-label"] {
+    background: var(--vx-bg-elevated) !important;
+    border: 1px solid var(--vx-border) !important;
+    color: var(--vx-text-dim) !important;
+}
+
+/* Dropdown/combobox wrapper -- Gradio's own dark-mode default for this element's
+   `.wrap` div doesn't get caught by the container-level override above (it's a
+   nested component with its own background), so it stayed dark gray. Generic catch
+   for any such leftover "wrap" surface; the more specific dropzone rule right after
+   wins for audio/file uploads via equal specificity + later source order. */
+.gradio-container .wrap {
+    background: var(--vx-bg-input) !important;
 }
 
 /* dropzones (audio/file upload) */
 .gradio-container [data-testid="audio"] .wrap,
 .gradio-container [data-testid="file"] .wrap {
-    background: var(--bg-input) !important;
-    border: 1px dashed var(--border-strong) !important;
-    border-radius: var(--radius-lg) !important;
+    background: var(--vx-bg-elevated) !important;
+    border: 1.5px dashed var(--vx-border-strong) !important;
+    border-radius: var(--vx-radius-lg) !important;
 }
 
-/* ---------- Buttons ---------- */
+/* ---------- Buttons: black pill primary, ElevenLabs-style, not colored --------- */
 button.primary, .gradio-container button.primary {
-    background: var(--accent) !important;
-    color: var(--accent-ink) !important;
+    background: var(--vx-accent) !important;
+    color: var(--vx-accent-ink) !important;
     border: none !important;
-    border-radius: var(--radius) !important;
+    border-radius: var(--vx-radius) !important;
     font-weight: 600 !important;
     letter-spacing: 0.01em;
     box-shadow: none !important;
     transition: transform 0.15s cubic-bezier(.2,.9,.3,1.3), background 0.15s ease, box-shadow 0.15s ease;
 }
 button.primary:hover {
-    background: var(--accent-hover) !important;
+    background: var(--vx-accent-hover) !important;
     transform: translateY(-1px);
-    box-shadow: 0 6px 18px -6px rgba(217,138,74,0.45) !important;
+    box-shadow: 0 8px 20px -8px rgba(94,106,210,0.55) !important;
 }
 button.primary:active { transform: translateY(0); }
 
 button.secondary, .gradio-container button.secondary {
-    background: transparent !important;
-    color: var(--text) !important;
-    border: 1px solid var(--border-strong) !important;
-    border-radius: var(--radius) !important;
+    background: var(--vx-bg-elevated) !important;
+    color: var(--vx-text) !important;
+    border: 1px solid var(--vx-border-strong) !important;
+    border-radius: var(--vx-radius) !important;
 }
-button.secondary:hover { border-color: var(--accent) !important; color: var(--accent) !important; }
+button.secondary:hover { border-color: var(--vx-text-dim) !important; }
 
-/* ---------- Slider accent ---------- */
-input[type="range"]::-webkit-slider-thumb { background: var(--accent) !important; }
-.gradio-container [data-testid="slider"] .thumb { background: var(--accent) !important; }
+/* ---------- Slider / progress accent (the one functional splash of color) ------ */
+input[type="range"]::-webkit-slider-thumb { background: var(--vx-accent) !important; }
+.gradio-container [data-testid="slider"] .thumb { background: var(--vx-accent) !important; }
+.progress-bar, .meta-text-center, .generating { color: var(--vx-accent) !important; }
 
-/* progress bar accent */
-.progress-bar, .meta-text-center, .generating {
-    color: var(--accent) !important;
-}
-
-/* accordion */
-.gradio-container .label-wrap {
-    font-family: var(--sans) !important;
-    color: var(--text-dim) !important;
-}
+.gradio-container .label-wrap { color: var(--vx-text-dim) !important; }
 
 /* footer note */
 .vx-footnote {
-    color: var(--text-faint) !important;
+    color: var(--vx-text-faint) !important;
     font-size: 0.82rem;
-    border-top: 1px solid var(--border);
+    border-top: 1px solid var(--vx-border);
     margin-top: 48px;
     padding-top: 18px;
 }
 
-/* Gradio's own default footer (API/branding links) -- undercuts a custom identity
-   on a local, offline app with no meaningful public API surface to advertise. */
 .gradio-container footer { display: none !important; }
 
-/* Radio buttons (voice-mode picker etc.) -- default gray boxes read as an
-   unstyled default; make the selected state legible against the accent system. */
-.gradio-container fieldset [role="radiogroup"] label,
-.gradio-container .wrap[role="radiogroup"] label {
-    background: var(--bg-input) !important;
-    border: 1px solid var(--border) !important;
-    border-radius: var(--radius) !important;
-    color: var(--text-dim) !important;
-    transition: border-color 0.15s ease, color 0.15s ease;
+/* Radio buttons (voice-mode picker etc.) -- pill-styled to match the button system.
+   Gradio itself adds a `.selected` class to the chosen option's <label> (confirmed
+   via the live DOM), which is more reliable here than a `role`/`:has()` selector --
+   those didn't match this component's actual markup at all. */
+.gradio-container fieldset label {
+    background: var(--vx-bg-elevated) !important;
+    border: 1px solid var(--vx-border-strong) !important;
+    border-radius: var(--vx-radius) !important;
+    color: var(--vx-text-dim) !important;
+    text-transform: none !important;
+    font-weight: 500 !important;
+    transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
 }
-.gradio-container fieldset [role="radiogroup"] label:has(input:checked),
-.gradio-container .wrap[role="radiogroup"] label:has(input:checked) {
-    border-color: var(--accent) !important;
-    color: var(--text) !important;
-    background: var(--bg-input-focus) !important;
+.gradio-container fieldset label.selected {
+    border-color: var(--vx-accent) !important;
+    color: var(--vx-text) !important;
+    background: var(--vx-bg-input-focus) !important;
+    box-shadow: 0 0 0 1px var(--vx-accent) inset;
 }
 
-::selection { background: rgba(217,138,74,0.35); }
+::selection { background: rgba(94,106,210,0.30); }
 ::-webkit-scrollbar { width: 10px; height: 10px; }
-::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 8px; }
+::-webkit-scrollbar-track { background: var(--vx-bg); }
+::-webkit-scrollbar-thumb { background: var(--vx-border-strong); border-radius: 8px; }
 """
-
-

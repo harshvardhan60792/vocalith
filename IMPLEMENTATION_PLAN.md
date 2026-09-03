@@ -48,8 +48,8 @@ Work happens in two environments, in this order. **Do not start Phase 3 before P
 signed off** — packaging a pipeline that doesn't work yet wastes days.
 
 ```
-Phase 0  Kaggle spike        — prove the 4 models load and run on free GPU      [DONE — 8/9 dub-chain stages proven, 9th fixed, v7 confirming]
-Phase 1  Core engine         — the 4 pipelines as a clean importable package    [WRITTEN; one real bug found+fixed (translate task format); no live GPU run of the real package yet, only the mirrored spike script]
+Phase 0  Kaggle spike        — prove the 4 models load and run on free GPU      [DONE — all 4 features + full dub chain (9/9 stages) proven on real GPU]
+Phase 1  Core engine         — the 4 pipelines as a clean importable package    [WRITTEN; two real bugs found+fixed in translate.py via the mirrored spike script; no live GPU run of the actual package yet, only the spike script it's mirrored from]
 Phase 2  Gradio UI           — the app a non-technical user actually sees       [DONE — premium redesign, verified in-browser across all 4 tabs, no GPU needed]
 Phase 3  Packaging           — one-click installers per OS                      [DRAFTED, NOT RUN]
 Phase 4  CI + Release        — GitHub Actions builds all 3 OSes, publishes      [WRITTEN, NEVER RUN — no push yet]
@@ -102,37 +102,81 @@ shaky, but because they weren't explicitly discussed with the user:
 **Later the same night — continuation, after the user gave a second instruction
 ("finish this while I sleep, conserve tokens and GPU, make it feel free"):**
 
-**P0.8 (full dubbing chain) got resolved.** It took 7 Kaggle kernel pushes (v1-v7) to
-get right, and every failure taught something real — full story in
-`kaggle/results/README.md`, don't skip it if a similar "works standalone, fails in this
-script" symptom ever shows up again. Short version: a diagnostic stage added to catch
-one bug was itself silently causing a *different* one (a VRAM-tracking helper's own
-`import torch` was pre-caching the wrong torch version before the pin got reinstalled).
-**v6 passed 8 of 9 stages** — real `dubbed_video.mp4` produced, one segment's timing
-correctly hit and clamped at the 1.25x stretch cap exactly as designed. The 9th stage
-(`translate`) failed on a real bug, not a spike artifact: transformers now requires the
-explicit `"translation_XX_to_YY"` task string, not a bare `"translation"`. **Fixed in
-`src/vocalith/pipelines/translate.py` directly** — this would have silently broken
-dubbing's translation step in the shipped app. **v7 re-runs with the fix; check
-`kaggle/results/README.md`'s dub-chain section for whether it landed** — it was still
-running, anomalously slowly (38+ min vs. v6's 7.5 min, likely a stalled/rate-limited HF
-Hub download rather than a code problem), when this session had to move on. Either way,
-treat P0.8 as *substantively proven*, not hypothetical: 8 of 9 stages have real Kaggle
-GPU evidence, and the 9th's fix is a standard, well-documented API requirement, not a
-speculative one.
+**P0.8 (full dubbing chain) is DONE — all 9 stages pass on real Kaggle GPU (kernel
+v8).** It took 8 kernel pushes (v1-v8) to get there, and every failure taught something
+real — full story in `kaggle/results/README.md`, don't skip it if a similar "works
+standalone, fails in this script" symptom ever shows up again. Two genuinely different
+bug classes, both now fixed in the real `src/vocalith/` code, not just the spike:
+1. **A self-inflicted debugging artifact (v1-v6):** a diagnostic stage added to catch
+   one bug was itself silently causing a *different* one — a VRAM-tracking helper's own
+   `import torch` was pre-caching the wrong torch version before `setup()` had
+   reinstalled the pin. Fixed by running `setup()` outside the tracking wrapper.
+2. **A real transformers-version bug (v6-v8):** `pipeline("translation_XX_to_YY", ...)`
+   raised `KeyError` two different ways across two attempts — transformers 5.2.0 (pulled
+   in unpinned by this project's other deps) turned out to have dropped the
+   `"translation"` pipeline task from its registry entirely. Fixed by rewriting
+   `translate.py` to call `AutoTokenizer`/`AutoModelForSeq2SeqLM` directly (tokenize →
+   generate → decode) instead of going through the pipeline task-name abstraction at
+   all — stable, documented, low-level API that doesn't depend on what task names a
+   given transformers version happens to register.
 
-**The UI got a full visual redesign**, prompted by direct user feedback that the
-default Gradio look "screamed AI" — generic, template-shaped. Used the
-`frontend-animation` skill's decision tree (plain HTML/CSS/JS project → anime.js) and
-rebuilt the look from scratch: warm near-black + copper-accent palette (deliberately
-not the purple/blue gradient every generic AI-tool site uses), a Fraunces display serif
-for the hero against a system-ui body face, thin 1px-border surfaces instead of
-soft-shadow cards, an editorial underline tab nav via semantic ARIA selectors (not
-Gradio's fragile internal hashed classes), and copy that isn't corporate-SaaS
-boilerplate. Fonts and anime.js are vendored locally and inlined as base64/text into
-the page — zero runtime network calls, matching the project's own offline promise (a
-`gr.themes.GoogleFont` or a CDN `<script src>` would have quietly broken that). See
-`src/vocalith/ui/design.py` for the whole system and its own inline reasoning,
+v8's output, for real, on a synthesized English clip: *"Bienvenidos a esta breve
+demostración. Hoy estamos probando una tubería de doblaje totalmente local..."* —
+correct Spanish, correctly timed (three segments hit the 1.25x stretch cap exactly as
+§6.4 designed, since translations ran 1.6-1.7x longer than the English source).
+
+**The UI went through three real design passes**, each triggered by direct user
+feedback, worth understanding in order because each one overwrote real work:
+1. First pass, prompted by "the default Gradio look screams AI" — used the
+   `frontend-animation` skill's decision tree (plain HTML/CSS/JS project → anime.js)
+   and built a dark near-black + warm-copper-accent editorial theme with a vendored
+   Fraunces serif for display type.
+2. Second pass, prompted by "the coffee-brown palette reads as default AI slop, not
+   premium" — swapped copper for a neutral near-black + a single vivid recording-light
+   red (thematically apt for an audio tool), still dark mode.
+3. Third pass, prompted by "look at ElevenLabs and similar platforms, use that as the
+   base" — checked elevenlabs.io directly (their actual marketing site, not their app)
+   and rebuilt around its real structure: light mode, warm off-white background,
+   near-black text, pill-shaped buttons/tabs/badges everywhere.
+4. Fourth pass (current, final), prompted by "still sloppy, I want dark, just copy
+   award-winning sites, don't overthink it" — committed directly to the
+   Linear/Vercel/Raycast school of dark developer-tool design, the most consistently
+   cited reference class for this look: near-black background (`#09090B`, not pure
+   black), off-white text (`#EDEEF0`, not pure white), one indigo-violet accent
+   (`#5E6AD2`) used sparingly, tight 8-10px rounded-rect shapes (not full pills —
+   those read as ElevenLabs-specific, not the broader dark-SaaS norm), subtle 1px
+   borders instead of shadows, primary buttons filled with the accent color (Linear's
+   own signature move) rather than plain black/white. Every structural CSS fix found
+   during the earlier passes (see below) carried forward unchanged — they're
+   correctness fixes independent of the palette on top. This is the current, final
+   look — check the file's own top-of-file comment in `src/vocalith/ui/design.py` for
+   the reasoning behind each pass; don't revert to an earlier one without a reason.
+
+   **Four real, non-obvious CSS bugs were found and fixed getting the dark mode to
+   actually render** (all still apply under pass 4's colors — read these before
+   touching `design.py`'s cascade again):
+   - Gradio adds a `body.dark` class when the OS prefers dark color-scheme, and its
+     own dark-mode rule for `.gradio-container` has the *same specificity* as a plain
+     `.gradio-container` selector — so on a dark-preference OS, Gradio's rule won
+     regardless of `!important`. Fix: explicitly match `body.dark .gradio-container`.
+   - Setting the `background` shorthand and then a separate `background-image`
+     longhand in the *same rule* silently dropped `background-color` from the
+     serialized declaration entirely (confirmed via the live CSSOM, not a guess) —
+     the container rendered fully transparent as a result. Fix: use
+     `background-color` + `background-image` as two explicit longhands, never mix
+     shorthand with a following longhand override for the same shorthand family.
+   - The Audio/File component's floating file-type badge (`[data-testid="block-label"]`)
+     and the Dropdown's inner wrapper (`.wrap`) are separate nested components with
+     their own dark-mode defaults that the container-level override doesn't reach —
+     each needed its own explicit rule.
+   - Gradio adds a literal `.selected` class to the active radio `<label>` — far more
+     reliable than guessing at `role`/`:has()` selectors, which didn't match this
+     component's actual markup at all.
+
+Only anime.js is vendored now (the Fraunces font files were deleted along with pass 3).
+It's inlined as text directly into the page — zero runtime network calls, matching the
+project's own offline promise (a `gr.themes.GoogleFont` or a CDN `<script src>` would
+have quietly broken that). See `src/vocalith/ui/design.py` for the whole system,
 especially the note about why the hero's entrance animation is CSS-driven, not
 JS-driven (a JS-timing bug once left it permanently invisible; anime.js is now reserved
 for a lower-stakes completion-pulse flourish instead). **Verified in-browser, all four

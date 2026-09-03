@@ -1,1 +1,3 @@
-seg@0.0s: wanted stretch 1.28x, clamped to 1.25x
+seg@0.0s: wanted stretch 1.70x, clamped to 1.25x
+seg@2.8s: wanted stretch 1.61x, clamped to 1.25x
+seg@11.6s: wanted stretch 1.66x, clamped to 1.25x
