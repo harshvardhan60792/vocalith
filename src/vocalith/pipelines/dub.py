@@ -165,6 +165,19 @@ def _revoice_segments(segments, vocals_path, voice_mode, preset_voice, device, p
     ref_clip = None
     if voice_mode == "clone":
         ref, sr = audio_mod.load(vocals_path)
+        available_secs = len(ref) / sr
+        # Found via real end-to-end testing (kaggle/results/README.md): a short input
+        # clip's own voice track can be shorter than clone.py's own minimum reference
+        # length, in which case clone.clone() raises a generic "upload a reference
+        # sample" error that makes no sense here -- the user never manually uploaded
+        # one, dub() derives it from the source clip. Fail with a clear, dubbing-
+        # specific message instead, before ever calling clone.clone().
+        if available_secs < clone_mod.MIN_REFERENCE_SECONDS:
+            raise ValueError(
+                f"This clip's voice track is only {available_secs:.1f}s long. Voice "
+                f"cloning needs at least {clone_mod.MIN_REFERENCE_SECONDS:.0f}s of "
+                f"speech to work from. Use a longer clip, or switch to 'preset voice' mode."
+            )
         clip_len = min(len(ref), int(sr * REFERENCE_CLIP_SECONDS))
         ref_clip = Path(vocals_path).parent / "clone_ref.wav"
         audio_mod.save(ref_clip, ref[:clip_len], sr)

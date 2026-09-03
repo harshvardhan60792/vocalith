@@ -152,8 +152,15 @@ def test_dub():
 
     # Build a real input video: speech + a tone bed, muxed with ffmpeg (same
     # construction as kaggle/dub_test/dub_test.py's proven build_input()).
+    # v2 used a one-sentence clip (~4.7s of vocals after Demucs) and hit a real bug:
+    # dub.dub() didn't check the source clip had enough voice audio to serve as its
+    # own cloning reference before calling clone.clone(), which then raised a
+    # confusing generic error. Fixed in pipelines/dub.py (see _revoice_segments).
+    # Use a longer clip here so this run actually exercises the success path too.
     speech_path = tts_mod.synthesize(
-        "This is the real dubbing pipeline speaking English before translation.",
+        "This is the real dubbing pipeline speaking English before translation. "
+        "It needs to run long enough to produce more than six seconds of voice audio, "
+        "since that voice track doubles as its own cloning reference for re-voicing.",
         voice="af_heart", device=DEVICE, out_path=f"{OUT}/dub_src_speech.wav",
     )
     speech, sr = audio_mod.load(speech_path)
