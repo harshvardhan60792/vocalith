@@ -65,6 +65,16 @@ set VOCALITH_FFMPEG=%~dp0ffmpeg\ffmpeg.exe
 "@ | Set-Content "$dist\Vocalith.bat"
 
 # 5. archive
-Compress-Archive -Path "$dist\*" -DestinationPath "$root\dist\Vocalith-win64.zip" -Force
+# NOT Compress-Archive: confirmed by an actual run on a real machine to throw
+# System.OutOfMemoryException on a tree this size (~1.5-2GB, tens of thousands of
+# files across a full ML site-packages install) -- a documented limitation of that
+# cmdlet, not something specific to this one machine's available RAM. System.IO.
+# Compression.ZipFile's CreateFromDirectory streams instead of buffering the whole
+# tree and has none of that ceiling, while staying just as dependency-free.
+$zipPath = "$root\dist\Vocalith-win64.zip"
+if (Test-Path $zipPath) { Remove-Item $zipPath -Force }
+Add-Type -AssemblyName System.IO.Compression.FileSystem
+[System.IO.Compression.ZipFile]::CreateFromDirectory(
+    $dist, $zipPath, [System.IO.Compression.CompressionLevel]::Optimal, $false)
 
-Write-Host "Built: $root\dist\Vocalith-win64.zip"
+Write-Host "Built: $zipPath"

@@ -51,7 +51,7 @@ signed off** — packaging a pipeline that doesn't work yet wastes days.
 Phase 0  Kaggle spike        — prove the 4 models load and run on free GPU      [DONE — all 4 features + full dub chain (9/9 stages) proven on real GPU]
 Phase 1  Core engine         — the 4 pipelines as a clean importable package    [DONE — the real package (not a mirror) ran all 4 pipelines on real GPU, 2 more real bugs found+fixed]
 Phase 2  Gradio UI           — the app a non-technical user actually sees       [DONE — premium redesign, verified in-browser across all 4 tabs, no GPU needed]
-Phase 3  Packaging           — one-click installers per OS                      [DRAFTED, NOT RUN]
+Phase 3  Packaging           — one-click installers per OS                      [WINDOWS PROVEN WORKING end-to-end; macOS/Linux still drafted-only]
 Phase 4  CI + Release        — GitHub Actions builds all 3 OSes, publishes      [WRITTEN, NEVER RUN — no push yet]
 Phase 5  Docs + polish       — README, licenses, first-run UX, error messages   [DONE — refine as issues surface]
 ```
@@ -653,11 +653,41 @@ demonstrated, not merely written.
 - [x] Output files land in `paths.outputs_dir()` with a download button
 - [x] **Opened in a browser and verified, 2026-09-04.** `PYTHONPATH=src python launcher/main.py` starts cleanly (imports are lazy, so this needed zero model downloads and zero GPU), served on 127.0.0.1:7860, and all four tabs were confirmed rendering their real fields (screenshot + get_page_text via the browser tool) — Text-to-Speech, Voice Cloning (with the watermark disclosure), Voice Isolation, Dubbing (with target-language/voice-mode/bed-gain controls). Two bugs this run caught and fixed: a redundant "CPU mode, CPU mode" banner string, and a Gradio 6.0 deprecation warning from passing `theme=` to `gr.Blocks()` instead of `.launch()`. **What's still unverified:** clicking Generate on any tab — that needs an actual model download, which needs either a GPU or patience on CPU. That's the next real gap, not the UI itself.
 
-**Phase 3 — packaging** — all three scripts are first drafts, explicitly unverified (see file headers)
-- [ ] Windows portable bundle launches on a clean VM with no Python installed
-- [ ] macOS bundle launches; Gatekeeper workaround documented
-- [ ] Linux tarball launches on a clean container
-- [ ] First-run CUDA-torch upgrade path works and is visible
+**Phase 3 — packaging**
+- [x] **Windows: `launcher/windows/build.ps1` actually run end-to-end on a real Windows
+      machine, 2026-09-04** — embedded Python bootstrapped, every dependency installed
+      (torch CPU, kokoro, chatterbox-tts, demucs, openai-whisper, gradio 6.8.0, etc.),
+      ffmpeg bundled, `Vocalith.bat` launched the packaged app from the standalone
+      environment (not the dev Python), and it served the real UI on 127.0.0.1:7860 —
+      confirmed in-browser. **Not yet tested on a genuinely clean VM** (this machine
+      has a dev Python and other tools present) — that's the one remaining honest gap,
+      not "does it work at all."
+
+  Three real, non-obvious bugs found and fixed by actually running the script (the
+  exact value of "flag early if something doesn't bundle cleanly" from §7.1):
+  1. **7-Zip isn't present on a typical dev machine** (confirmed absent via
+     `Get-Command` and both Program Files paths) — the original draft used it for both
+     ffmpeg extraction and the final archive. Switched to PowerShell's native
+     `Expand-Archive` and an ffmpeg `.zip` build instead of `.7z`.
+  2. **`ffmpeg-python` was dead weight** — declared in `pyproject.toml` but nothing in
+     the codebase imports it (`audio.py` shells out to the raw ffmpeg binary by
+     design). Removed from `pyproject.toml` rather than papering over it by adding the
+     unused package to three packaging scripts.
+  3. **`Compress-Archive` throws `System.OutOfMemoryException`** on a tree this size
+     (~1.5-2GB, tens of thousands of files across a full ML `site-packages`) — a
+     documented cmdlet limitation, not specific to this machine's RAM at the time.
+     Switched to `System.IO.Compression.ZipFile.CreateFromDirectory`, which streams
+     instead of buffering the whole tree and has no such ceiling.
+- [ ] macOS bundle launches; Gatekeeper workaround documented — still drafted-only,
+      unverified (no Mac available this session)
+- [ ] Linux tarball launches on a clean container — still drafted-only, unverified
+      (bash syntax-checked with `bash -n`, which caught nothing, but that only proves
+      the script parses, not that it runs)
+- [ ] Windows bundle re-tested on an actually clean VM (no dev Python, no Visual C++
+      redistributables preinstalled) — the real bar for "works," per this script's own
+      header note
+- [ ] First-run CUDA-torch upgrade path works and is visible — untested (this test
+      machine's GPU situation wasn't exercised for the packaged launcher specifically)
 - [ ] Uninstall = delete the folder + the data dir (documented)
 - [ ] `launcher/windows/build.ps1`'s .exe shim is a TODO stub (currently a .bat) — needs a real no-console shim
 
