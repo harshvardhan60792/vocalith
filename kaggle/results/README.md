@@ -1,3 +1,15 @@
+## linux_package_test/ — Linux packaging (`launcher/linux/build.sh`), 2026-09-04
+
+No Linux machine was directly available this session, but Kaggle kernels *run on*
+Linux — genuinely the only real Linux access reachable tonight, and it needed zero
+GPU (packaging installs CPU-only torch by design, `enable_gpu: false` on this kernel,
+no GPU quota spent). Uploaded a slice of the repo (`src/`, `launcher/`, `pyproject.toml`)
+as a dataset and ran `launcher/linux/build.sh` for real, then extracted the resulting
+tarball and launched `vocalith.sh` to confirm it actually serves the UI.
+
+**Result: _(fill in once `kaggle/linux_package_test/out/` lands — check
+`vocalith-linux-package-test.log` for LINUX PACKAGE TEST: SUCCESS or FAILED)_.**
+
 ## phase1_real_package_test/ — DONE, 2026-09-04, kernel v3, Tesla P100
 
 The Phase 0 spikes (`pipeline_test`, `dub_test`) proved the *logic* works by mirroring

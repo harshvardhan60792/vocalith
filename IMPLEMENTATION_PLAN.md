@@ -10,6 +10,58 @@ and know exactly what "done" means for the next task.
 
 ---
 
+## AT A GLANCE — read this block first, it's the whole status in one place
+
+*Last updated 2026-09-04, end of an overnight autonomous session. If you're an AI picking
+this project up cold, this block plus §2's table is enough to know where things stand
+without reading the full history below — read the history when you need the *why*.*
+
+**Genuinely done and GPU/browser-verified (not just written):**
+- **Phase 0** — Kokoro, Chatterbox, Demucs, Whisper all load and chain correctly; the
+  full dubbing pipeline (video → translated, re-voiced video) passes all 9 stages on a
+  real Kaggle GPU. Evidence: `kaggle/results/`.
+- **Phase 1** — the actual `src/vocalith/` package (not a mirrored test script) ran its
+  real `tts`, `clone`, `isolate`, and `dub` functions on Kaggle GPU and all four passed.
+  Evidence: `kaggle/results/phase1_real_package_test/`.
+- **Phase 2** — the Gradio UI, dark Linear/Vercel-style theme, verified across all four
+  tabs in a real browser. `src/vocalith/ui/design.py`'s own header explains 4 design
+  passes and why each was superseded — read it before changing the look again.
+- **Phase 3, Windows only** — `launcher/windows/build.ps1` actually run on real Windows:
+  embedded Python bootstrapped, the full ML stack installed, ffmpeg bundled, and the
+  resulting standalone app launched and served the real UI on its own. 716MB archive,
+  60,022 files, integrity-verified.
+- **Phase 5** — README, LICENSES (Demucs resolved), TROUBLESHOOTING all written; the
+  ethics note on voice cloning consent is in place.
+- `ruff check` and `pytest` (the two real commands `ci.yml` runs) both verified passing
+  locally, with an explicit pinned lint rule set so a future ruff version can't quietly
+  change what counts as clean.
+
+**Not done, and why — these are real constraints, not skipped effort:**
+- **macOS packaging is untested.** There is no Mac hardware anywhere in this session's
+  reach — not this machine, not Kaggle (Linux/GPU only), nothing. `launcher/macos/
+  build.sh` is a careful draft mirroring the proven Linux/Windows pattern, but "careful
+  draft" is honestly what it is until it runs on an actual Mac. Whoever has one: that's
+  the single highest-value next step for Phase 3.
+- **Linux packaging: check `kaggle/results/README.md`'s Linux section for current
+  status** — a real test was run on a Kaggle kernel (Kaggle's own infrastructure is
+  Linux, so this was actually reachable tonight, no GPU needed) using `launcher/linux/
+  build.sh`; the result is recorded there, not summarized twice in two places.
+- **GitHub Actions has never executed.** Running it means pushing to a GitHub remote,
+  which is the user's call to make, not something an AI session takes on its own
+  authority overnight regardless of how the instructions for the rest of the work were
+  phrased — this is a deliberate, held boundary, not an oversight. `ci.yml`/`release.yml`
+  are YAML-valid and their real steps work locally; actually running them in Actions is
+  the one item that waits on the user, by design.
+- Windows packaging hasn't been tried on a genuinely clean VM (no dev Python, no VC++
+  redistributables) — this machine has other tools installed, so "it works here" isn't
+  yet "it works on a stranger's machine."
+
+**If you are an AI resuming this session:** the two boundaries above (no macOS hardware,
+no push without the user) are not problems for you to solve by working around them —
+respect them the same way. Everything else in this list is fair game to keep pushing on.
+
+---
+
 ## 1. What this is
 
 A free, open-source, **fully local** desktop audio toolkit — a self-hosted alternative to
