@@ -1,0 +1,11 @@
+# Force LF line endings for shell scripts regardless of the checking-out machine's
+# git autocrlf setting. Found the hard way: this repo edited on Windows silently
+# picked up CRLF endings on launcher/linux/build.sh and launcher/macos/build.sh,
+# which breaks bash on real Linux/macOS with "set: pipefail: invalid option name"
+# (bash chokes on the trailing \r). See kaggle/results/README.md's Linux packaging
+# test section for the exact failure this caused.
+*.sh text eol=lf
+
+# Windows scripts keep CRLF -- that's their native, correct line ending.
+*.ps1 text eol=crlf
+*.bat text eol=crlf
