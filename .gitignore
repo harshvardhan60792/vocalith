@@ -21,4 +21,4 @@ kaggle/dub_test/out[0-9]*/
 kaggle/package_test/vocalith_dataset/
 kaggle/package_test/out/
 kaggle/linux_package_test/repo_dataset/
-kaggle/linux_package_test/out/
+kaggle/linux_package_test/out*/
