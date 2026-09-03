@@ -11,3 +11,7 @@ dist/
 !kaggle/results/**/*.wav
 .pytest_cache/
 .ruff_cache/
+kaggle/dub_test/out/
+kaggle/dub_test/out2/
+kaggle/dub_test/out3/
+kaggle/pipeline_test/out/
