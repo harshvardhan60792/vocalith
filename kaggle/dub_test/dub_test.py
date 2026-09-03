@@ -43,32 +43,30 @@ def stage(name, fn):
 
 def setup():
     sh("apt-get update -qq && apt-get install -y -qq espeak-ng ffmpeg > /dev/null")
-    sh(f"{sys.executable} -m pip install -q kokoro==0.9.4 misaki[en] soundfile librosa")
+    # Exact match to kaggle/pipeline_test/test.py's WORKING sequence (verified passing,
+    # see kaggle/results/phase0_spike/) -- deliberately NOT installing librosa or
+    # sentencepiece here. Two dub_test attempts that added those two packages before
+    # the torch pin both failed with the same torchvision::nms mismatch that this exact
+    # combined-install-last pattern fixed for pipeline_test; isolating that variable
+    # before guessing further. librosa/sentencepiece install lazily, right before the
+    # stages that actually need them, after torch/torchvision are already locked in.
+    sh(f"{sys.executable} -m pip install -q kokoro==0.9.4 misaki[en] soundfile")
     sh(f"{sys.executable} -m pip install -q chatterbox-tts")
     sh(f"{sys.executable} -m pip install -q demucs")
     sh(f"{sys.executable} -m pip install -q openai-whisper")
-    sh(f"{sys.executable} -m pip install -q sentencepiece")
-    # realign torch trio (chatterbox pins torch==2.6.0, orphaning Kaggle's torchvision).
-    # --force-reinstall --no-deps per package, individually: a single combined pip
-    # command can decide a package is "already satisfied" and silently skip it,
-    # which is exactly what happened here once already (see kaggle/results/README.md).
-    for pkg in ["torch==2.6.0", "torchvision==0.21.0", "torchaudio==2.6.0"]:
-        sh(f"{sys.executable} -m pip install -q --force-reinstall --no-deps {pkg}")
-    # librosa (pulled in above) can drag numpy to a version ABI-incompatible with
-    # numpy's own compiled extensions and other packages built against numpy<2.
-    sh(f"{sys.executable} -m pip install -q --force-reinstall --no-deps 'numpy<2.0'")
+    sh(f"{sys.executable} -m pip install -q torch==2.6.0 torchvision==0.21.0 torchaudio==2.6.0")
 
 stage("setup", setup)
 
-def check_imports():
-    import torch, torchvision, numpy as np
-    from torchvision.ops import nms  # canary: catches the torch/torchvision pin mismatch
-    from transformers import AlbertModel  # canary: catches the numpy ABI mismatch (kokoro's import path)
-    print("torch", torch.__version__, "| torchvision", torchvision.__version__, "| numpy", np.__version__)
-    print("import canaries OK")
-
-stage("import_check", check_imports)
-
+# NOTE on 3 earlier failed attempts (kaggle/results/README.md has the full story):
+# adding an extra diagnostic stage here that imported torch *before* this line -- even
+# just to log versions -- reproducibly broke the very torchvision::nms registration this
+# was trying to verify, while a check in a brand-new subprocess always passed. Root cause
+# not fully isolated (looks like a Kaggle-kernel-specific first-import quirk, not a real
+# version mismatch -- `pip show` and the subprocess canary both showed correct versions
+# every time). Fix: match kaggle/pipeline_test/test.py's exact proven shape -- the very
+# first `import torch` in this process happens right here, immediately after the last
+# pip install of the trio, with nothing in between. Do not insert anything above this line.
 import torch
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 print("device:", DEVICE)
@@ -131,6 +129,7 @@ stage("whisper_transcribe", transcribe)
 # ---------- 5. Translate each segment (Opus-MT, Apache-2.0 / CC-BY-4.0) ----------
 TRANSLATED = []
 def translate():
+    sh(f"{sys.executable} -m pip install -q sentencepiece")
     from transformers import pipeline as hf_pipeline
     translator = hf_pipeline("translation", model="Helsinki-NLP/opus-mt-en-es",
                               device=0 if DEVICE == "cuda" else -1)
@@ -167,6 +166,7 @@ stage("chatterbox_revoice", revoice)
 
 # ---------- 7. Time-stretch each segment to fit + place on original timeline ----------
 def align_and_mix():
+    sh(f"{sys.executable} -m pip install -q librosa")
     import soundfile as sf, numpy as np, librosa
     bed, bed_sr = sf.read(f"{OUT}/bed.wav")
     if bed.ndim > 1:
