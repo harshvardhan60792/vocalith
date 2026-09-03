@@ -15,3 +15,6 @@ kaggle/dub_test/out/
 kaggle/dub_test/out2/
 kaggle/dub_test/out3/
 kaggle/pipeline_test/out/
+kaggle/dub_test/out4/
+kaggle/dub_test/out5/
+kaggle/dub_test/out[0-9]*/
