@@ -4,16 +4,16 @@ server must never be reachable from the LAN by default, and Gradio's share tunne
 would route user audio through a public relay, which this project exists to avoid.
 """
 from __future__ import annotations
+
 import traceback
 
 import gradio as gr
 
-from .. import paths
 from ..device import describe_device
-from ..pipelines import tts as tts_mod
 from ..pipelines import clone as clone_mod
-from ..pipelines import isolate as isolate_mod
 from ..pipelines import dub as dub_mod
+from ..pipelines import isolate as isolate_mod
+from ..pipelines import tts as tts_mod
 from . import design
 from .theme import theme
 
@@ -121,7 +121,9 @@ def _clone_tab():
             traceback.print_exc()
             return None, _friendly_error(e)
 
-    run.click(_run, inputs=[ref, text, exaggeration, cfg_weight, denoise], outputs=[out_audio, status]).then(fn=None, js=design.pulse_js())
+    run.click(
+        _run, inputs=[ref, text, exaggeration, cfg_weight, denoise], outputs=[out_audio, status]
+    ).then(fn=None, js=design.pulse_js())
 
 
 def _isolate_tab():
@@ -187,8 +189,10 @@ def _dub_tab():
             )
             msg = "\n".join(f"⚠️ {w}" for w in result.warnings) if result.warnings else "Done."
             if result.video_path:
-                return gr.update(value=str(result.video_path), visible=True), gr.update(visible=False), str(result.srt_path), msg
-            return gr.update(visible=False), gr.update(value=str(result.audio_path), visible=True), str(result.srt_path), msg
+                return (gr.update(value=str(result.video_path), visible=True),
+                        gr.update(visible=False), str(result.srt_path), msg)
+            return (gr.update(visible=False),
+                    gr.update(value=str(result.audio_path), visible=True), str(result.srt_path), msg)
         except Exception as e:
             traceback.print_exc()
             return gr.update(visible=False), gr.update(visible=False), None, _friendly_error(e)

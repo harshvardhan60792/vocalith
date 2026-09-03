@@ -14,6 +14,7 @@ task was removed from its registry -- the wrapper's job is just tokenize -> gene
 See kaggle/results/README.md for the two failed pipeline()-based attempts this replaced.
 """
 from __future__ import annotations
+
 from typing import Callable, Optional
 
 from ..device import pick_device
@@ -32,8 +33,8 @@ def _load_translator(src: str, tgt: str, device: str) -> tuple:
     if key in _translator_cache:
         return _translator_cache[key]
 
-    from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
     from huggingface_hub.utils import HfHubHTTPError
+    from transformers import AutoModelForSeq2SeqLM, AutoTokenizer
 
     try:
         tokenizer = AutoTokenizer.from_pretrained(_opus_mt_id(src, tgt))

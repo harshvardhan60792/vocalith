@@ -1,4 +1,4 @@
-from vocalith.device import pick_device, pick_dtype, describe_device
+from vocalith.device import describe_device, pick_device, pick_dtype
 
 
 def test_pick_device_returns_valid_value():

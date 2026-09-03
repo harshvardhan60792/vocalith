@@ -66,14 +66,24 @@ except Exception:
     print(f"===== setup FAILED ({time.time()-_t0:.1f}s) =====")
     traceback.print_exc()
 
-# Locate the uploaded package (robust to Kaggle's mount path, which we don't hardcode-guess)
-_candidates = glob.glob("/kaggle/input/*/vocalith") + glob.glob("/kaggle/input/*/*/vocalith")
+# Locate the uploaded package. v1 assumed Kaggle would preserve the "vocalith/" folder
+# name in the dataset -- it didn't: `kaggle datasets create -r zip` flattened it, so
+# paths.py/device.py/pipelines/ etc. sit directly at the dataset root with no
+# "vocalith" wrapper folder at all. Find the root by an unambiguous marker file
+# instead of guessing a folder name, then symlink it to a dir literally named
+# "vocalith" so `import vocalith` resolves regardless of how the upload was flattened.
+_candidates = glob.glob("/kaggle/input/**/paths.py", recursive=True)
 if not _candidates:
-    sh("find /kaggle/input -maxdepth 4")
+    sh("find /kaggle/input -maxdepth 6")
     raise RuntimeError("Could not locate the vocalith package under /kaggle/input")
-_pkg_parent = os.path.dirname(_candidates[0])
-sys.path.insert(0, _pkg_parent)
-print(f"Using package at: {_candidates[0]}")
+_pkg_root = os.path.dirname(_candidates[0])
+_stage = "/kaggle/working/pkg_stage"
+os.makedirs(_stage, exist_ok=True)
+_link = os.path.join(_stage, "vocalith")
+if not os.path.exists(_link):
+    os.symlink(_pkg_root, _link)
+sys.path.insert(0, _stage)
+print(f"Package root found at: {_pkg_root}, symlinked to: {_link}")
 
 import torch  # first import in the process, strictly after setup() finished -- see stage() note
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"

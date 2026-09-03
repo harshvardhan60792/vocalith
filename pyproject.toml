@@ -44,5 +44,20 @@ where = ["src"]
 vocalith = ["ui/static/js/*.js"]
 
 [tool.ruff]
-line-length = 100
+line-length = 120
 target-version = "py310"
+
+[tool.ruff.lint]
+# Pinned explicitly rather than accepting whatever a given ruff version's default
+# expands to (a ruff bump silently widening this and breaking CI is the same class
+# of surprise as the unpinned-transformers-version bug found earlier tonight).
+# E/F/I: pycodestyle errors, pyflakes, import sorting -- catches real bugs and
+# genuine mess. Deliberately NOT pylint-refactor/bandit-security/pyupgrade-style
+# rules, which are opinions, not correctness, and weren't part of this project's
+# actual quality bar.
+select = ["E", "F", "I"]
+
+[tool.ruff.lint.per-file-ignores]
+# gr.Progress() as a default argument is Gradio's own documented API for wiring
+# progress bars -- not a bug B008 would otherwise (correctly, in general) flag.
+"src/vocalith/ui/app.py" = ["B008"]

@@ -4,6 +4,7 @@ Never shows a terminal in the packaged build (the OS-specific shim in windows/ma
 hides the console); this module itself stays console-safe so it also runs fine from source.
 """
 from __future__ import annotations
+
 import socket
 import sys
 import threading

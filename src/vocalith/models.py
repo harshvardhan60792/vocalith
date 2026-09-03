@@ -5,6 +5,7 @@ pipeline that needs it actually runs, with progress wired to the UI so a multi-m
 download never looks like a hung app.
 """
 from __future__ import annotations
+
 import os
 import shutil
 from dataclasses import dataclass, field
@@ -120,6 +121,7 @@ def _resolve_path(spec: ModelSpec, lang_pair: tuple[str, str] | None) -> Path:
 def unload_all() -> None:
     """Free resident GPU model weights. Call when switching tabs under tight VRAM."""
     import gc
+
     import torch
     gc.collect()
     if torch.cuda.is_available():

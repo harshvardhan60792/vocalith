@@ -3,6 +3,7 @@
 API verified working on Kaggle P100, 2026-09-04 spike run (see kaggle/results/).
 """
 from __future__ import annotations
+
 from pathlib import Path
 from typing import Callable, Optional
 

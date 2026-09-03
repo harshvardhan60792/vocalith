@@ -3,6 +3,7 @@
 API verified working on Kaggle P100, 2026-09-04 spike run (see kaggle/results/).
 """
 from __future__ import annotations
+
 from pathlib import Path
 from typing import Callable, Optional, TypedDict
 
@@ -26,6 +27,7 @@ def _get_model(name: str, device: str):
     if key not in _model_cache:
         models.ensure("whisper")
         import whisper
+
         from .. import paths
         _model_cache[key] = whisper.load_model(
             name, device=device, download_root=str(paths.models_dir() / "whisper")

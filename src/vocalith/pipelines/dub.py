@@ -17,6 +17,7 @@ Logic verified end-to-end on Kaggle P100 against a real synthesized video,
 2026-09-04 (kaggle/dub_test/ -> kaggle/results/phase0_dub_spike/).
 """
 from __future__ import annotations
+
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Callable, Optional

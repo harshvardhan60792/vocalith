@@ -1,6 +1,7 @@
 """ffmpeg-backed audio/video helpers. Resolves a bundled ffmpeg binary first, falls
 back to system PATH -- never assume the user has ffmpeg installed (most don't)."""
 from __future__ import annotations
+
 import os
 import shutil
 import subprocess

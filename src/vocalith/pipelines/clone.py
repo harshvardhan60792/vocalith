@@ -5,6 +5,7 @@ Note: Chatterbox watermarks its output by default (Resemble AI's Perth watermark
 this is disclosed to the user in the UI and in docs/LICENSES.md, not hidden.
 """
 from __future__ import annotations
+
 from pathlib import Path
 from typing import Callable, Optional
 

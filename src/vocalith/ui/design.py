@@ -24,6 +24,7 @@ Design direction, in order of how it evolved this session:
    regardless of the palette on top of them.
 """
 from __future__ import annotations
+
 from pathlib import Path
 
 _STATIC = Path(__file__).parent / "static"

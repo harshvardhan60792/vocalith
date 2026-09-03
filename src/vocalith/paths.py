@@ -1,6 +1,7 @@
 """Per-OS user data dirs. Never write into the install directory (Program Files, a
 read-only macOS app bundle, etc. are not writable)."""
 from __future__ import annotations
+
 import os
 from pathlib import Path
 

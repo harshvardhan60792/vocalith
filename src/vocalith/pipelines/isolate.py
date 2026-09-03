@@ -6,8 +6,8 @@ the spike proved it out -- keeps its dependency surface isolated from the rest o
 the app's process.
 """
 from __future__ import annotations
+
 import glob
-import shutil
 import subprocess
 import sys
 from pathlib import Path

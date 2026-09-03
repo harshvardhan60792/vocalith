@@ -1,5 +1,6 @@
 """GPU/CPU detection. Every pipeline calls pick_device() instead of hardcoding .cuda()."""
 from __future__ import annotations
+
 import torch
 
 

@@ -5,10 +5,9 @@ against real Kaggle GPU runs instead -- see kaggle/results/ -- rather than run h
 so CI stays fast and doesn't need a GPU.
 """
 import numpy as np
-import pytest
 
-from vocalith.pipelines.dub import _align_to_timeline, _srt_timestamp, _write_srt, STRETCH_MIN, STRETCH_MAX
 from vocalith import audio as audio_mod
+from vocalith.pipelines.dub import STRETCH_MAX, _align_to_timeline, _srt_timestamp, _write_srt
 
 
 def test_srt_timestamp_format():
