@@ -44,11 +44,15 @@ def _maybe_install_cuda_torch() -> None:
     if torch.cuda.is_available():
         return  # already CUDA-enabled build
     print("NVIDIA GPU detected. Installing CUDA-accelerated PyTorch for faster generation…")
-    subprocess.run([
+    r = subprocess.run([
         sys.executable, "-m", "pip", "install", "-q",
         "torch==2.6.0", "torchvision==0.21.0", "torchaudio==2.6.0",
         "--index-url", "https://download.pytorch.org/whl/cu124",
-    ])
+    ], capture_output=True, text=True)
+    if r.returncode != 0:
+        # Not fatal -- CPU torch (already installed) still works, just slower.
+        print("CUDA PyTorch install failed, continuing on CPU torch. Details:")
+        print(r.stderr[-1500:])
 
 
 def main():

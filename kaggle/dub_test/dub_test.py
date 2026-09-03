@@ -48,12 +48,15 @@ def setup():
     sh(f"{sys.executable} -m pip install -q demucs")
     sh(f"{sys.executable} -m pip install -q openai-whisper")
     sh(f"{sys.executable} -m pip install -q sentencepiece")
-    # realign torch trio (chatterbox pins torch==2.6.0, orphaning Kaggle's torchvision)
-    sh(f"{sys.executable} -m pip install -q torch==2.6.0 torchvision==0.21.0 torchaudio==2.6.0")
+    # realign torch trio (chatterbox pins torch==2.6.0, orphaning Kaggle's torchvision).
+    # --force-reinstall --no-deps per package, individually: a single combined pip
+    # command can decide a package is "already satisfied" and silently skip it,
+    # which is exactly what happened here once already (see kaggle/results/README.md).
+    for pkg in ["torch==2.6.0", "torchvision==0.21.0", "torchaudio==2.6.0"]:
+        sh(f"{sys.executable} -m pip install -q --force-reinstall --no-deps {pkg}")
     # librosa (pulled in above) can drag numpy to a version ABI-incompatible with
     # numpy's own compiled extensions and other packages built against numpy<2.
-    # Force it back down and reinstall so every C extension agrees on one ABI.
-    sh(f"{sys.executable} -m pip install -q 'numpy<2.0' --force-reinstall --no-deps")
+    sh(f"{sys.executable} -m pip install -q --force-reinstall --no-deps 'numpy<2.0'")
 
 stage("setup", setup)
 

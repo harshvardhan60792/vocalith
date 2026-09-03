@@ -29,13 +29,14 @@ def _friendly_error(e: Exception) -> str:
 
 def build_app() -> gr.Blocks:
     device_info = describe_device()
-    banner = (
-        f"Running on **{device_info['name']}**"
-        + (f" ({device_info['vram_gb']} GB VRAM)" if device_info["vram_gb"] else "")
-        + ("" if device_info["is_gpu"] else " — CPU mode, generation will be slower.")
-    )
+    if device_info["is_gpu"]:
+        banner = f"Running on **{device_info['name']}**"
+        if device_info["vram_gb"]:
+            banner += f" ({device_info['vram_gb']} GB VRAM)"
+    else:
+        banner = "Running on **CPU** — generation will be slower than on a GPU."
 
-    with gr.Blocks(theme=theme, title="Vocalith") as app:
+    with gr.Blocks(title="Vocalith") as app:
         gr.Markdown("# Vocalith\nFree, local, open-source text-to-speech, voice cloning, "
                      "voice isolation, and dubbing. Nothing leaves this machine.")
         gr.Markdown(banner)
@@ -184,7 +185,8 @@ def _dub_tab():
 
 def launch(server_port: int = 7860):
     app = build_app()
-    app.launch(server_name="127.0.0.1", server_port=server_port, share=False, inbrowser=False)
+    app.launch(server_name="127.0.0.1", server_port=server_port, share=False,
+               inbrowser=False, theme=theme)
 
 
 if __name__ == "__main__":

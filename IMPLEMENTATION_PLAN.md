@@ -562,7 +562,7 @@ demonstrated, not merely written.
 - [x] Device banner ("Running on NVIDIA RTX 4070" / "Running on CPU — slower")
 - [x] Plain-English validation errors, never stack traces (traceback goes to console/log only)
 - [x] Output files land in `paths.outputs_dir()` with a download button
-- [ ] **Never actually opened in a browser.** `pip install -e .` and `python launcher/main.py` has not been run once this session — do this first before writing any more UI code.
+- [x] **Opened in a browser and verified, 2026-09-04.** `PYTHONPATH=src python launcher/main.py` starts cleanly (imports are lazy, so this needed zero model downloads and zero GPU), served on 127.0.0.1:7860, and all four tabs were confirmed rendering their real fields (screenshot + get_page_text via the browser tool) — Text-to-Speech, Voice Cloning (with the watermark disclosure), Voice Isolation, Dubbing (with target-language/voice-mode/bed-gain controls). Two bugs this run caught and fixed: a redundant "CPU mode, CPU mode" banner string, and a Gradio 6.0 deprecation warning from passing `theme=` to `gr.Blocks()` instead of `.launch()`. **What's still unverified:** clicking Generate on any tab — that needs an actual model download, which needs either a GPU or patience on CPU. That's the next real gap, not the UI itself.
 
 **Phase 3 — packaging** — all three scripts are first drafts, explicitly unverified (see file headers)
 - [ ] Windows portable bundle launches on a clean VM with no Python installed
