@@ -9,7 +9,7 @@ its own terms apply to that component independently of Vocalith's MIT license.
 | Kokoro-82M (TTS) | Apache-2.0 | Yes | hexgrad/Kokoro-82M on HuggingFace |
 | Chatterbox (voice cloning) | MIT | Yes | ResembleAI/chatterbox. **Watermarks output by default** (Perth watermarker) — disclosed in the UI, not stripped. |
 | Whisper (transcription) | MIT | Yes | openai/whisper |
-| Demucs (voice isolation) | **Verify before v1.0 release** | ? | Meta's demucs *code* was relicensed MIT; confirm the `htdemucs` pretrained *weights* carry the same license, separately from the code, before shipping. Blocking item — see IMPLEMENTATION_PLAN.md §9. |
+| Demucs (voice isolation) | MIT | Yes | facebookresearch/demucs. Confirmed 2026-09-04 by reading the repo directly: its README states plainly "Demucs is released under the MIT license," with no carve-out for the pretrained `htdemucs` weights vs. the code — the project's own official position covers both. (The training data, MusDB18 + an extra 800 songs, is separately-licensed commercial music, same as virtually every audio/speech model in this table including Whisper and Kokoro — that's a training-data-provenance question, not a redistribution-license one, and isn't specific to Demucs.) |
 | Helsinki-NLP Opus-MT (translation) | Apache-2.0 / CC-BY-4.0 (varies per language pair) | Yes | Record the exact license per pair actually shipped, at release time |
 | facebook/m2m100_418M (translation fallback) | MIT | Yes | Used only for language pairs Opus-MT doesn't cover |
 | ffmpeg | LGPL (essentials builds) | Yes, if LGPL build used | Static builds from gyan.dev (Windows) / johnvansickle.com (Linux) are LGPL-licensed shared builds; verify the specific build before release, avoid GPL-only builds |

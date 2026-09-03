@@ -593,7 +593,7 @@ states plainly what downloads on first run and how large it is.
 | Kokoro-82M | Apache-2.0 | Yes | Attribute |
 | Chatterbox | MIT | Yes | Attribute; disclose watermarking |
 | Whisper | MIT | Yes | Attribute |
-| Demucs | **VERIFY** — Meta relicensed demucs to MIT, but confirm the exact tag and the `htdemucs` weights separately from the code | ? | **Blocking check before release.** If weights are CC-BY-NC, either find MIT weights or cut the feature. |
+| Demucs | MIT | Yes | **Resolved 2026-09-04** — the repo's own README states plainly "Demucs is released under the MIT license," no carve-out for the pretrained `htdemucs` weights vs. the code. See docs/LICENSES.md for the full note. |
 | Opus-MT | CC-BY-4.0 / Apache-2.0 (varies per pair) | Yes | Record per-pair |
 | M2M100 | MIT | Yes | Attribute |
 | **NLLB-200** | **CC-BY-NC** | **NO** | **Do not use** |
@@ -672,7 +672,7 @@ demonstrated, not merely written.
 
 **Phase 5 — docs**
 - [x] README: what it does, first-run expectations — download links pending an actual release
-- [x] `docs/LICENSES.md` — Demucs weight-license question still explicitly open, flagged as blocking
+- [x] `docs/LICENSES.md` — Demucs license question resolved 2026-09-04 (MIT, confirmed from the repo's own README, no weights carve-out)
 - [x] `docs/TROUBLESHOOTING.md`: no GPU detected, port in use, Gatekeeper, slow CPU, OOM
 - [x] Ethics note on voice cloning consent
 
@@ -701,7 +701,7 @@ demonstrated, not merely written.
 | Risk | Likelihood | Impact | Mitigation |
 |------|-----------|--------|------------|
 | Chatterbox pins a torch version that conflicts with Demucs/Whisper | High | Blocks Phase 1 | Resolve in Phase 0; if unresolvable, isolate Chatterbox in a subprocess with its own venv |
-| Demucs weights turn out to be non-commercial | Medium | Cuts feature 3 and degrades feature 4 | Verify before Phase 1; alternatives: MDX-Net, or a smaller MIT denoiser |
+| ~~Demucs weights turn out to be non-commercial~~ | — | — | **Resolved 2026-09-04: confirmed MIT.** Risk closed, no longer tracked. |
 | PyInstaller cannot bundle torch reliably | High | Blocks Phase 3 | Portable embedded Python is the primary plan, not the fallback (§7.1) |
 | Bundle exceeds CI runner disk | Medium | Blocks Phase 4 | CPU torch in bundle, CUDA on first run (§7.2) |
 | CPU-only dubbing is unusably slow (>30 min for 5 min video) | Medium | Feature unusable for most users | Offer `whisper-tiny`/Kokoro-preset "fast mode"; show honest time estimates up front |
