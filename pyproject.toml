@@ -25,7 +25,6 @@ dependencies = [
   "platformdirs",
   "huggingface_hub",
   "gradio>=4.44",
-  "ffmpeg-python",
 ]
 
 [project.optional-dependencies]
