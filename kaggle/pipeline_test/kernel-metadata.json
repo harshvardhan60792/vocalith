@@ -1,0 +1,13 @@
+{
+  "id": "harshu60792/audio-toolkit-pipeline-test",
+  "title": "audio-toolkit-pipeline-test",
+  "code_file": "test.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_internet": true,
+  "dataset_sources": [],
+  "competition_sources": [],
+  "kernel_sources": []
+}

@@ -1,0 +1,13 @@
+kaggle/kaggle.json
+__pycache__/
+*.pyc
+.venv/
+venv/
+*.egg-info/
+build/
+dist/
+*.wav
+!tests/fixtures/*.wav
+!kaggle/results/**/*.wav
+.pytest_cache/
+.ruff_cache/

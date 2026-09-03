@@ -1,0 +1,13 @@
+{
+  "id": "harshu60792/audio-toolkit-dub-test",
+  "title": "audio-toolkit-dub-test",
+  "code_file": "dub_test.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_internet": true,
+  "dataset_sources": [],
+  "competition_sources": [],
+  "kernel_sources": []
+}

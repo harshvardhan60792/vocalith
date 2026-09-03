@@ -1,0 +1,148 @@
+[{"stream_name":"stdout","time":0.71074213,"data":"\n"}
+,{"stream_name":"stdout","time":0.710819213,"data":"===== STAGE: setup =====\n"}
+,{"stream_name":"stdout","time":0.710861127,"data":"$ apt-get update -qq \u0026\u0026 apt-get install -y -qq espeak-ng ffmpeg \u003e /dev/null\n"}
+,{"stream_name":"stderr","time":6.638302741,"data":"W: Skipping acquire of configured file 'main/source/Sources' as repository 'https://r2u.stat.illinois.edu/ubuntu jammy InRelease' does not seem to provide it (sources.list entry misspelt?)\n"}
+,{"stream_name":"stdout","time":15.744963877,"data":"$ /usr/bin/python3 -m pip install -q kokoro==0.9.4 misaki[en] soundfile\n"}
+,{"stream_name":"stdout","time":18.772927891,"data":"     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 48.3/48.3 kB 2.7 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":21.821543357,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.6/3.6 MB 54.5 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":21.953082452,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 10.1/10.1 MB 108.5 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":21.979611557,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 61.6/61.6 kB 4.4 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":22.028231493,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 163.5/163.5 kB 14.1 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":22.052217129,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 82.7/82.7 kB 6.5 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":22.078948577,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 237.9/237.9 kB 17.2 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":22.157082932,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 6.3/6.3 MB 104.0 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":22.253416865,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 69.5/69.5 kB 4.7 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":22.325172708,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 216.7/216.7 kB 16.2 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":22.354264758,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 615.4/615.4 kB 40.1 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":27.251466123,"data":"$ /usr/bin/python3 -m pip install -q chatterbox-tts\n"}
+,{"stream_name":"stdout","time":28.960747345,"data":"     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 61.0/61.0 kB 2.7 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":33.095138842,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 108.5/108.5 kB 4.9 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":33.179740139,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.2/2.2 MB 48.9 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":33.4244587,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 24.2/24.2 MB 71.5 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":33.468096947,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.4/2.4 MB 86.5 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":33.499337426,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 471.6/471.6 kB 27.6 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":41.875642726,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 766.6/766.6 MB 2.4 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":42.202576034,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.4/3.4 MB 12.6 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":42.313072574,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 10.4/10.4 MB 109.4 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":42.338018285,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 58.3/58.3 kB 4.9 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":46.214867348,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 363.4/363.4 MB 5.1 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":46.377899109,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 13.8/13.8 MB 80.4 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":46.61855864,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 24.6/24.6 MB 70.5 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":46.662076468,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 883.7/883.7 kB 47.6 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":54.073637515,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 664.8/664.8 MB 2.6 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":57.251712583,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 211.5/211.5 MB 4.5 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":57.810126093,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 56.3/56.3 MB 34.8 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":59.157505941,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 127.9/127.9 MB 14.9 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":62.600762834,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 207.5/207.5 MB 4.2 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":64.300177399,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 150.1/150.1 MB 12.3 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":67.981635339,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 188.7/188.7 MB 4.0 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":68.199532171,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 21.1/21.1 MB 73.6 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":68.227575402,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 99.1/99.1 kB 8.2 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":68.308160582,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 6.2/6.2 MB 92.6 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":74.478468924,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 253.2/253.2 MB 2.4 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":74.689909876,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 18.0/18.0 MB 72.0 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":75.082017839,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 34.4/34.4 MB 51.5 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":75.131175489,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 226.4/226.4 kB 19.3 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":75.208959015,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.1/4.1 MB 69.0 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":75.256488319,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 226.2/226.2 kB 18.1 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":75.308110399,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 99.4/99.4 kB 5.4 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":75.407845325,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.3/5.3 MB 85.0 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":75.437137061,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 470.6/470.6 kB 30.4 MB/s eta 0:00:00\n"}
+,{"stream_name":"stderr","time":226.066588513,"data":"ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.\n"}
+,{"stream_name":"stderr","time":226.066634926,"data":"bigframes 2.39.0 requires google-cloud-bigquery-storage\u003c3.0.0,\u003e=2.30.0, which is not installed.\n"}
+,{"stream_name":"stderr","time":226.066641679,"data":"kaggle-environments 1.29.3 requires numpy\u003e=2.0, but you have numpy 1.26.4 which is incompatible.\n"}
+,{"stream_name":"stderr","time":226.0666459,"data":"cesium 0.12.4 requires numpy\u003c3.0,\u003e=2.0, but you have numpy 1.26.4 which is incompatible.\n"}
+,{"stream_name":"stderr","time":226.066649828,"data":"google-colab 1.0.0 requires jupyter-server==2.14.0, but you have jupyter-server 2.12.5 which is incompatible.\n"}
+,{"stream_name":"stderr","time":226.066653545,"data":"google-colab 1.0.0 requires pandas==2.2.2, but you have pandas 2.3.3 which is incompatible.\n"}
+,{"stream_name":"stderr","time":226.066657008,"data":"dopamine-rl 4.1.2 requires gym\u003c=0.25.2, but you have gym 0.26.2 which is incompatible.\n"}
+,{"stream_name":"stderr","time":226.066660663,"data":"jaxlib 0.7.2 requires numpy\u003e=2.0, but you have numpy 1.26.4 which is incompatible.\n"}
+,{"stream_name":"stderr","time":226.066675461,"data":"cupy-cuda12x 14.0.1 requires numpy\u003c2.6,\u003e=2.0, but you have numpy 1.26.4 which is incompatible.\n"}
+,{"stream_name":"stderr","time":226.066678619,"data":"moviepy 1.0.3 requires decorator\u003c5.0,\u003e=4.0.2, but you have decorator 5.3.1 which is incompatible.\n"}
+,{"stream_name":"stderr","time":226.066682188,"data":"opencv-python 4.13.0.92 requires numpy\u003e=2; python_version \u003e= \"3.9\", but you have numpy 1.26.4 which is incompatible.\n"}
+,{"stream_name":"stderr","time":226.066685361,"data":"tobler 0.14.0 requires numpy\u003e=2.0, but you have numpy 1.26.4 which is incompatible.\n"}
+,{"stream_name":"stderr","time":226.066688092,"data":"jax 0.7.2 requires numpy\u003e=2.0, but you have numpy 1.26.4 which is incompatible.\n"}
+,{"stream_name":"stderr","time":226.066690796,"data":"opencv-python-headless 4.13.0.92 requires numpy\u003e=2; python_version \u003e= \"3.9\", but you have numpy 1.26.4 which is incompatible.\n"}
+,{"stream_name":"stderr","time":226.066693765,"data":"rasterio 1.5.0 requires numpy\u003e=2, but you have numpy 1.26.4 which is incompatible.\n"}
+,{"stream_name":"stderr","time":226.066696844,"data":"torchvision 0.25.0+cu128 requires torch==2.10.0, but you have torch 2.6.0 which is incompatible.\n"}
+,{"stream_name":"stderr","time":226.066699556,"data":"pytensor 2.38.2 requires numpy\u003e=2.0, but you have numpy 1.26.4 which is incompatible.\n"}
+,{"stream_name":"stderr","time":226.066702318,"data":"xarray-einstats 0.10.0 requires numpy\u003e=2.0, but you have numpy 1.26.4 which is incompatible.\n"}
+,{"stream_name":"stderr","time":226.066705044,"data":"tifffile 2026.4.11 requires numpy\u003e=2.0, but you have numpy 1.26.4 which is incompatible.\n"}
+,{"stream_name":"stderr","time":226.066707827,"data":"opencv-contrib-python 4.13.0.92 requires numpy\u003e=2; python_version \u003e= \"3.9\", but you have numpy 1.26.4 which is incompatible.\n"}
+,{"stream_name":"stderr","time":226.066712298,"data":"shap 0.51.0 requires numpy\u003e=2, but you have numpy 1.26.4 which is incompatible.\n"}
+,{"stream_name":"stdout","time":226.835661184,"data":"$ /usr/bin/python3 -m pip install -q demucs\n"}
+,{"stream_name":"stdout","time":228.526811938,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100.6/100.6 kB 4.2 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":228.588434945,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 247.5/247.5 kB 10.7 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":228.757566769,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 18.1/18.1 MB 94.1 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":232.997278131,"data":"$ /usr/bin/python3 -m pip install -q openai-whisper\n"}
+,{"stream_name":"stdout","time":234.215482695,"data":"     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 803.2/803.2 kB 17.5 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":241.470792915,"data":"$ /usr/bin/python3 -m pip install -q torch==2.6.0 torchvision==0.21.0 torchaudio==2.6.0\n"}
+,{"stream_name":"stdout","time":242.982046434,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 7.2/7.2 MB 64.7 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":246.099917173,"data":"===== setup OK (245.4s) =====\n"}
+,{"stream_name":"stdout","time":246.099952174,"data":"\n"}
+,{"stream_name":"stdout","time":246.099960991,"data":"===== STAGE: import_check =====\n"}
+,{"stream_name":"stdout","time":254.494828271,"data":"torch 2.6.0+cu124 | torchvision 0.21.0+cu124 | torchaudio 2.6.0+cu124 | transformers 5.2.0\n"}
+,{"stream_name":"stdout","time":254.494888354,"data":"torchvision ops OK\n"}
+,{"stream_name":"stdout","time":254.494893785,"data":"===== import_check OK (8.4s) =====\n"}
+,{"stream_name":"stdout","time":254.536012077,"data":"CUDA available: True\n"}
+,{"stream_name":"stdout","time":254.556401457,"data":"GPU: Tesla P100-PCIE-16GB\n"}
+,{"stream_name":"stdout","time":254.556425563,"data":"\n"}
+,{"stream_name":"stdout","time":254.556431315,"data":"===== STAGE: kokoro_tts =====\n"}
+,{"stream_name":"stdout","time":261.669867845,"data":"WARNING: Defaulting repo_id to hexgrad/Kokoro-82M. Pass repo_id='hexgrad/Kokoro-82M' to suppress this warning.\n"}
+,{"stream_name":"stderr","time":261.83660345,"data":"Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n"}
+,{"stream_name":"stderr","time":261.959413542,"data":"/usr/local/lib/python3.12/dist-packages/torch/nn/modules/rnn.py:123: UserWarning: dropout option adds dropout after all but last recurrent layer, so non-zero dropout expects num_layers greater than 1, but got dropout=0.2 and num_layers=1\n"}
+,{"stream_name":"stderr","time":261.959466197,"data":"  warnings.warn(\n"}
+,{"stream_name":"stderr","time":262.04426004,"data":"/usr/local/lib/python3.12/dist-packages/torch/nn/utils/weight_norm.py:143: FutureWarning: `torch.nn.utils.weight_norm` is deprecated in favor of `torch.nn.utils.parametrizations.weight_norm`.\n"}
+,{"stream_name":"stderr","time":262.044281239,"data":"  WeightNorm.apply(module, name, dim)\n"}
+,{"stream_name":"stdout","time":271.445235372,"data":"wrote tts_out.wav, samples: (129000,)\n"}
+,{"stream_name":"stdout","time":271.458922004,"data":"===== kokoro_tts OK (16.9s) =====\n"}
+,{"stream_name":"stdout","time":271.458969526,"data":"\n"}
+,{"stream_name":"stdout","time":271.458976822,"data":"===== STAGE: chatterbox_clone =====\n"}
+,{"stream_name":"stderr","time":271.493529956,"data":"/usr/local/lib/python3.12/dist-packages/perth/perth_net/__init__.py:1: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools\u003c81.\n"}
+,{"stream_name":"stderr","time":271.493564831,"data":"  from pkg_resources import resource_filename\n"}
+,{"stream_name":"stderr","time":305.248926052,"data":"/usr/local/lib/python3.12/dist-packages/diffusers/models/lora.py:393: FutureWarning: `LoRACompatibleLinear` is deprecated and will be removed in version 1.0.0. Use of `LoRACompatibleLinear` is deprecated. Please switch to PEFT backend by installing PEFT: `pip install peft`.\n"}
+,{"stream_name":"stderr","time":305.248974596,"data":"  deprecate(\"LoRACompatibleLinear\", \"1.0.0\", deprecation_message)\n"}
+,{"stream_name":"stdout","time":307.962681837,"data":"loaded PerthNet (Implicit) at step 250,000\n"}
+,{"stream_name":"stderr","time":316.111649288,"data":"WARNING:root:Reference mel length is not equal to 2 * reference token length.\n"}
+,{"stream_name":"stderr","time":316.111719363,"data":"\n"}
+,{"stream_name":"stderr","time":317.743732113,"data":"/usr/lib/python3.12/contextlib.py:105: FutureWarning: `torch.backends.cuda.sdp_kernel()` is deprecated. In the future, this context manager will be removed. Please see `torch.nn.attention.sdpa_kernel()` for the new context manager, with updated signature.\n"}
+,{"stream_name":"stderr","time":317.743774775,"data":"  self.gen = func(*args, **kwds)\n"}
+,{"stream_name":"stderr","time":317.758617292,"data":"`sdpa` attention does not support `output_attentions=True`. Please set your attention to `eager` if you want any of these features.\n"}
+,{"stream_name":"stderr","time":320.591477008,"data":"\rSampling:   0%|          | 0/1000 [00:00\u003c?, ?it/s]\rSampling:   0%|          | 3/1000 [00:00\u003c00:38, 25.79it/s]\rSampling:   1%|          | 8/1000 [00:00\u003c00:28, 34.93it/s]\rSampling:   1%|▏         | 13/1000 [00:00\u003c00:26, 37.89it/s]\rSampling:   2%|▏         | 18/1000 [00:00\u003c00:24, 39.44it/s]\rSampling:   2%|▏         | 23/1000 [00:00\u003c00:24, 40.48it/s]\rSampling:   3%|▎         | 28/1000 [00:00\u003c00:23, 41.24it/s]\rSampling:   3%|▎         | 33/1000 [00:00\u003c00:23, 41.35it/s]\rSampling:   4%|▍         | 38/1000 [00:00\u003c00:23, 41.47it/s]\rSampling:   4%|▍         | 43/1000 [00:01\u003c00:23, 41.44it/s]\rSampling:   5%|▍         | 48/1000 [00:01\u003c00:22, 41.75it/s]\rSampling:   5%|▌         | 53/1000 [00:01\u003c00:22, 41.84it/s]\rSampling:   6%|▌         | 58/1000 [00:01\u003c00:22, 42.01it/s]\rSampling:   6%|▋         | 63/1000 [00:01\u003c00:22, 42.09it/s]\rSampling:   7%|▋         | 68/1000 [00:01\u003c00:22, 42.26it/s]\rSampling:   7%|▋         | 73/1000 [00:01\u003c00:21, 42.29it/s]\rSampling:   8%|▊         | 78/1000 [00:01\u003c00:21, 42.12it/s]\rSampling:   8%|▊         | 83/1000 [00:02\u003c00:21, 41.95it/s]\rSampling:   9%|▉         | 88/1000 [00:02\u003c00:21, 42.06it/s]\rSampling:   9%|▉         | 93/1000 [00:02\u003c00:21, 42.01it/s]\rSampling:  10%|▉         | 98/1000 [00:02\u003c00:21, 42.05it/s]\rSampling:  10%|█         | 103/1000 [00:02\u003c00:21, 41.97it/s]\rSampling:  11%|█         | 108/1000 [00:02\u003c00:21, 41.80it/s]\rSampling:  11%|█▏        | 113/1000 [00:02\u003c00:21, 41.28it/s]\rSampling:  11%|█▏        | 114/1000 [00:02\u003c00:21, 41.17it/s]\n"}
+,{"stream_name":"stdout","time":321.473397838,"data":"wrote clone_out.wav\n"}
+,{"stream_name":"stdout","time":321.484171653,"data":"===== chatterbox_clone OK (50.0s) =====\n"}
+,{"stream_name":"stdout","time":321.484211013,"data":"\n"}
+,{"stream_name":"stdout","time":321.484216267,"data":"===== STAGE: demucs_isolation =====\n"}
+,{"stream_name":"stdout","time":321.495901763,"data":"$ /usr/bin/python3 -m demucs --two-stems=vocals -n htdemucs -o /kaggle/working/demucs_out /kaggle/working/noisy_mix.wav\n"}
+,{"stream_name":"stderr","time":323.713883264,"data":"Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n"}
+,{"stream_name":"stdout","time":327.08339372,"data":"Selected model is a bag of 1 models. You will see that many progress bars per track.\n"}
+,{"stream_name":"stdout","time":327.083440472,"data":"Separated tracks will be stored in /kaggle/working/demucs_out/htdemucs\n"}
+,{"stream_name":"stdout","time":327.08346268,"data":"Separating track /kaggle/working/noisy_mix.wav\n"}
+,{"stream_name":"stderr","time":328.729734936,"data":"\r  0%|                                                                                   | 0.0/5.85 [00:00\u003c?, ?seconds/s]\r100%|██████████████████████████████████████████████████████████████████████████| 5.85/5.85 [00:01\u003c00:00,  3.55seconds/s]\r100%|██████████████████████████████████████████████████████████████████████████| 5.85/5.85 [00:01\u003c00:00,  3.55seconds/s]\n"}
+,{"stream_name":"stdout","time":329.655407844,"data":"===== demucs_isolation OK (8.2s) =====\n"}
+,{"stream_name":"stdout","time":329.655457662,"data":"\n"}
+,{"stream_name":"stdout","time":329.655463881,"data":"===== STAGE: whisper_transcribe =====\n"}
+,{"stream_name":"stderr","time":330.656138994,"data":"\r  0%|                                               | 0.00/139M [00:00\u003c?, ?iB/s]\r  1%|▏                                      | 824k/139M [00:00\u003c00:17, 8.44MiB/s]\r 11%|███▉                                  | 14.6M/139M [00:00\u003c00:01, 87.2MiB/s]\r 25%|█████████▊                             | 34.8M/139M [00:00\u003c00:00, 144MiB/s]\r 40%|███████████████▍                       | 55.0M/139M [00:00\u003c00:00, 171MiB/s]\r 52%|████████████████████▎                  | 72.0M/139M [00:00\u003c00:00, 172MiB/s]\r 65%|█████████████████████████▎             | 90.1M/139M [00:00\u003c00:00, 178MiB/s]\r 78%|███████████████████████████████▎        | 108M/139M [00:00\u003c00:00, 183MiB/s]\r 93%|█████████████████████████████████████▏  | 129M/139M [00:00\u003c00:00, 193MiB/s]\r100%|████████████████████████████████████████| 139M/139M [00:00\u003c00:00, 171MiB/s]\n"}
+,{"stream_name":"stdout","time":332.379542284,"data":"Whisper transcript:  Voice cloning test. This sentence should sound like the reference speaker.\n"}
+,{"stream_name":"stdout","time":332.380571432,"data":"===== whisper_transcribe OK (2.7s) =====\n"}
+,{"stream_name":"stdout","time":332.380586527,"data":"\n"}
+,{"stream_name":"stdout","time":332.380591857,"data":"\n"}
+,{"stream_name":"stdout","time":332.380596214,"data":"===== PIPELINE TEST COMPLETE =====\n"}
+,{"stream_name":"stdout","time":332.380601348,"data":"$ ls -la /kaggle/working\n"}
+,{"stream_name":"stdout","time":332.385725257,"data":"total 700\n"}
+,{"stream_name":"stdout","time":332.385743054,"data":"drwxr-xr-x 3 root root   4096 Sep  3 19:43 .\n"}
+,{"stream_name":"stdout","time":332.385748874,"data":"drwxr-xr-x 8 root root   4096 Sep  3 19:38 ..\n"}
+,{"stream_name":"stdout","time":332.385753803,"data":"-rw-r--r-- 1 root root 218958 Sep  3 19:43 clone_out.wav\n"}
+,{"stream_name":"stdout","time":332.385758459,"data":"drwxr-xr-x 3 root root   4096 Sep  3 19:43 demucs_out\n"}
+,{"stream_name":"stdout","time":332.385763227,"data":"-rw-r--r-- 1 root root 218924 Sep  3 19:43 noisy_mix.wav\n"}
+,{"stream_name":"stdout","time":332.385767992,"data":"-rw-r--r-- 1 root root     75 Sep  3 19:43 transcript.txt\n"}
+,{"stream_name":"stdout","time":332.385773219,"data":"-rw-r--r-- 1 root root 258044 Sep  3 19:42 tts_out.wav\n"}
+,{"stream_name":"stdout","time":332.386127826,"data":"$ find /kaggle/working/demucs_out -type f 2\u003e/dev/null\n"}
+,{"stream_name":"stdout","time":332.389295262,"data":"/kaggle/working/demucs_out/htdemucs/noisy_mix/vocals.wav\n"}
+,{"stream_name":"stdout","time":332.389311071,"data":"/kaggle/working/demucs_out/htdemucs/noisy_mix/no_vocals.wav\n"}
+,{"stream_name":"stderr","time":336.348400407,"data":"/usr/local/lib/python3.12/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":336.348453508,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":336.536045455,"data":"/usr/local/lib/python3.12/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":336.536072363,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":337.253760713,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":338.068063826,"data":"[NbConvertApp] Writing 298690 bytes to __results__.html\n"}
+]
