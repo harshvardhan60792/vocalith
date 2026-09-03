@@ -18,3 +18,5 @@ kaggle/pipeline_test/out/
 kaggle/dub_test/out4/
 kaggle/dub_test/out5/
 kaggle/dub_test/out[0-9]*/
+kaggle/package_test/vocalith_dataset/
+kaggle/package_test/out/
