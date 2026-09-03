@@ -659,9 +659,10 @@ demonstrated, not merely written.
       (torch CPU, kokoro, chatterbox-tts, demucs, openai-whisper, gradio 6.8.0, etc.),
       ffmpeg bundled, `Vocalith.bat` launched the packaged app from the standalone
       environment (not the dev Python), and it served the real UI on 127.0.0.1:7860 —
-      confirmed in-browser. **Not yet tested on a genuinely clean VM** (this machine
-      has a dev Python and other tools present) — that's the one remaining honest gap,
-      not "does it work at all."
+      confirmed in-browser. Final archive: 716 MB, 60,022 files, zip integrity verified
+      (`zipfile.testzip()` — no corrupt entries). **Not yet tested on a genuinely clean
+      VM** (this machine has a dev Python and other tools present) — that's the one
+      remaining honest gap, not "does it work at all."
 
   Three real, non-obvious bugs found and fixed by actually running the script (the
   exact value of "flag early if something doesn't bundle cleanly" from §7.1):
