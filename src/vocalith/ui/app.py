@@ -14,6 +14,7 @@ from ..pipelines import tts as tts_mod
 from ..pipelines import clone as clone_mod
 from ..pipelines import isolate as isolate_mod
 from ..pipelines import dub as dub_mod
+from . import design
 from .theme import theme
 
 LANGUAGES = {
@@ -30,16 +31,23 @@ def _friendly_error(e: Exception) -> str:
 def build_app() -> gr.Blocks:
     device_info = describe_device()
     if device_info["is_gpu"]:
-        banner = f"Running on **{device_info['name']}**"
+        device_label = device_info["name"]
         if device_info["vram_gb"]:
-            banner += f" ({device_info['vram_gb']} GB VRAM)"
+            device_label += f" · {device_info['vram_gb']} GB"
     else:
-        banner = "Running on **CPU** — generation will be slower than on a GPU."
+        device_label = "CPU — slower, still works"
 
     with gr.Blocks(title="Vocalith") as app:
-        gr.Markdown("# Vocalith\nFree, local, open-source text-to-speech, voice cloning, "
-                     "voice isolation, and dubbing. Nothing leaves this machine.")
-        gr.Markdown(banner)
+        with gr.Column(elem_classes=["vx-hero"]):
+            gr.HTML(
+                '<div class="vx-eyebrow">Local · Private · Free Forever</div>'
+                '<h1>Your voice,<br>kept off the record.</h1>'
+                '<p class="vx-tagline">Text to speech, voice cloning, isolation, and dubbing '
+                '— run entirely on <em>this</em> machine. Nothing you speak or upload ever '
+                'reaches a server.</p>'
+                f'<div class="vx-banner"><span class="vx-dot"></span>'
+                f'Running on <strong>{device_label}</strong></div>'
+            )
 
         with gr.Tabs():
             with gr.TabItem("Text to Speech"):
@@ -50,6 +58,12 @@ def build_app() -> gr.Blocks:
                 _isolate_tab()
             with gr.TabItem("Dubbing"):
                 _dub_tab()
+
+        gr.HTML(
+            '<div class="vx-footnote">Kokoro · Chatterbox · Demucs · Whisper — '
+            'each under a permissive license, each running locally. No account, no API key, '
+            'no upload.</div>'
+        )
 
     return app
 
@@ -76,7 +90,7 @@ def _tts_tab():
             traceback.print_exc()
             return None, _friendly_error(e)
 
-    run.click(_run, inputs=[text, voice, speed], outputs=[out_audio, status])
+    run.click(_run, inputs=[text, voice, speed], outputs=[out_audio, status]).then(fn=None, js=design.pulse_js())
 
 
 def _clone_tab():
@@ -107,7 +121,7 @@ def _clone_tab():
             traceback.print_exc()
             return None, _friendly_error(e)
 
-    run.click(_run, inputs=[ref, text, exaggeration, cfg_weight, denoise], outputs=[out_audio, status])
+    run.click(_run, inputs=[ref, text, exaggeration, cfg_weight, denoise], outputs=[out_audio, status]).then(fn=None, js=design.pulse_js())
 
 
 def _isolate_tab():
@@ -134,7 +148,7 @@ def _isolate_tab():
             traceback.print_exc()
             return None, None, _friendly_error(e)
 
-    run.click(_run, inputs=[src, mode], outputs=[vocals_out, other_out, status])
+    run.click(_run, inputs=[src, mode], outputs=[vocals_out, other_out, status]).then(fn=None, js=design.pulse_js())
 
 
 def _dub_tab():
@@ -180,13 +194,13 @@ def _dub_tab():
             return gr.update(visible=False), gr.update(visible=False), None, _friendly_error(e)
 
     run.click(_run, inputs=[src, target_lang, voice_mode, preset_voice, bed_gain],
-              outputs=[out_video, out_audio, out_srt, status])
+              outputs=[out_video, out_audio, out_srt, status]).then(fn=None, js=design.pulse_js())
 
 
 def launch(server_port: int = 7860):
     app = build_app()
     app.launch(server_name="127.0.0.1", server_port=server_port, share=False,
-               inbrowser=False, theme=theme)
+               inbrowser=False, theme=theme, css=design.CSS, head=design.head_script())
 
 
 if __name__ == "__main__":

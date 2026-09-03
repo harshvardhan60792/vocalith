@@ -28,7 +28,9 @@ def stage(name, fn):
     print(f"\n===== STAGE: {name} =====")
     t0 = time.time()
     try:
-        import torch
+        import torch  # safe here: setup() (below) always runs first, via _run_setup(),
+                       # which never imports torch itself -- so this is the first import
+                       # in the process, happening strictly after the pin is on disk.
         if torch.cuda.is_available():
             torch.cuda.reset_peak_memory_stats()
         fn()
@@ -44,30 +46,36 @@ def stage(name, fn):
 def setup():
     sh("apt-get update -qq && apt-get install -y -qq espeak-ng ffmpeg > /dev/null")
     # Exact match to kaggle/pipeline_test/test.py's WORKING sequence (verified passing,
-    # see kaggle/results/phase0_spike/) -- deliberately NOT installing librosa or
-    # sentencepiece here. Two dub_test attempts that added those two packages before
-    # the torch pin both failed with the same torchvision::nms mismatch that this exact
-    # combined-install-last pattern fixed for pipeline_test; isolating that variable
-    # before guessing further. librosa/sentencepiece install lazily, right before the
-    # stages that actually need them, after torch/torchvision are already locked in.
+    # see kaggle/results/phase0_spike/) -- librosa/sentencepiece install lazily, right
+    # before the stages that need them, after torch/torchvision are locked in.
     sh(f"{sys.executable} -m pip install -q kokoro==0.9.4 misaki[en] soundfile")
     sh(f"{sys.executable} -m pip install -q chatterbox-tts")
     sh(f"{sys.executable} -m pip install -q demucs")
     sh(f"{sys.executable} -m pip install -q openai-whisper")
     sh(f"{sys.executable} -m pip install -q torch==2.6.0 torchvision==0.21.0 torchaudio==2.6.0")
 
-stage("setup", setup)
+# ROOT CAUSE of 4 earlier failed attempts, finally found (kaggle/results/README.md has
+# the full story): `stage()` above imports torch for its VRAM-tracking feature -- and
+# running setup() *through* stage() means that import fires BEFORE setup() has reinstalled
+# the pin, caching the OLD Kaggle-default torch in memory. Every subsequent "import torch"
+# in the process (including torchvision's first-ever import, deep in kokoro's import
+# chain) then registers against that stale in-memory module instead of the correctly
+# pinned one now on disk -- producing the exact "torchvision::nms does not exist" error,
+# even though `pip show` and a fresh subprocess both correctly reported the pinned
+# versions the whole time. Fix: run setup() directly, NOT through stage() -- nothing in
+# this process may import torch before the pin is on disk.
+print("\n===== STAGE: setup =====")
+_t0 = time.time()
+try:
+    setup()
+    TIMINGS["setup"] = round(time.time() - _t0, 1)
+    print(f"===== setup OK ({TIMINGS['setup']}s) =====")
+except Exception:
+    TIMINGS["setup"] = round(time.time() - _t0, 1)
+    print(f"===== setup FAILED ({TIMINGS['setup']}s) =====")
+    traceback.print_exc()
 
-# NOTE on 3 earlier failed attempts (kaggle/results/README.md has the full story):
-# adding an extra diagnostic stage here that imported torch *before* this line -- even
-# just to log versions -- reproducibly broke the very torchvision::nms registration this
-# was trying to verify, while a check in a brand-new subprocess always passed. Root cause
-# not fully isolated (looks like a Kaggle-kernel-specific first-import quirk, not a real
-# version mismatch -- `pip show` and the subprocess canary both showed correct versions
-# every time). Fix: match kaggle/pipeline_test/test.py's exact proven shape -- the very
-# first `import torch` in this process happens right here, immediately after the last
-# pip install of the trio, with nothing in between. Do not insert anything above this line.
-import torch
+import torch  # first import in the process, strictly after setup() finished
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 print("device:", DEVICE)
 
