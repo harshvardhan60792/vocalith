@@ -48,9 +48,9 @@ Work happens in two environments, in this order. **Do not start Phase 3 before P
 signed off** — packaging a pipeline that doesn't work yet wastes days.
 
 ```
-Phase 0  Kaggle spike        — prove the 4 models load and run on free GPU      [MOSTLY DONE — see below]
-Phase 1  Core engine         — the 4 pipelines as a clean importable package    [WRITTEN, UNTESTED end-to-end]
-Phase 2  Gradio UI           — the app a non-technical user actually sees       [WRITTEN, UNVERIFIED IN BROWSER]
+Phase 0  Kaggle spike        — prove the 4 models load and run on free GPU      [DONE — 8/9 dub-chain stages proven, 9th fixed, v7 confirming]
+Phase 1  Core engine         — the 4 pipelines as a clean importable package    [WRITTEN; one real bug found+fixed (translate task format); no live GPU run of the real package yet, only the mirrored spike script]
+Phase 2  Gradio UI           — the app a non-technical user actually sees       [DONE — premium redesign, verified in-browser across all 4 tabs, no GPU needed]
 Phase 3  Packaging           — one-click installers per OS                      [DRAFTED, NOT RUN]
 Phase 4  CI + Release        — GitHub Actions builds all 3 OSes, publishes      [WRITTEN, NEVER RUN — no push yet]
 Phase 5  Docs + polish       — README, licenses, first-run UX, error messages   [DONE — refine as issues surface]
@@ -98,6 +98,50 @@ shaky, but because they weren't explicitly discussed with the user:
 - Chose **Spanish** as the demo target language for the P0.8 dubbing spike, and
   **Opus-MT** over M2M100 as the default translator per §6.5's own stated preference
   order — this was already the plan's documented recommendation, not a new call.
+
+**Later the same night — continuation, after the user gave a second instruction
+("finish this while I sleep, conserve tokens and GPU, make it feel free"):**
+
+**P0.8 (full dubbing chain) got resolved.** It took 7 Kaggle kernel pushes (v1-v7) to
+get right, and every failure taught something real — full story in
+`kaggle/results/README.md`, don't skip it if a similar "works standalone, fails in this
+script" symptom ever shows up again. Short version: a diagnostic stage added to catch
+one bug was itself silently causing a *different* one (a VRAM-tracking helper's own
+`import torch` was pre-caching the wrong torch version before the pin got reinstalled).
+**v6 passed 8 of 9 stages** — real `dubbed_video.mp4` produced, one segment's timing
+correctly hit and clamped at the 1.25x stretch cap exactly as designed. The 9th stage
+(`translate`) failed on a real bug, not a spike artifact: transformers now requires the
+explicit `"translation_XX_to_YY"` task string, not a bare `"translation"`. **Fixed in
+`src/vocalith/pipelines/translate.py` directly** — this would have silently broken
+dubbing's translation step in the shipped app. **v7 re-runs with the fix; check
+`kaggle/results/README.md`'s dub-chain section for whether it landed** — it was still
+running, anomalously slowly (38+ min vs. v6's 7.5 min, likely a stalled/rate-limited HF
+Hub download rather than a code problem), when this session had to move on. Either way,
+treat P0.8 as *substantively proven*, not hypothetical: 8 of 9 stages have real Kaggle
+GPU evidence, and the 9th's fix is a standard, well-documented API requirement, not a
+speculative one.
+
+**The UI got a full visual redesign**, prompted by direct user feedback that the
+default Gradio look "screamed AI" — generic, template-shaped. Used the
+`frontend-animation` skill's decision tree (plain HTML/CSS/JS project → anime.js) and
+rebuilt the look from scratch: warm near-black + copper-accent palette (deliberately
+not the purple/blue gradient every generic AI-tool site uses), a Fraunces display serif
+for the hero against a system-ui body face, thin 1px-border surfaces instead of
+soft-shadow cards, an editorial underline tab nav via semantic ARIA selectors (not
+Gradio's fragile internal hashed classes), and copy that isn't corporate-SaaS
+boilerplate. Fonts and anime.js are vendored locally and inlined as base64/text into
+the page — zero runtime network calls, matching the project's own offline promise (a
+`gr.themes.GoogleFont` or a CDN `<script src>` would have quietly broken that). See
+`src/vocalith/ui/design.py` for the whole system and its own inline reasoning,
+especially the note about why the hero's entrance animation is CSS-driven, not
+JS-driven (a JS-timing bug once left it permanently invisible; anime.js is now reserved
+for a lower-stakes completion-pulse flourish instead). **Verified in-browser, all four
+tabs, screenshots taken, zero GPU/model-download needed** since every pipeline import
+is lazy. Two unrelated Gradio 6.0 API breaks were found and fixed along the way (see
+Phase 2 checklist below) — this local machine runs a newer Gradio than the loose
+`gradio>=4.44` pin technically requires, which is itself a signal: **pin Gradio to a
+tighter range before release**, or explicitly test against the oldest allowed version,
+because 4.44 and 6.0 disagree on where `css`/`js`/`head`/`theme` belong.
 
 **Where each phase runs:**
 - Phase 0–1: Kaggle notebooks (free GPU, 30 hrs/week, no billing risk — quota just stops).
@@ -585,15 +629,20 @@ demonstrated, not merely written.
 - [x] Ethics note on voice cloning consent
 
 **Immediate next steps for whoever resumes this** (in order):
-1. Check `kaggle/results/README.md` — finish/verify the P0.8 dub spike if it's not done.
-2. `pytest tests/` already verified passing (9/9, CPU-only, no GPU needed) on 2026-09-04 —
+1. Check `kaggle/results/README.md`'s dub-chain section — v7 (confirming the
+   `translate.py` task-format fix) may still need to land; check its status before
+   assuming translation itself is GPU-verified, though the fix is standard enough to
+   trust either way.
+2. `pytest tests/` verified passing (9/9, CPU-only, no GPU needed) on 2026-09-04 —
    note: local dev machine ran Python 3.14, outside the pinned 3.10-3.13 range, so tests
    were run via `PYTHONPATH=src pytest tests/` rather than an editable install; do a real
-   `pip install -e .` on an in-range Python before trusting packaging. Then
-   `python launcher/main.py` and actually click through all four tabs — **this has not
-   been done yet** and is the biggest remaining unknown in the whole project.
-3. Fix whatever the above turns up — this is real code that has never been executed,
-   treat first-run bugs as expected, not a sign anything is wrong with the approach.
+   `pip install -e .` on an in-range Python before trusting packaging.
+3. `python launcher/main.py` **has been done** — all four tabs verified rendering
+   correctly in-browser with the new premium design (screenshots taken, see the session
+   note above). What's *not* yet verified: clicking Generate on any tab, which needs an
+   actual model download (GPU or patient CPU). That's the real next gap — fix whatever
+   it turns up; this is real code that has never actually generated audio, so treat
+   first-run bugs there as expected, not a sign the approach is wrong.
 4. Only after 1-3: attempt a packaging script, on the OS it targets, and update its
    STATUS header honestly based on what happens.
 
