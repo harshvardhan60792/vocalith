@@ -10,12 +10,11 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
-      - run: choco install 7zip -y
       - run: powershell -File launcher/windows/build.ps1
       - uses: actions/upload-artifact@v4
         with:
           name: Vocalith-win64
-          path: dist/Vocalith-win64.7z
+          path: dist/Vocalith-win64.zip
 
   macos:
     runs-on: macos-14  # arm64

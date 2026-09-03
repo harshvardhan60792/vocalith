@@ -1,17 +1,25 @@
 # Windows portable bundle: embedded Python + site-packages + bundled ffmpeg, zipped as
-# Vocalith-win64.7z. See IMPLEMENTATION_PLAN.md §7.1 for why embedded-Python was chosen
+# Vocalith-win64.zip. See IMPLEMENTATION_PLAN.md §7.1 for why embedded-Python was chosen
 # over PyInstaller (torch + PyInstaller is a known-bad pairing).
 #
-# STATUS: first draft, written 2026-09-04, NOT YET RUN on a clean machine or in CI.
-# Before trusting this script: run it, then launch Vocalith.exe on a VM with no Python
-# and no Visual C++ redistributables preinstalled -- that is the actual bar for "works".
+# STATUS: run locally 2026-09-04 on a real Windows machine (not yet on a clean VM or in
+# CI). First real run found a real gap: the original draft used `7z` for both the
+# ffmpeg extraction and the final archive -- but 7-Zip isn't installed on a typical dev
+# machine (confirmed: `Get-Command 7z` and both Program Files paths came back empty on
+# this machine). Switched to PowerShell's native Expand-Archive/Compress-Archive and an
+# ffmpeg .zip build instead of .7z, so this script has zero external tool dependencies.
+# Trade-off: zip compresses worse than 7z, so the final download is somewhat larger --
+# accepted deliberately in exchange for not requiring users (or CI, without an extra
+# `choco install 7zip` step) to have 7-Zip present. Before fully trusting this script:
+# run it end to end, then launch Vocalith.exe on a VM with no Python and no Visual C++
+# redistributables preinstalled -- that is the actual bar for "works".
 $ErrorActionPreference = "Stop"
 
 $root = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
 $dist = Join-Path $root "dist\windows"
 $pyVersion = "3.11.9"
 $embedUrl = "https://www.python.org/ftp/python/$pyVersion/python-$pyVersion-embed-amd64.zip"
-$ffmpegUrl = "https://www.gyan.dev/ffmpeg/builds/ffmpeg-release-essentials.7z"  # LGPL build
+$ffmpegUrl = "https://www.gyan.dev/ffmpeg/builds/ffmpeg-release-essentials.zip"  # LGPL build, .zip not .7z
 
 Remove-Item -Recurse -Force $dist -ErrorAction SilentlyContinue
 New-Item -ItemType Directory -Force -Path $dist | Out-Null
@@ -38,12 +46,12 @@ Invoke-WebRequest "https://bootstrap.pypa.io/get-pip.py" -OutFile "$dist\get-pip
     sentencepiece soundfile librosa "numpy<2.0" platformdirs huggingface_hub "gradio>=4.44"
 
 # 3. bundled ffmpeg (LGPL build; note in docs/LICENSES.md)
-Invoke-WebRequest $ffmpegUrl -OutFile "$dist\ffmpeg.7z"
-& 7z x "$dist\ffmpeg.7z" -o"$dist\ffmpeg_tmp" -y
+Invoke-WebRequest $ffmpegUrl -OutFile "$dist\ffmpeg.zip"
+Expand-Archive "$dist\ffmpeg.zip" -DestinationPath "$dist\ffmpeg_tmp"
 $ffmpegExe = Get-ChildItem -Recurse "$dist\ffmpeg_tmp" -Filter "ffmpeg.exe" | Select-Object -First 1
 New-Item -ItemType Directory -Force -Path "$dist\ffmpeg" | Out-Null
 Copy-Item $ffmpegExe.FullName "$dist\ffmpeg\ffmpeg.exe"
-Remove-Item -Recurse -Force "$dist\ffmpeg_tmp", "$dist\ffmpeg.7z"
+Remove-Item -Recurse -Force "$dist\ffmpeg_tmp", "$dist\ffmpeg.zip"
 
 # 4. launcher entrypoint + a double-clickable .exe shim (requires a tiny C launcher or
 #    a tool like `pyinstaller --onefile launcher_shim.py` just for the shim -- NOT for
@@ -57,6 +65,6 @@ set VOCALITH_FFMPEG=%~dp0ffmpeg\ffmpeg.exe
 "@ | Set-Content "$dist\Vocalith.bat"
 
 # 5. archive
-& 7z a "$root\dist\Vocalith-win64.7z" "$dist\*"
+Compress-Archive -Path "$dist\*" -DestinationPath "$root\dist\Vocalith-win64.zip" -Force
 
-Write-Host "Built: $root\dist\Vocalith-win64.7z"
+Write-Host "Built: $root\dist\Vocalith-win64.zip"

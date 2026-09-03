@@ -504,7 +504,7 @@ and record the blocker in this file.
 
 | OS | Approach | Artifact | Notes |
 |----|----------|----------|-------|
-| Windows | Embedded Python (`python-3.11.x-embed-amd64`) + preinstalled site-packages + `run.bat` + a tiny `.exe` launcher shim | `Vocalith-win64.7z` (~1.5 GB) | 7z, not zip — halves the download. Ship an `.exe` shim so users double-click an icon, not a `.bat`. |
+| Windows | Embedded Python (`python-3.11.x-embed-amd64`) + preinstalled site-packages + `run.bat` + a tiny `.exe` launcher shim | `Vocalith-win64.zip` (~1.5-2 GB) | **Revised 2026-09-04 after a real local run:** originally planned as `.7z` to halve the download, but that requires 7-Zip on the build machine — confirmed absent (`Get-Command 7z` and both Program Files paths came back empty) on a real Windows dev machine, and CI would need an extra `choco install 7zip` step. Switched to PowerShell's native `Expand-Archive`/`Compress-Archive` (plain `.zip`, zero external tool dependencies) — a larger download traded for one less thing to go wrong. Still ship an `.exe` shim so users double-click an icon, not a `.bat`. |
 | macOS | PyInstaller `.app`, or the same embedded pattern with `python-build-standalone` | `Vocalith-macos-arm64.dmg` | **Unsigned builds are Gatekeeper-blocked.** Either pay $99/yr for signing (violates the free constraint) or document the right-click→Open workaround prominently. Support arm64 (MPS) first; Intel Macs are CPU-only and slow. |
 | Linux | `python-build-standalone` + tarball, or AppImage | `Vocalith-linux-x86_64.tar.gz` | Simplest of the three. AppImage is nicer UX but adds build complexity — tarball first. |
 
