@@ -1,0 +1,79 @@
+[{"stream_name":"stdout","time":0.873657452,"data":"Found repo slice at: /kaggle/input/datasets/harshu60792/vocalith-repo-slice\n"}
+,{"stream_name":"stdout","time":0.874682374,"data":"$ mkdir -p /kaggle/working/repo\n"}
+,{"stream_name":"stdout","time":0.886273506,"data":"  (exit code 0)\n"}
+,{"stream_name":"stdout","time":0.886305009,"data":"$ cp -r /kaggle/input/datasets/harshu60792/vocalith-repo-slice/src /kaggle/input/datasets/harshu60792/vocalith-repo-slice/launcher /kaggle/input/datasets/harshu60792/vocalith-repo-slice/pyproject.toml /kaggle/working/repo/\n"}
+,{"stream_name":"stdout","time":0.968400471,"data":"  (exit code 0)\n"}
+,{"stream_name":"stdout","time":0.968434955,"data":"$ chmod +x /kaggle/working/repo/launcher/linux/build.sh\n"}
+,{"stream_name":"stdout","time":0.973517183,"data":"  (exit code 0)\n"}
+,{"stream_name":"stdout","time":0.973551083,"data":"$ ls -la /kaggle/working/repo\n"}
+,{"stream_name":"stdout","time":1.022446277,"data":"total 20\n"}
+,{"stream_name":"stdout","time":1.022487142,"data":"drwxr-xr-x 4 root root 4096 Sep  3 23:28 .\n"}
+,{"stream_name":"stdout","time":1.022493446,"data":"drwxr-xr-x 3 root root 4096 Sep  3 23:28 ..\n"}
+,{"stream_name":"stdout","time":1.022498203,"data":"drwxr-xr-x 5 root root 4096 Sep  3 23:28 launcher\n"}
+,{"stream_name":"stdout","time":1.022502607,"data":"-rw-r--r-- 1 root root 2070 Sep  3 23:28 pyproject.toml\n"}
+,{"stream_name":"stdout","time":1.022507343,"data":"drwxr-xr-x 3 root root 4096 Sep  3 23:28 src\n"}
+,{"stream_name":"stdout","time":1.022512349,"data":"\n"}
+,{"stream_name":"stdout","time":1.022516659,"data":"  (exit code 0)\n"}
+,{"stream_name":"stdout","time":1.022520969,"data":"\n"}
+,{"stream_name":"stdout","time":1.022524976,"data":"===== Running launcher/linux/build.sh =====\n"}
+,{"stream_name":"stdout","time":1.022529104,"data":"$ bash launcher/linux/build.sh\n"}
+,{"stream_name":"stdout","time":390.254731399,"data":"Resolved Python build: https://github.com/astral-sh/python-build-standalone/releases/download/20260901/cpython-3.11.16%2B20260901-x86_64-unknown-linux-gnu-install_only.tar.gz\n"}
+,{"stream_name":"stdout","time":390.254986062,"data":"Built: /kaggle/working/repo/dist/Vocalith-linux-x86_64.tar.gz\n"}
+,{"stream_name":"stdout","time":390.254998922,"data":"\n"}
+,{"stream_name":"stdout","time":390.255004654,"data":"  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current\n"}
+,{"stream_name":"stdout","time":390.25501062,"data":"                                 Dload  Upload   Total   Spent    Left  Speed\n"}
+,{"stream_name":"stdout","time":390.255016292,"data":"\n"}
+,{"stream_name":"stdout","time":390.255021332,"data":"  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\n"}
+,{"stream_name":"stdout","time":390.25502713,"data":"  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\n"}
+,{"stream_name":"stdout","time":390.255032622,"data":"\n"}
+,{"stream_name":"stdout","time":390.25503787,"data":"  3 46.6M    3 1712k    0     0  2793k      0  0:00:17 --:--:--  0:00:17 2793k\n"}
+,{"stream_name":"stdout","time":390.255043805,"data":"100 46.6M  100 46.6M    0     0  37.2M      0  0:00:01  0:00:01 --:--:-- 70.6M\n"}
+,{"stream_name":"stdout","time":390.2550493,"data":"  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current\n"}
+,{"stream_name":"stdout","time":390.255054744,"data":"                                 Dload  Upload   Total   Spent    Left  Speed\n"}
+,{"stream_name":"stdout","time":390.255059873,"data":"\n"}
+,{"stream_name":"stdout","time":390.255064953,"data":"  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\n"}
+,{"stream_name":"stdout","time":390.255089002,"data":"  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\n"}
+,{"stream_name":"stdout","time":390.255094808,"data":"  0 39.9M    0  143k    0     0   111k      0  0:06:06  0:00:01  0:06:05  111k\n"}
+,{"stream_name":"stdout","time":390.255099712,"data":" 28 39.9M   28 11.1M    0     0  4968k      0  0:00:08  0:00:02  0:00:06 4967k\n"}
+,{"stream_name":"stdout","time":390.255104528,"data":" 63 39.9M   63 25.3M    0     0  8171k      0  0:00:05  0:00:03  0:00:02 8169k\n"}
+,{"stream_name":"stdout","time":390.255109354,"data":"100 39.9M  100 39.9M    0     0  9768k      0  0:00:04  0:00:04 --:--:-- 9767k\n"}
+,{"stream_name":"stdout","time":390.255114159,"data":"100 39.9M  100 39.9M    0     0  9768k      0  0:00:04  0:00:04 --:--:-- 10.1M\n"}
+,{"stream_name":"stdout","time":390.255118964,"data":"\n"}
+,{"stream_name":"stdout","time":390.255123312,"data":"  (exit code 0)\n"}
+,{"stream_name":"stdout","time":390.255130997,"data":"build.sh finished in 389s, exit code 0\n"}
+,{"stream_name":"stdout","time":390.255135455,"data":"\n"}
+,{"stream_name":"stdout","time":390.255138397,"data":"===== Build succeeded: /kaggle/working/repo/dist/Vocalith-linux-x86_64.tar.gz =====\n"}
+,{"stream_name":"stdout","time":390.255141672,"data":"$ ls -la /kaggle/working/repo/dist/Vocalith-linux-x86_64.tar.gz\n"}
+,{"stream_name":"stdout","time":390.265018033,"data":"-rw-r--r-- 1 root root 1003119754 Sep  3 23:35 /kaggle/working/repo/dist/Vocalith-linux-x86_64.tar.gz\n"}
+,{"stream_name":"stdout","time":390.26505619,"data":"\n"}
+,{"stream_name":"stdout","time":390.265061757,"data":"  (exit code 0)\n"}
+,{"stream_name":"stdout","time":390.265066191,"data":"$ mkdir -p /kaggle/working/extracted\n"}
+,{"stream_name":"stdout","time":390.269454266,"data":"  (exit code 0)\n"}
+,{"stream_name":"stdout","time":390.269489029,"data":"$ tar -xzf /kaggle/working/repo/dist/Vocalith-linux-x86_64.tar.gz -C /kaggle/working/extracted\n"}
+,{"stream_name":"stdout","time":427.188249947,"data":"  (exit code 0)\n"}
+,{"stream_name":"stdout","time":427.188298103,"data":"$ ls -la /kaggle/working/extracted\n"}
+,{"stream_name":"stdout","time":427.192387574,"data":"total 28\n"}
+,{"stream_name":"stdout","time":427.192426686,"data":"drwxr-xr-x 6 root root 4096 Sep  3 23:31 .\n"}
+,{"stream_name":"stdout","time":427.192433983,"data":"drwxr-xr-x 4 root root 4096 Sep  3 23:35 ..\n"}
+,{"stream_name":"stdout","time":427.192440435,"data":"drwxr-xr-x 2 root root 4096 Sep  3 23:31 ffmpeg\n"}
+,{"stream_name":"stdout","time":427.192446507,"data":"drwxr-xr-x 5 root root 4096 Sep  3 23:31 launcher_src\n"}
+,{"stream_name":"stdout","time":427.192452281,"data":"drwxr-xr-x 6 root root 4096 Sep  3 23:28 pyruntime\n"}
+,{"stream_name":"stdout","time":427.192457668,"data":"drwxr-xr-x 4 root root 4096 Sep  3 23:31 src\n"}
+,{"stream_name":"stdout","time":427.192463378,"data":"-rwxr-xr-x 1 root root  173 Sep  3 23:31 vocalith.sh\n"}
+,{"stream_name":"stdout","time":427.1924692,"data":"\n"}
+,{"stream_name":"stdout","time":427.192474507,"data":"  (exit code 0)\n"}
+,{"stream_name":"stdout","time":427.192479895,"data":"\n"}
+,{"stream_name":"stdout","time":427.192485371,"data":"===== Launching the packaged app for real =====\n"}
+,{"stream_name":"stdout","time":452.19416928,"data":"$ curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:7860\n"}
+,{"stream_name":"stdout","time":452.254573372,"data":"200\n"}
+,{"stream_name":"stdout","time":452.254616413,"data":"  (exit code 0)\n"}
+,{"stream_name":"stdout","time":452.254622943,"data":"HTTP status from packaged app: 200\n"}
+,{"stream_name":"stdout","time":452.255965559,"data":"\n"}
+,{"stream_name":"stdout","time":452.25600811,"data":"===== LINUX PACKAGE TEST: SUCCESS =====\n"}
+,{"stream_name":"stderr","time":455.432433362,"data":"/usr/local/lib/python3.12/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":455.432521359,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":455.856889818,"data":"/usr/local/lib/python3.12/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":455.856945476,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":457.528330587,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":459.34943988,"data":"[NbConvertApp] Writing 287664 bytes to __results__.html\n"}
+]

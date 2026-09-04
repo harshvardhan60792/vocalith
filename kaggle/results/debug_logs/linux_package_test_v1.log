@@ -1,0 +1,36 @@
+[{"stream_name":"stdout","time":1.165407439,"data":"Found repo slice at: /kaggle/input/datasets/harshu60792/vocalith-repo-slice\n"}
+,{"stream_name":"stdout","time":1.16549368,"data":"$ mkdir -p /kaggle/working/repo\n"}
+,{"stream_name":"stdout","time":1.189882574,"data":"  (exit code 0)\n"}
+,{"stream_name":"stdout","time":1.189954953,"data":"$ cp -r /kaggle/input/datasets/harshu60792/vocalith-repo-slice/src /kaggle/input/datasets/harshu60792/vocalith-repo-slice/launcher /kaggle/input/datasets/harshu60792/vocalith-repo-slice/pyproject.toml /kaggle/working/repo/\n"}
+,{"stream_name":"stdout","time":1.302796193,"data":"  (exit code 0)\n"}
+,{"stream_name":"stdout","time":1.302849283,"data":"$ chmod +x /kaggle/working/repo/launcher/linux/build.sh\n"}
+,{"stream_name":"stdout","time":1.308605878,"data":"  (exit code 0)\n"}
+,{"stream_name":"stdout","time":1.308659552,"data":"$ ls -la /kaggle/working/repo\n"}
+,{"stream_name":"stdout","time":1.359122448,"data":"total 20\n"}
+,{"stream_name":"stdout","time":1.359183177,"data":"drwxr-xr-x 4 root root 4096 Sep  3 23:18 .\n"}
+,{"stream_name":"stdout","time":1.359192438,"data":"drwxr-xr-x 3 root root 4096 Sep  3 23:18 ..\n"}
+,{"stream_name":"stdout","time":1.359197606,"data":"drwxr-xr-x 5 root root 4096 Sep  3 23:18 launcher\n"}
+,{"stream_name":"stdout","time":1.3592032170000001,"data":"-rw-r--r-- 1 root root 2070 Sep  3 23:18 pyproject.toml\n"}
+,{"stream_name":"stdout","time":1.359208626,"data":"drwxr-xr-x 4 root root 4096 Sep  3 23:18 src\n"}
+,{"stream_name":"stdout","time":1.359214283,"data":"\n"}
+,{"stream_name":"stdout","time":1.359221576,"data":"  (exit code 0)\n"}
+,{"stream_name":"stdout","time":1.35922946,"data":"\n"}
+,{"stream_name":"stdout","time":1.359236846,"data":"===== Running launcher/linux/build.sh =====\n"}
+,{"stream_name":"stdout","time":1.35924441,"data":"$ bash launcher/linux/build.sh\n"}
+,{"stream_name":"stdout","time":1.363046596,"data":"launcher/linux/build.sh: line 7: set: pipefail\n"}
+,{"stream_name":"stdout","time":1.363083955,"data":": invalid option name\n"}
+,{"stream_name":"stdout","time":1.363090251,"data":"\n"}
+,{"stream_name":"stdout","time":1.363094511,"data":"  (exit code 2)\n"}
+,{"stream_name":"stdout","time":1.363099625,"data":"build.sh finished in 0s, exit code 2\n"}
+,{"stream_name":"stdout","time":1.363104287,"data":"BUILD FAILED or did not produce the expected tarball.\n"}
+,{"stream_name":"stdout","time":1.363159918,"data":"$ find /kaggle/working/repo/dist -maxdepth 3 2\u003e/dev/null || echo 'no dist dir'\n"}
+,{"stream_name":"stdout","time":1.369402908,"data":"no dist dir\n"}
+,{"stream_name":"stdout","time":1.369437217,"data":"\n"}
+,{"stream_name":"stdout","time":1.369443028,"data":"  (exit code 0)\n"}
+,{"stream_name":"stderr","time":4.479668919,"data":"/usr/local/lib/python3.12/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":4.479731322,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":5.035180528,"data":"/usr/local/lib/python3.12/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":5.035244378,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":7.187812441,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":9.134492965,"data":"[NbConvertApp] Writing 287664 bytes to __results__.html\n"}
+]

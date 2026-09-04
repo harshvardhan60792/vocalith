@@ -63,6 +63,12 @@ Kaggle dataset source lives at `kaggle/package_test/vocalith_dataset/` (gitignor
 transient -- re-copy from `src/vocalith/` and re-upload via `kaggle datasets version`
 if this needs re-running after further changes).
 
+## debug_logs/ — the raw log from every kernel run, not just the passing ones
+
+See [`debug_logs/README.md`](debug_logs/README.md) for an index. Every failed attempt
+narrated below and in the phase sections has its actual log text preserved there, not
+just this file's summary of it — in case the exact wording ever matters again.
+
 # Kaggle spike results
 
 Saved so nobody has to re-run Kaggle GPU time to see this project's pipeline actually

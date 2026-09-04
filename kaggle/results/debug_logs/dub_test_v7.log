@@ -1,0 +1,381 @@
+[{"stream_name":"stdout","time":1.185239468,"data":"\n"}
+,{"stream_name":"stdout","time":1.185325318,"data":"===== STAGE: setup =====\n"}
+,{"stream_name":"stdout","time":1.185331182,"data":"$ apt-get update -qq \u0026\u0026 apt-get install -y -qq espeak-ng ffmpeg \u003e /dev/null\n"}
+,{"stream_name":"stdout","time":17.92842499,"data":"W: Skipping acquire of configured file 'main/source/Sources' as repository 'https://r2u.stat.illinois.edu/ubuntu jammy InRelease' does not seem to provide it (sources.list entry misspelt?)\n"}
+,{"stream_name":"stdout","time":17.928467094,"data":"\n"}
+,{"stream_name":"stdout","time":17.92847224,"data":"$ /usr/bin/python3 -m pip install -q kokoro==0.9.4 misaki[en] soundfile\n"}
+,{"stream_name":"stdout","time":32.464587714,"data":"     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 48.3/48.3 kB 1.3 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":32.464649564,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.6/3.6 MB 31.7 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":32.46465917,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 10.1/10.1 MB 103.3 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":32.464666281,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 61.6/61.6 kB 4.1 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":32.464673094,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 163.5/163.5 kB 12.2 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":32.464679254,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 82.7/82.7 kB 5.9 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":32.464686526,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 237.9/237.9 kB 14.8 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":32.464692797,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 6.3/6.3 MB 89.1 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":32.464700717,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 69.5/69.5 kB 4.2 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":32.464709407,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 216.7/216.7 kB 14.6 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":32.464717873,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 615.4/615.4 kB 31.1 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":32.464726084,"data":"\n"}
+,{"stream_name":"stdout","time":32.464733577,"data":"$ /usr/bin/python3 -m pip install -q chatterbox-tts\n"}
+,{"stream_name":"stdout","time":303.618667332,"data":"     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 61.0/61.0 kB 1.8 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":303.618713861,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 108.5/108.5 kB 4.2 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":303.618721931,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.2/2.2 MB 36.4 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":303.618743201,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 24.2/24.2 MB 70.7 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":303.618748749,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.4/2.4 MB 78.7 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":303.618753956,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 471.6/471.6 kB 27.7 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":303.618759001,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 766.6/766.6 MB 2.3 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":303.618764021,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.4/3.4 MB 36.3 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":303.618769321,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 10.4/10.4 MB 66.7 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":303.61877406,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 58.3/58.3 kB 3.6 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":303.618778878,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 363.4/363.4 MB 3.8 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":303.61878378,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 13.8/13.8 MB 19.1 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":303.618790046,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 24.6/24.6 MB 31.2 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":303.618794997,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 883.7/883.7 kB 27.4 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":303.618799762,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 664.8/664.8 MB 2.3 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":303.618804647,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 211.5/211.5 MB 5.0 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":303.618838373,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 56.3/56.3 MB 20.4 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":303.618843514,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 127.9/127.9 MB 5.0 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":303.618850076,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 207.5/207.5 MB 7.8 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":303.61885534,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 150.1/150.1 MB 7.0 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":303.618862746,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 188.7/188.7 MB 8.5 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":303.618871832,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 21.1/21.1 MB 7.6 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":303.618882178,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 99.1/99.1 kB 157.0 kB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":303.61888736,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 6.2/6.2 MB 44.7 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":303.618892502,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 253.2/253.2 MB 6.8 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":303.61889764,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 18.0/18.0 MB 49.0 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":303.618903708,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 34.4/34.4 MB 32.8 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":303.618908046,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 226.4/226.4 kB 15.3 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":303.618916434,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.1/4.1 MB 44.4 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":303.618938341,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 226.2/226.2 kB 14.5 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":303.618941419,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 99.4/99.4 kB 4.5 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":303.618945351,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.3/5.3 MB 43.7 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":303.618996226,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 470.6/470.6 kB 21.2 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":303.619001626,"data":"\n"}
+,{"stream_name":"stdout","time":303.619005531,"data":"ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.\n"}
+,{"stream_name":"stdout","time":303.619014867,"data":"bigframes 2.39.0 requires google-cloud-bigquery-storage\u003c3.0.0,\u003e=2.30.0, which is not installed.\n"}
+,{"stream_name":"stdout","time":303.61902092,"data":"kaggle-environments 1.29.3 requires numpy\u003e=2.0, but you have numpy 1.26.4 which is incompatible.\n"}
+,{"stream_name":"stdout","time":303.619025326,"data":"cesium 0.12.4 requires numpy\u003c3.0,\u003e=2.0, but you have numpy 1.26.4 which is incompatible.\n"}
+,{"stream_name":"stdout","time":303.619029696,"data":"google-colab 1.0.0 requires jupyter-server==2.14.0, but you have jupyter-server 2.12.5 which is incompatible.\n"}
+,{"stream_name":"stdout","time":303.619033986,"data":"google-colab 1.0.0 requires pandas==2.2.2, but you have pandas 2.3.3 which is incompatible.\n"}
+,{"stream_name":"stdout","time":303.619040081,"data":"dopamine-rl 4.1.2 requires gym\u003c=0.25.2, but you have gym 0.26.2 which is incompatible.\n"}
+,{"stream_name":"stdout","time":303.619052485,"data":"jaxlib 0.7.2 requires numpy\u003e=2.0, but you have numpy 1.26.4 which is incompatible.\n"}
+,{"stream_name":"stdout","time":303.619056374,"data":"cupy-cuda12x 14.0.1 requires numpy\u003c2.6,\u003e=2.0, but you have numpy 1.26.4 which is incompatible.\n"}
+,{"stream_name":"stdout","time":303.619059419,"data":"moviepy 1.0.3 requires decorator\u003c5.0,\u003e=4.0.2, but you have decorator 5.3.1 which is incompatible.\n"}
+,{"stream_name":"stdout","time":303.619062488,"data":"opencv-python 4.13.0.92 requires numpy\u003e=2; python_version \u003e= \"3.9\", but you have numpy 1.26.4 which is incompatible.\n"}
+,{"stream_name":"stdout","time":303.619065564,"data":"tobler 0.14.0 requires numpy\u003e=2.0, but you have numpy 1.26.4 which is incompatible.\n"}
+,{"stream_name":"stdout","time":303.619068374,"data":"jax 0.7.2 requires numpy\u003e=2.0, but you have numpy 1.26.4 which is incompatible.\n"}
+,{"stream_name":"stdout","time":303.619071153,"data":"opencv-python-headless 4.13.0.92 requires numpy\u003e=2; python_version \u003e= \"3.9\", but you have numpy 1.26.4 which is incompatible.\n"}
+,{"stream_name":"stdout","time":303.619074179,"data":"rasterio 1.5.0 requires numpy\u003e=2, but you have numpy 1.26.4 which is incompatible.\n"}
+,{"stream_name":"stdout","time":303.619077007,"data":"torchvision 0.25.0+cu128 requires torch==2.10.0, but you have torch 2.6.0 which is incompatible.\n"}
+,{"stream_name":"stdout","time":303.619079767,"data":"pytensor 2.38.2 requires numpy\u003e=2.0, but you have numpy 1.26.4 which is incompatible.\n"}
+,{"stream_name":"stdout","time":303.619082539,"data":"xarray-einstats 0.10.0 requires numpy\u003e=2.0, but you have numpy 1.26.4 which is incompatible.\n"}
+,{"stream_name":"stdout","time":303.619085464,"data":"tifffile 2026.4.11 requires numpy\u003e=2.0, but you have numpy 1.26.4 which is incompatible.\n"}
+,{"stream_name":"stdout","time":303.619088287,"data":"opencv-contrib-python 4.13.0.92 requires numpy\u003e=2; python_version \u003e= \"3.9\", but you have numpy 1.26.4 which is incompatible.\n"}
+,{"stream_name":"stdout","time":303.619091315,"data":"shap 0.51.0 requires numpy\u003e=2, but you have numpy 1.26.4 which is incompatible.\n"}
+,{"stream_name":"stdout","time":303.619094139,"data":"\n"}
+,{"stream_name":"stdout","time":303.619096793,"data":"$ /usr/bin/python3 -m pip install -q demucs\n"}
+,{"stream_name":"stdout","time":309.792638984,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100.6/100.6 kB 2.4 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":309.79268818,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 247.5/247.5 kB 6.8 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":309.792702553,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 18.1/18.1 MB 69.9 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":309.792707173,"data":"\n"}
+,{"stream_name":"stdout","time":309.792729469,"data":"$ /usr/bin/python3 -m pip install -q openai-whisper\n"}
+,{"stream_name":"stdout","time":320.572042723,"data":"     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 803.2/803.2 kB 8.7 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":320.57211132,"data":"\n"}
+,{"stream_name":"stdout","time":320.572119508,"data":"$ /usr/bin/python3 -m pip install -q torch==2.6.0 torchvision==0.21.0 torchaudio==2.6.0\n"}
+,{"stream_name":"stdout","time":326.271983021,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 7.2/7.2 MB 33.2 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":326.27204951,"data":"\n"}
+,{"stream_name":"stdout","time":326.272063235,"data":"===== setup OK (325.1s) =====\n"}
+,{"stream_name":"stdout","time":328.451426223,"data":"device: cuda\n"}
+,{"stream_name":"stdout","time":328.451460764,"data":"\n"}
+,{"stream_name":"stdout","time":328.451484641,"data":"===== STAGE: build_input =====\n"}
+,{"stream_name":"stdout","time":345.108916833,"data":"WARNING: Defaulting repo_id to hexgrad/Kokoro-82M. Pass repo_id='hexgrad/Kokoro-82M' to suppress this warning.\n"}
+,{"stream_name":"stderr","time":345.290758222,"data":"Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n"}
+,{"stream_name":"stderr","time":345.450533329,"data":"/usr/local/lib/python3.12/dist-packages/torch/nn/modules/rnn.py:123: UserWarning: dropout option adds dropout after all but last recurrent layer, so non-zero dropout expects num_layers greater than 1, but got dropout=0.2 and num_layers=1\n"}
+,{"stream_name":"stderr","time":345.450587303,"data":"  warnings.warn(\n"}
+,{"stream_name":"stderr","time":345.55164725,"data":"/usr/local/lib/python3.12/dist-packages/torch/nn/utils/weight_norm.py:143: FutureWarning: `torch.nn.utils.weight_norm` is deprecated in favor of `torch.nn.utils.parametrizations.weight_norm`.\n"}
+,{"stream_name":"stderr","time":345.551685446,"data":"  WeightNorm.apply(module, name, dim)\n"}
+,{"stream_name":"stdout","time":354.955847655,"data":"$ ffmpeg -y -f lavfi -i color=c=navy:s=320x240:d=15.25 -i /kaggle/working/src_audio.wav -c:v libx264 -c:a aac -shortest /kaggle/working/src_video.mp4\n"}
+,{"stream_name":"stdout","time":356.0472189,"data":" : mono\n"}
+,{"stream_name":"stdout","time":356.047275192,"data":"Input #1, wav, from '/kaggle/working/src_audio.wav':\n"}
+,{"stream_name":"stdout","time":356.047282199,"data":"  Duration: 00:00:15.25, bitrate: 384 kb/s\n"}
+,{"stream_name":"stdout","time":356.047287875,"data":"  Stream #1:0: Audio: pcm_s16le ([1][0][0][0] / 0x0001), 24000 Hz, mono, s16, 384 kb/s\n"}
+,{"stream_name":"stdout","time":356.04729508,"data":"Stream mapping:\n"}
+,{"stream_name":"stdout","time":356.047299908,"data":"  Stream #0:0 -\u003e #0:0 (rawvideo (native) -\u003e h264 (libx264))\n"}
+,{"stream_name":"stdout","time":356.047306787,"data":"  Stream #1:0 -\u003e #0:1 (pcm_s16le (native) -\u003e aac (native))\n"}
+,{"stream_name":"stdout","time":356.047312156,"data":"Press [q] to stop, [?] for help\n"}
+,{"stream_name":"stdout","time":356.047317034,"data":"[libx264 @ 0x5ae854a7b480] using SAR=1/1\n"}
+,{"stream_name":"stdout","time":356.047322082,"data":"[libx264 @ 0x5ae854a7b480] using cpu capabilities: MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2 AVX512\n"}
+,{"stream_name":"stdout","time":356.047327093,"data":"[libx264 @ 0x5ae854a7b480] profile High, level 1.3, 4:2:0, 8-bit\n"}
+,{"stream_name":"stdout","time":356.047334876,"data":"[libx264 @ 0x5ae854a7b480] 264 - core 163 r3060 5db6aa6 - H.264/MPEG-4 AVC codec - Copyleft 2003-2021 - http://www.videolan.org/x264.html - options: cabac=1 ref=3 deblock=1:0:0 analyse=0x3:0x113 me=hex subme=7 psy=1 psy_rd=1.00:0.00 mixed_ref=1 me_range=16 chroma_me=1 trellis=1 8x8dct=1 cqm=0 deadzone=21,11 fast_pskip=1 chroma_qp_offset=-2 threads=6 lookahead_threads=1 sliced_threads=0 nr=0 decimate=1 interlaced=0 bluray_compat=0 constrained_intra=0 bframes=3 b_pyramid=2 b_adapt=1 b_bias=0 direct=1 weightb=1 open_gop=0 weightp=2 keyint=250 keyint_min=25 scenecut=40 intra_refresh=0 rc_lookahead=40 rc=crf mbtree=1 crf=23.0 qcomp=0.60 qpmin=0 qpmax=69 qpstep=4 ip_ratio=1.40 aq=1:1.00\n"}
+,{"stream_name":"stdout","time":356.047360307,"data":"Output #0, mp4, to '/kaggle/working/src_video.mp4':\n"}
+,{"stream_name":"stdout","time":356.047365016,"data":"  Metadata:\n"}
+,{"stream_name":"stdout","time":356.047368781,"data":"    encoder         : Lavf58.76.100\n"}
+,{"stream_name":"stdout","time":356.047372267,"data":"  Stream #0:0: Video: h264 (avc1 / 0x31637661), yuv420p(progressive), 320x240 [SAR 1:1 DAR 4:3], q=2-31, 25 fps, 12800 tbn\n"}
+,{"stream_name":"stdout","time":356.047375958,"data":"    Metadata:\n"}
+,{"stream_name":"stdout","time":356.047379484,"data":"      encoder         : Lavc58.134.100 libx264\n"}
+,{"stream_name":"stdout","time":356.047383288,"data":"    Side data:\n"}
+,{"stream_name":"stdout","time":356.047386932,"data":"      cpb: bitrate max/min/avg: 0/0/0 buffer size: 0 vbv_delay: N/A\n"}
+,{"stream_name":"stdout","time":356.047390969,"data":"  Stream #0:1: Audio: aac (LC) (mp4a / 0x6134706D), 24000 Hz, mono, fltp, 69 kb/s\n"}
+,{"stream_name":"stdout","time":356.047394929,"data":"    Metadata:\n"}
+,{"stream_name":"stdout","time":356.047398719,"data":"      encoder         : Lavc58.134.100 aac\n"}
+,{"stream_name":"stdout","time":356.047402274,"data":"frame=    1 fps=0.0 q=0.0 size=       0kB time=00:00:00.00 bitrate=N/A speed=   0x    \n"}
+,{"stream_name":"stdout","time":356.047406767,"data":"frame=  382 fps=0.0 q=-1.0 Lsize=     149kB time=00:00:15.23 bitrate=  80.2kbits/s speed=41.1x    \n"}
+,{"stream_name":"stdout","time":356.047412031,"data":"video:7kB audio:131kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 7.687315%\n"}
+,{"stream_name":"stdout","time":356.04741588,"data":"[libx264 @ 0x5ae854a7b480] frame I:2     Avg QP: 7.50  size:    69\n"}
+,{"stream_name":"stdout","time":356.047419793,"data":"[libx264 @ 0x5ae854a7b480] frame P:96    Avg QP: 9.11  size:    23\n"}
+,{"stream_name":"stdout","time":356.047423502,"data":"[libx264 @ 0x5ae854a7b480] frame B:284   Avg QP:12.67  size:    15\n"}
+,{"stream_name":"stdout","time":356.047427119,"data":"[libx264 @ 0x5ae854a7b480] consecutive B-frames:  0.8%  0.0%  0.8% 98.4%\n"}
+,{"stream_name":"stdout","time":356.047431098,"data":"[libx264 @ 0x5ae854a7b480] mb I  I16..4: 100.0%  0.0%  0.0%\n"}
+,{"stream_name":"stdout","time":356.047435261,"data":"[libx264 @ 0x5ae854a7b480] mb P  I16..4:  0.0%  0.0%  0.0%  P16..4:  0.0%  0.0%  0.0%  0.0%  0.0%    skip:100.0%\n"}
+,{"stream_name":"stdout","time":356.04743957,"data":"[libx264 @ 0x5ae854a7b480] mb B  I16..4:  0.0%  0.0%  0.0%  B16..8:  0.0%  0.0%  0.0%  direct: 0.0%  skip:100.0%\n"}
+,{"stream_name":"stdout","time":356.047443557,"data":"[libx264 @ 0x5ae854a7b480] 8x8 transform intra:0.0%\n"}
+,{"stream_name":"stdout","time":356.047447187,"data":"[libx264 @ 0x5ae854a7b480] coded y,uvDC,uvAC intra: 0.0% 0.3% 0.0% inter: 0.0% 0.0% 0.0%\n"}
+,{"stream_name":"stdout","time":356.047451097,"data":"[libx264 @ 0x5ae854a7b480] i16 v,h,dc,p: 93%  0%  7%  0%\n"}
+,{"stream_name":"stdout","time":356.047455628,"data":"[libx264 @ 0x5ae854a7b480] i8c dc,h,v,p: 100%  0%  0%  0%\n"}
+,{"stream_name":"stdout","time":356.047459427,"data":"[libx264 @ 0x5ae854a7b480] Weighted P-Frames: Y:0.0% UV:0.0%\n"}
+,{"stream_name":"stdout","time":356.047463309,"data":"[libx264 @ 0x5ae854a7b480] kb/s:3.40\n"}
+,{"stream_name":"stdout","time":356.047467132,"data":"[aac @ 0x5ae854a7dd40] Qavg: 198.720\n"}
+,{"stream_name":"stdout","time":356.047470682,"data":"\n"}
+,{"stream_name":"stdout","time":356.047477387,"data":"built src_video.mp4, duration 15.2s\n"}
+,{"stream_name":"stdout","time":356.063587019,"data":"===== build_input OK (27.6s, peak VRAM 1.25 GB) =====\n"}
+,{"stream_name":"stdout","time":356.063621881,"data":"\n"}
+,{"stream_name":"stdout","time":356.063626832,"data":"===== STAGE: extract_audio =====\n"}
+,{"stream_name":"stdout","time":356.063646118,"data":"$ ffmpeg -y -i /kaggle/working/src_video.mp4 -vn -acodec pcm_s16le -ar 24000 -ac 1 /kaggle/working/extracted.wav\n"}
+,{"stream_name":"stdout","time":356.204848253,"data":"ion=0ubuntu0.22.04.1 --toolchain=hardened --libdir=/usr/lib/x86_64-linux-gnu --incdir=/usr/include/x86_64-linux-gnu --arch=amd64 --enable-gpl --disable-stripping --enable-gnutls --enable-ladspa --enable-libaom --enable-libass --enable-libbluray --enable-libbs2b --enable-libcaca --enable-libcdio --enable-libcodec2 --enable-libdav1d --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libgme --enable-libgsm --enable-libjack --enable-libmp3lame --enable-libmysofa --enable-libopenjpeg --enable-libopenmpt --enable-libopus --enable-libpulse --enable-librabbitmq --enable-librubberband --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libsrt --enable-libssh --enable-libtheora --enable-libtwolame --enable-libvidstab --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx265 --enable-libxml2 --enable-libxvid --enable-libzimg --enable-libzmq --enable-libzvbi --enable-lv2 --enable-omx --enable-openal --enable-opencl --enable-opengl --enable-sdl2 --enable-pocketsphinx --enable-librsvg --enable-libmfx --enable-libdc1394 --enable-libdrm --enable-libiec61883 --enable-chromaprint --enable-frei0r --enable-libx264 --enable-shared\n"}
+,{"stream_name":"stdout","time":356.20488546,"data":"  libavutil      56. 70.100 / 56. 70.100\n"}
+,{"stream_name":"stdout","time":356.204890154,"data":"  libavcodec     58.134.100 / 58.134.100\n"}
+,{"stream_name":"stdout","time":356.20489404,"data":"  libavformat    58. 76.100 / 58. 76.100\n"}
+,{"stream_name":"stdout","time":356.204897822,"data":"  libavdevice    58. 13.100 / 58. 13.100\n"}
+,{"stream_name":"stdout","time":356.204901687,"data":"  libavfilter     7.110.100 /  7.110.100\n"}
+,{"stream_name":"stdout","time":356.204905368,"data":"  libswscale      5.  9.100 /  5.  9.100\n"}
+,{"stream_name":"stdout","time":356.204909148,"data":"  libswresample   3.  9.100 /  3.  9.100\n"}
+,{"stream_name":"stdout","time":356.20491303,"data":"  libpostproc    55.  9.100 / 55.  9.100\n"}
+,{"stream_name":"stdout","time":356.204916786,"data":"Input #0, mov,mp4,m4a,3gp,3g2,mj2, from '/kaggle/working/src_video.mp4':\n"}
+,{"stream_name":"stdout","time":356.204920997,"data":"  Metadata:\n"}
+,{"stream_name":"stdout","time":356.204924847,"data":"    major_brand     : isom\n"}
+,{"stream_name":"stdout","time":356.204928766,"data":"    minor_version   : 512\n"}
+,{"stream_name":"stdout","time":356.204932674,"data":"    compatible_brands: isomiso2avc1mp41\n"}
+,{"stream_name":"stdout","time":356.204936631,"data":"    encoder         : Lavf58.76.100\n"}
+,{"stream_name":"stdout","time":356.204940409,"data":"  Duration: 00:00:15.28, start: 0.000000, bitrate: 79 kb/s\n"}
+,{"stream_name":"stdout","time":356.204944513,"data":"  Stream #0:0(und): Video: h264 (High) (avc1 / 0x31637661), yuv420p, 320x240 [SAR 1:1 DAR 4:3], 3 kb/s, 25 fps, 25 tbr, 12800 tbn, 50 tbc (default)\n"}
+,{"stream_name":"stdout","time":356.204948891,"data":"    Metadata:\n"}
+,{"stream_name":"stdout","time":356.204952717,"data":"      handler_name    : VideoHandler\n"}
+,{"stream_name":"stdout","time":356.204956556,"data":"      vendor_id       : [0][0][0][0]\n"}
+,{"stream_name":"stdout","time":356.204961389,"data":"  Stream #0:1(und): Audio: aac (LC) (mp4a / 0x6134706D), 24000 Hz, mono, fltp, 70 kb/s (default)\n"}
+,{"stream_name":"stdout","time":356.204972661,"data":"    Metadata:\n"}
+,{"stream_name":"stdout","time":356.204976222,"data":"      handler_name    : SoundHandler\n"}
+,{"stream_name":"stdout","time":356.204980459,"data":"      vendor_id       : [0][0][0][0]\n"}
+,{"stream_name":"stdout","time":356.204995995,"data":"Stream mapping:\n"}
+,{"stream_name":"stdout","time":356.204999889,"data":"  Stream #0:1 -\u003e #0:0 (aac (native) -\u003e pcm_s16le (native))\n"}
+,{"stream_name":"stdout","time":356.205004675,"data":"Press [q] to stop, [?] for help\n"}
+,{"stream_name":"stdout","time":356.20500857,"data":"Output #0, wav, to '/kaggle/working/extracted.wav':\n"}
+,{"stream_name":"stdout","time":356.205012679,"data":"  Metadata:\n"}
+,{"stream_name":"stdout","time":356.205016911,"data":"    major_brand     : isom\n"}
+,{"stream_name":"stdout","time":356.205020742,"data":"    minor_version   : 512\n"}
+,{"stream_name":"stdout","time":356.20502467,"data":"    compatible_brands: isomiso2avc1mp41\n"}
+,{"stream_name":"stdout","time":356.205028667,"data":"    ISFT            : Lavf58.76.100\n"}
+,{"stream_name":"stdout","time":356.205033036,"data":"  Stream #0:0(und): Audio: pcm_s16le ([1][0][0][0] / 0x0001), 24000 Hz, mono, s16, 384 kb/s (default)\n"}
+,{"stream_name":"stdout","time":356.205037169,"data":"    Metadata:\n"}
+,{"stream_name":"stdout","time":356.205041196,"data":"      handler_name    : SoundHandler\n"}
+,{"stream_name":"stdout","time":356.205044881,"data":"      vendor_id       : [0][0][0][0]\n"}
+,{"stream_name":"stdout","time":356.205048645,"data":"      encoder         : Lavc58.134.100 pcm_s16le\n"}
+,{"stream_name":"stdout","time":356.205052059,"data":"size=       2kB time=00:00:00.00 bitrate=N/A speed=   0x    \n"}
+,{"stream_name":"stdout","time":356.205055395,"data":"size=     716kB time=00:00:15.23 bitrate= 385.1kbits/s speed= 663x    \n"}
+,{"stream_name":"stdout","time":356.205059143,"data":"video:0kB audio:716kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 0.010639%\n"}
+,{"stream_name":"stdout","time":356.205062914,"data":"\n"}
+,{"stream_name":"stdout","time":356.205190664,"data":"===== extract_audio OK (0.1s, peak VRAM 0.01 GB) =====\n"}
+,{"stream_name":"stdout","time":356.205203294,"data":"\n"}
+,{"stream_name":"stdout","time":356.205207693,"data":"===== STAGE: demucs_split =====\n"}
+,{"stream_name":"stdout","time":356.205326517,"data":"$ /usr/bin/python3 -m demucs --two-stems=vocals -n htdemucs -o /kaggle/working/demucs_out /kaggle/working/extracted.wav\n"}
+,{"stream_name":"stdout","time":365.179778254,"data":"Selected model is a bag of 1 models. You will see that many progress bars per track.\n"}
+,{"stream_name":"stdout","time":365.179837874,"data":"Separated tracks will be stored in /kaggle/working/demucs_out/htdemucs\n"}
+,{"stream_name":"stdout","time":365.1798484,"data":"Separating track /kaggle/working/extracted.wav\n"}
+,{"stream_name":"stdout","time":365.179855308,"data":"\n"}
+,{"stream_name":"stdout","time":365.179861078,"data":"Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n"}
+,{"stream_name":"stdout","time":365.179866788,"data":"\n"}
+,{"stream_name":"stdout","time":365.179871961,"data":"  0%|                                                                     | 0.0/17.549999999999997 [00:00\u003c?, ?seconds/s]\n"}
+,{"stream_name":"stdout","time":365.17988117,"data":" 33%|████████████████████                                        | 5.85/17.549999999999997 [00:01\u003c00:03,  3.21seconds/s]\n"}
+,{"stream_name":"stdout","time":365.179886094,"data":" 67%|████████████████████████████████████████                    | 11.7/17.549999999999997 [00:02\u003c00:00,  6.82seconds/s]\n"}
+,{"stream_name":"stdout","time":365.179891742,"data":"100%|██████████████████████████████████████████████| 17.549999999999997/17.549999999999997 [00:02\u003c00:00, 10.71seconds/s]\n"}
+,{"stream_name":"stdout","time":365.179927979,"data":"100%|██████████████████████████████████████████████| 17.549999999999997/17.549999999999997 [00:02\u003c00:00,  8.05seconds/s]\n"}
+,{"stream_name":"stdout","time":365.179934971,"data":"\n"}
+,{"stream_name":"stdout","time":365.180029507,"data":"$ cp '/kaggle/working/demucs_out/htdemucs/extracted/vocals.wav' /kaggle/working/vocals.wav\n"}
+,{"stream_name":"stdout","time":365.18892084,"data":"$ cp '/kaggle/working/demucs_out/htdemucs/extracted/no_vocals.wav' /kaggle/working/bed.wav\n"}
+,{"stream_name":"stdout","time":365.194939527,"data":"===== demucs_split OK (9.0s, peak VRAM 0.01 GB) =====\n"}
+,{"stream_name":"stdout","time":365.194966001,"data":"\n"}
+,{"stream_name":"stdout","time":365.194971395,"data":"===== STAGE: whisper_transcribe =====\n"}
+,{"stream_name":"stderr","time":367.985488379,"data":"\r  0%|                                               | 0.00/139M [00:00\u003c?, ?iB/s]\r  0%|                                       | 240k/139M [00:00\u003c01:00, 2.40MiB/s]\r  2%|▋                                     | 2.55M/139M [00:00\u003c00:09, 15.1MiB/s]\r 10%|███▉                                  | 14.2M/139M [00:00\u003c00:02, 63.8MiB/s]\r 20%|███████▌                              | 27.4M/139M [00:00\u003c00:01, 92.7MiB/s]\r 29%|███████████▎                           | 40.3M/139M [00:00\u003c00:00, 108MiB/s]\r 39%|███████████████                        | 53.6M/139M [00:00\u003c00:00, 119MiB/s]\r 48%|██████████████████▊                    | 66.8M/139M [00:00\u003c00:00, 125MiB/s]\r 58%|██████████████████████▌                | 80.2M/139M [00:00\u003c00:00, 130MiB/s]\r 67%|██████████████████████████▏            | 93.1M/139M [00:00\u003c00:00, 132MiB/s]\r 77%|██████████████████████████████▋         | 106M/139M [00:01\u003c00:00, 133MiB/s]\r 86%|██████████████████████████████████▍     | 119M/139M [00:01\u003c00:00, 135MiB/s]\r 95%|██████████████████████████████████████▏ | 132M/139M [00:01\u003c00:00, 134MiB/s]\r100%|████████████████████████████████████████| 139M/139M [00:01\u003c00:00, 116MiB/s]\n"}
+,{"stream_name":"stdout","time":375.525381021,"data":"[\n"}
+,{"stream_name":"stdout","time":375.525444147,"data":"  {\n"}
+,{"stream_name":"stdout","time":375.525452171,"data":"    \"start\": 0.0,\n"}
+,{"stream_name":"stdout","time":375.525458297,"data":"    \"end\": 2.1,\n"}
+,{"stream_name":"stdout","time":375.525464112,"data":"    \"text\": \"Welcome to this short demonstration.\"\n"}
+,{"stream_name":"stdout","time":375.52546996,"data":"  },\n"}
+,{"stream_name":"stdout","time":375.525475135,"data":"  {\n"}
+,{"stream_name":"stdout","time":375.525480006,"data":"    \"start\": 2.78,\n"}
+,{"stream_name":"stdout","time":375.525490611,"data":"    \"end\": 5.56,\n"}
+,{"stream_name":"stdout","time":375.525495386,"data":"    \"text\": \"Today we are testing a fully local dubbing pipeline.\"\n"}
+,{"stream_name":"stdout","time":375.525499156,"data":"  },\n"}
+,{"stream_name":"stdout","time":375.525502593,"data":"  {\n"}
+,{"stream_name":"stdout","time":375.525516669,"data":"    \"start\": 6.02,\n"}
+,{"stream_name":"stdout","time":375.525519449,"data":"    \"end\": 11.04,\n"}
+,{"stream_name":"stdout","time":375.525522178,"data":"    \"text\": \"It transcribes speech, translates it, and revises it in the original speaker's voice.\"\n"}
+,{"stream_name":"stdout","time":375.525525052,"data":"  },\n"}
+,{"stream_name":"stdout","time":375.525528512,"data":"  {\n"}
+,{"stream_name":"stdout","time":375.525547983,"data":"    \"start\": 11.58,\n"}
+,{"stream_name":"stdout","time":375.525552274,"data":"    \"end\": 14.62,\n"}
+,{"stream_name":"stdout","time":375.525556928,"data":"    \"text\": \"The timing should match the original as closely as possible.\"\n"}
+,{"stream_name":"stdout","time":375.52556148,"data":"  }\n"}
+,{"stream_name":"stdout","time":375.525565944,"data":"]\n"}
+,{"stream_name":"stdout","time":375.526637031,"data":"===== whisper_transcribe OK (10.3s, peak VRAM 0.49 GB) =====\n"}
+,{"stream_name":"stdout","time":375.526657371,"data":"\n"}
+,{"stream_name":"stdout","time":375.526660593,"data":"===== STAGE: translate =====\n"}
+,{"stream_name":"stdout","time":375.526663738,"data":"$ /usr/bin/python3 -m pip install -q sentencepiece\n"}
+,{"stream_name":"stdout","time":379.530694579,"data":"===== translate FAILED (4.0s) =====\n"}
+,{"stream_name":"stderr","time":379.531710292,"data":"Traceback (most recent call last):\n"}
+,{"stream_name":"stderr","time":379.532030346,"data":"  File \"/kaggle/src/script.py\", line 36, in stage\n"}
+,{"stream_name":"stderr","time":379.532044583,"data":"    fn()\n"}
+,{"stream_name":"stderr","time":379.532049227,"data":"  File \"/kaggle/src/script.py\", line 146, in translate\n"}
+,{"stream_name":"stderr","time":379.532053605,"data":"    translator = hf_pipeline(\"translation_en_to_es\", model=\"Helsinki-NLP/opus-mt-en-es\",\n"}
+,{"stream_name":"stderr","time":379.532058508,"data":"                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":379.532062798,"data":"  File \"/usr/local/lib/python3.12/dist-packages/transformers/pipelines/__init__.py\", line 777, in pipeline\n"}
+,{"stream_name":"stderr","time":379.532067333,"data":"    normalized_task, targeted_task, task_options = check_task(task)\n"}
+,{"stream_name":"stderr","time":379.532077229,"data":"                                                   ^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":379.532080861,"data":"  File \"/usr/local/lib/python3.12/dist-packages/transformers/pipelines/__init__.py\", line 381, in check_task\n"}
+,{"stream_name":"stderr","time":379.5320839,"data":"    return PIPELINE_REGISTRY.check_task(task)\n"}
+,{"stream_name":"stderr","time":379.532086811,"data":"           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":379.532089741,"data":"  File \"/usr/local/lib/python3.12/dist-packages/transformers/pipelines/base.py\", line 1351, in check_task\n"}
+,{"stream_name":"stderr","time":379.532093147,"data":"    targeted_task = self.supported_tasks[\"translation\"]\n"}
+,{"stream_name":"stderr","time":379.532096115,"data":"                    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":379.53209902,"data":"KeyError: 'translation'\n"}
+,{"stream_name":"stdout","time":379.532281973,"data":"\n"}
+,{"stream_name":"stdout","time":379.532290579,"data":"===== STAGE: chatterbox_revoice =====\n"}
+,{"stream_name":"stderr","time":379.8158886,"data":"/usr/local/lib/python3.12/dist-packages/perth/perth_net/__init__.py:1: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools\u003c81.\n"}
+,{"stream_name":"stderr","time":379.81594949,"data":"  from pkg_resources import resource_filename\n"}
+,{"stream_name":"stderr","time":410.539918717,"data":"/usr/local/lib/python3.12/dist-packages/diffusers/models/lora.py:393: FutureWarning: `LoRACompatibleLinear` is deprecated and will be removed in version 1.0.0. Use of `LoRACompatibleLinear` is deprecated. Please switch to PEFT backend by installing PEFT: `pip install peft`.\n"}
+,{"stream_name":"stderr","time":410.539989891,"data":"  deprecate(\"LoRACompatibleLinear\", \"1.0.0\", deprecation_message)\n"}
+,{"stream_name":"stdout","time":413.642074204,"data":"loaded PerthNet (Implicit) at step 250,000\n"}
+,{"stream_name":"stderr","time":424.551149593,"data":"/usr/lib/python3.12/contextlib.py:105: FutureWarning: `torch.backends.cuda.sdp_kernel()` is deprecated. In the future, this context manager will be removed. Please see `torch.nn.attention.sdpa_kernel()` for the new context manager, with updated signature.\n"}
+,{"stream_name":"stderr","time":424.551194914,"data":"  self.gen = func(*args, **kwds)\n"}
+,{"stream_name":"stderr","time":424.568019487,"data":"`sdpa` attention does not support `output_attentions=True`. Please set your attention to `eager` if you want any of these features.\n"}
+,{"stream_name":"stderr","time":426.453699835,"data":"\rSampling:   0%|          | 0/1000 [00:00\u003c?, ?it/s]\rSampling:   0%|          | 3/1000 [00:00\u003c00:41, 23.77it/s]\rSampling:   1%|          | 7/1000 [00:00\u003c00:33, 29.81it/s]\rSampling:   1%|          | 11/1000 [00:00\u003c00:30, 32.02it/s]\rSampling:   2%|▏         | 15/1000 [00:00\u003c00:29, 32.87it/s]\rSampling:   2%|▏         | 19/1000 [00:00\u003c00:29, 33.43it/s]\rSampling:   2%|▏         | 23/1000 [00:00\u003c00:29, 33.17it/s]\rSampling:   3%|▎         | 27/1000 [00:00\u003c00:28, 33.64it/s]\rSampling:   3%|▎         | 31/1000 [00:00\u003c00:28, 33.60it/s]\rSampling:   4%|▎         | 35/1000 [00:01\u003c00:28, 33.66it/s]\rSampling:   4%|▍         | 39/1000 [00:01\u003c00:28, 33.86it/s]\rSampling:   4%|▍         | 43/1000 [00:01\u003c00:28, 34.10it/s]\rSampling:   5%|▍         | 47/1000 [00:01\u003c00:27, 34.15it/s]\rSampling:   5%|▌         | 51/1000 [00:01\u003c00:27, 34.33it/s]\rSampling:   6%|▌         | 55/1000 [00:01\u003c00:27, 34.07it/s]\rSampling:   6%|▌         | 59/1000 [00:01\u003c00:27, 34.19it/s]\rSampling:   6%|▌         | 61/1000 [00:01\u003c00:28, 33.42it/s]\n"}
+,{"stream_name":"stdout","time":427.309679178,"data":"generated seg 0: /kaggle/working/seg_00.wav\n"}
+,{"stream_name":"stderr","time":430.128320723,"data":"\rSampling:   0%|          | 0/1000 [00:00\u003c?, ?it/s]\rSampling:   0%|          | 3/1000 [00:00\u003c00:35, 27.91it/s]\rSampling:   1%|          | 7/1000 [00:00\u003c00:30, 32.21it/s]\rSampling:   1%|          | 11/1000 [00:00\u003c00:29, 33.14it/s]\rSampling:   2%|▏         | 15/1000 [00:00\u003c00:29, 33.95it/s]\rSampling:   2%|▏         | 19/1000 [00:00\u003c00:28, 34.40it/s]\rSampling:   2%|▏         | 23/1000 [00:00\u003c00:28, 34.58it/s]\rSampling:   3%|▎         | 27/1000 [00:00\u003c00:28, 34.63it/s]\rSampling:   3%|▎         | 31/1000 [00:00\u003c00:28, 34.59it/s]\rSampling:   4%|▎         | 35/1000 [00:01\u003c00:27, 34.65it/s]\rSampling:   4%|▍         | 39/1000 [00:01\u003c00:27, 34.65it/s]\rSampling:   4%|▍         | 43/1000 [00:01\u003c00:27, 34.71it/s]\rSampling:   5%|▍         | 47/1000 [00:01\u003c00:27, 34.34it/s]\rSampling:   5%|▌         | 51/1000 [00:01\u003c00:27, 34.06it/s]\rSampling:   6%|▌         | 55/1000 [00:01\u003c00:27, 33.88it/s]\rSampling:   6%|▌         | 59/1000 [00:01\u003c00:27, 33.92it/s]\rSampling:   6%|▋         | 63/1000 [00:01\u003c00:27, 34.05it/s]\rSampling:   7%|▋         | 67/1000 [00:01\u003c00:27, 33.98it/s]\rSampling:   7%|▋         | 71/1000 [00:02\u003c00:27, 34.25it/s]\rSampling:   8%|▊         | 75/1000 [00:02\u003c00:26, 34.49it/s]\rSampling:   8%|▊         | 79/1000 [00:02\u003c00:26, 34.77it/s]\rSampling:   8%|▊         | 83/1000 [00:02\u003c00:26, 35.01it/s]\rSampling:   9%|▊         | 87/1000 [00:02\u003c00:26, 34.95it/s]\rSampling:   9%|▉         | 90/1000 [00:02\u003c00:26, 34.33it/s]\n"}
+,{"stream_name":"stdout","time":431.009468387,"data":"generated seg 1: /kaggle/working/seg_01.wav\n"}
+,{"stream_name":"stderr","time":435.3604663,"data":"\rSampling:   0%|          | 0/1000 [00:00\u003c?, ?it/s]\rSampling:   0%|          | 3/1000 [00:00\u003c00:36, 27.40it/s]\rSampling:   1%|          | 7/1000 [00:00\u003c00:31, 31.66it/s]\rSampling:   1%|          | 11/1000 [00:00\u003c00:29, 33.37it/s]\rSampling:   2%|▏         | 15/1000 [00:00\u003c00:28, 34.18it/s]\rSampling:   2%|▏         | 19/1000 [00:00\u003c00:28, 34.76it/s]\rSampling:   2%|▏         | 23/1000 [00:00\u003c00:27, 35.10it/s]\rSampling:   3%|▎         | 27/1000 [00:00\u003c00:27, 35.23it/s]\rSampling:   3%|▎         | 31/1000 [00:00\u003c00:27, 35.23it/s]\rSampling:   4%|▎         | 35/1000 [00:01\u003c00:27, 35.41it/s]\rSampling:   4%|▍         | 39/1000 [00:01\u003c00:27, 35.40it/s]\rSampling:   4%|▍         | 43/1000 [00:01\u003c00:27, 35.39it/s]\rSampling:   5%|▍         | 47/1000 [00:01\u003c00:26, 35.74it/s]\rSampling:   5%|▌         | 51/1000 [00:01\u003c00:26, 35.89it/s]\rSampling:   6%|▌         | 55/1000 [00:01\u003c00:26, 36.03it/s]\rSampling:   6%|▌         | 59/1000 [00:01\u003c00:26, 35.98it/s]\rSampling:   6%|▋         | 63/1000 [00:01\u003c00:26, 35.67it/s]\rSampling:   7%|▋         | 67/1000 [00:01\u003c00:26, 35.53it/s]\rSampling:   7%|▋         | 71/1000 [00:02\u003c00:26, 35.46it/s]\rSampling:   8%|▊         | 75/1000 [00:02\u003c00:26, 35.34it/s]\rSampling:   8%|▊         | 79/1000 [00:02\u003c00:26, 35.27it/s]\rSampling:   8%|▊         | 83/1000 [00:02\u003c00:25, 35.31it/s]\rSampling:   9%|▊         | 87/1000 [00:02\u003c00:25, 35.25it/s]\rSampling:   9%|▉         | 91/1000 [00:02\u003c00:25, 35.17it/s]\rSampling:  10%|▉         | 95/1000 [00:02\u003c00:25, 35.15it/s]\rSampling:  10%|▉         | 99/1000 [00:02\u003c00:25, 35.11it/s]\rSampling:  10%|█         | 103/1000 [00:02\u003c00:25, 35.09it/s]\rSampling:  11%|█         | 107/1000 [00:03\u003c00:25, 35.04it/s]\rSampling:  11%|█         | 111/1000 [00:03\u003c00:25, 35.03it/s]\rSampling:  12%|█▏        | 115/1000 [00:03\u003c00:25, 35.00it/s]\rSampling:  12%|█▏        | 119/1000 [00:03\u003c00:25, 35.14it/s]\rSampling:  12%|█▏        | 123/1000 [00:03\u003c00:24, 35.11it/s]\rSampling:  13%|█▎        | 127/1000 [00:03\u003c00:24, 35.09it/s]\rSampling:  13%|█▎        | 131/1000 [00:03\u003c00:24, 35.06it/s]\rSampling:  14%|█▎        | 135/1000 [00:03\u003c00:24, 35.30it/s]\rSampling:  14%|█▍        | 139/1000 [00:03\u003c00:24, 35.34it/s]\rSampling:  14%|█▍        | 143/1000 [00:04\u003c00:24, 35.05it/s]\rSampling:  14%|█▍        | 145/1000 [00:04\u003c00:24, 35.10it/s]\n"}
+,{"stream_name":"stdout","time":436.328641774,"data":"generated seg 2: /kaggle/working/seg_02.wav\n"}
+,{"stream_name":"stderr","time":439.380754411,"data":"\rSampling:   0%|          | 0/1000 [00:00\u003c?, ?it/s]\rSampling:   0%|          | 3/1000 [00:00\u003c00:35, 27.72it/s]\rSampling:   1%|          | 7/1000 [00:00\u003c00:31, 31.17it/s]\rSampling:   1%|          | 11/1000 [00:00\u003c00:30, 32.63it/s]\rSampling:   2%|▏         | 15/1000 [00:00\u003c00:29, 33.73it/s]\rSampling:   2%|▏         | 19/1000 [00:00\u003c00:28, 34.17it/s]\rSampling:   2%|▏         | 23/1000 [00:00\u003c00:28, 34.60it/s]\rSampling:   3%|▎         | 27/1000 [00:00\u003c00:28, 34.65it/s]\rSampling:   3%|▎         | 31/1000 [00:00\u003c00:28, 34.16it/s]\rSampling:   4%|▎         | 35/1000 [00:01\u003c00:28, 34.41it/s]\rSampling:   4%|▍         | 39/1000 [00:01\u003c00:27, 34.65it/s]\rSampling:   4%|▍         | 43/1000 [00:01\u003c00:27, 34.96it/s]\rSampling:   5%|▍         | 47/1000 [00:01\u003c00:26, 35.33it/s]\rSampling:   5%|▌         | 51/1000 [00:01\u003c00:26, 35.41it/s]\rSampling:   6%|▌         | 55/1000 [00:01\u003c00:26, 35.42it/s]\rSampling:   6%|▌         | 59/1000 [00:01\u003c00:26, 35.30it/s]\rSampling:   6%|▋         | 63/1000 [00:01\u003c00:26, 34.85it/s]\rSampling:   7%|▋         | 67/1000 [00:01\u003c00:26, 34.67it/s]\rSampling:   7%|▋         | 71/1000 [00:02\u003c00:27, 34.31it/s]\rSampling:   8%|▊         | 75/1000 [00:02\u003c00:27, 34.25it/s]\rSampling:   8%|▊         | 79/1000 [00:02\u003c00:26, 34.29it/s]\rSampling:   8%|▊         | 83/1000 [00:02\u003c00:26, 34.36it/s]\rSampling:   9%|▊         | 87/1000 [00:02\u003c00:26, 34.31it/s]\rSampling:   9%|▉         | 91/1000 [00:02\u003c00:26, 34.44it/s]\rSampling:  10%|▉         | 95/1000 [00:02\u003c00:26, 34.12it/s]\rSampling:  10%|▉         | 98/1000 [00:02\u003c00:26, 34.33it/s]\n"}
+,{"stream_name":"stdout","time":440.263189938,"data":"generated seg 3: /kaggle/working/seg_03.wav\n"}
+,{"stream_name":"stdout","time":440.274897055,"data":"===== chatterbox_revoice OK (60.7s, peak VRAM 3.76 GB) =====\n"}
+,{"stream_name":"stdout","time":440.274930927,"data":"\n"}
+,{"stream_name":"stdout","time":440.274937335,"data":"===== STAGE: align_and_mix =====\n"}
+,{"stream_name":"stdout","time":440.274941867,"data":"$ /usr/bin/python3 -m pip install -q librosa\n"}
+,{"stream_name":"stdout","time":444.928382582,"data":"wrote final_audio.wav; timing warnings: ['seg@2.8s: wanted stretch 1.29x, clamped to 1.25x', 'seg@11.6s: wanted stretch 1.29x, clamped to 1.25x']\n"}
+,{"stream_name":"stdout","time":444.928833453,"data":"===== align_and_mix OK (4.7s, peak VRAM 0.1 GB) =====\n"}
+,{"stream_name":"stdout","time":444.928851579,"data":"\n"}
+,{"stream_name":"stdout","time":444.928857576,"data":"===== STAGE: mux_and_srt =====\n"}
+,{"stream_name":"stdout","time":444.928862957,"data":"$ ffmpeg -y -i /kaggle/working/src_video.mp4 -i /kaggle/working/final_audio.wav -map 0:v -map 1:a -c:v copy -c:a aac -shortest /kaggle/working/dubbed_video.mp4\n"}
+,{"stream_name":"stdout","time":445.230919562,"data":"le-libopenjpeg --enable-libopenmpt --enable-libopus --enable-libpulse --enable-librabbitmq --enable-librubberband --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libsrt --enable-libssh --enable-libtheora --enable-libtwolame --enable-libvidstab --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx265 --enable-libxml2 --enable-libxvid --enable-libzimg --enable-libzmq --enable-libzvbi --enable-lv2 --enable-omx --enable-openal --enable-opencl --enable-opengl --enable-sdl2 --enable-pocketsphinx --enable-librsvg --enable-libmfx --enable-libdc1394 --enable-libdrm --enable-libiec61883 --enable-chromaprint --enable-frei0r --enable-libx264 --enable-shared\n"}
+,{"stream_name":"stdout","time":445.230966386,"data":"  libavutil      56. 70.100 / 56. 70.100\n"}
+,{"stream_name":"stdout","time":445.230982641,"data":"  libavcodec     58.134.100 / 58.134.100\n"}
+,{"stream_name":"stdout","time":445.230986752,"data":"  libavformat    58. 76.100 / 58. 76.100\n"}
+,{"stream_name":"stdout","time":445.23099077,"data":"  libavdevice    58. 13.100 / 58. 13.100\n"}
+,{"stream_name":"stdout","time":445.230994396,"data":"  libavfilter     7.110.100 /  7.110.100\n"}
+,{"stream_name":"stdout","time":445.230998393,"data":"  libswscale      5.  9.100 /  5.  9.100\n"}
+,{"stream_name":"stdout","time":445.231002233,"data":"  libswresample   3.  9.100 /  3.  9.100\n"}
+,{"stream_name":"stdout","time":445.231005902,"data":"  libpostproc    55.  9.100 / 55.  9.100\n"}
+,{"stream_name":"stdout","time":445.231009556,"data":"Input #0, mov,mp4,m4a,3gp,3g2,mj2, from '/kaggle/working/src_video.mp4':\n"}
+,{"stream_name":"stdout","time":445.231013356,"data":"  Metadata:\n"}
+,{"stream_name":"stdout","time":445.231027808,"data":"    major_brand     : isom\n"}
+,{"stream_name":"stdout","time":445.231030824,"data":"    minor_version   : 512\n"}
+,{"stream_name":"stdout","time":445.23103355,"data":"    compatible_brands: isomiso2avc1mp41\n"}
+,{"stream_name":"stdout","time":445.231036352,"data":"    encoder         : Lavf58.76.100\n"}
+,{"stream_name":"stdout","time":445.23103911,"data":"  Duration: 00:00:15.28, start: 0.000000, bitrate: 79 kb/s\n"}
+,{"stream_name":"stdout","time":445.23105553,"data":"  Stream #0:0(und): Video: h264 (High) (avc1 / 0x31637661), yuv420p, 320x240 [SAR 1:1 DAR 4:3], 3 kb/s, 25 fps, 25 tbr, 12800 tbn, 50 tbc (default)\n"}
+,{"stream_name":"stdout","time":445.231060515,"data":"    Metadata:\n"}
+,{"stream_name":"stdout","time":445.231064871,"data":"      handler_name    : VideoHandler\n"}
+,{"stream_name":"stdout","time":445.231069023,"data":"      vendor_id       : [0][0][0][0]\n"}
+,{"stream_name":"stdout","time":445.23107377,"data":"  Stream #0:1(und): Audio: aac (LC) (mp4a / 0x6134706D), 24000 Hz, mono, fltp, 70 kb/s (default)\n"}
+,{"stream_name":"stdout","time":445.231078444,"data":"    Metadata:\n"}
+,{"stream_name":"stdout","time":445.231083008,"data":"      handler_name    : SoundHandler\n"}
+,{"stream_name":"stdout","time":445.231087753,"data":"      vendor_id       : [0][0][0][0]\n"}
+,{"stream_name":"stdout","time":445.231092071,"data":"Guessed Channel Layout for Input Stream #1.0 : mono\n"}
+,{"stream_name":"stdout","time":445.231096859,"data":"Input #1, wav, from '/kaggle/working/final_audio.wav':\n"}
+,{"stream_name":"stdout","time":445.231101465,"data":"  Duration: 00:00:15.27, bitrate: 705 kb/s\n"}
+,{"stream_name":"stdout","time":445.231105776,"data":"  Stream #1:0: Audio: pcm_s16le ([1][0][0][0] / 0x0001), 44100 Hz, mono, s16, 705 kb/s\n"}
+,{"stream_name":"stdout","time":445.23111058,"data":"Stream mapping:\n"}
+,{"stream_name":"stdout","time":445.231115018,"data":"  Stream #0:0 -\u003e #0:0 (copy)\n"}
+,{"stream_name":"stdout","time":445.23112187,"data":"  Stream #1:0 -\u003e #0:1 (pcm_s16le (native) -\u003e aac (native))\n"}
+,{"stream_name":"stdout","time":445.231126313,"data":"Press [q] to stop, [?] for help\n"}
+,{"stream_name":"stdout","time":445.231130224,"data":"Output #0, mp4, to '/kaggle/working/dubbed_video.mp4':\n"}
+,{"stream_name":"stdout","time":445.231134217,"data":"  Metadata:\n"}
+,{"stream_name":"stdout","time":445.231138026,"data":"    major_brand     : isom\n"}
+,{"stream_name":"stdout","time":445.231141846,"data":"    minor_version   : 512\n"}
+,{"stream_name":"stdout","time":445.23114573,"data":"    compatible_brands: isomiso2avc1mp41\n"}
+,{"stream_name":"stdout","time":445.231161984,"data":"    encoder         : Lavf58.76.100\n"}
+,{"stream_name":"stdout","time":445.231165743,"data":"  Stream #0:0(und): Video: h264 (High) (avc1 / 0x31637661), yuv420p, 320x240 [SAR 1:1 DAR 4:3], q=2-31, 3 kb/s, 25 fps, 25 tbr, 12800 tbn, 12800 tbc (default)\n"}
+,{"stream_name":"stdout","time":445.231246841,"data":"    Metadata:\n"}
+,{"stream_name":"stdout","time":445.231263181,"data":"      handler_name    : VideoHandler\n"}
+,{"stream_name":"stdout","time":445.231268393,"data":"      vendor_id       : [0][0][0][0]\n"}
+,{"stream_name":"stdout","time":445.231273049,"data":"  Stream #0:1: Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, mono, fltp, 69 kb/s\n"}
+,{"stream_name":"stdout","time":445.231277309,"data":"    Metadata:\n"}
+,{"stream_name":"stdout","time":445.231281105,"data":"      encoder         : Lavc58.134.100 aac\n"}
+,{"stream_name":"stdout","time":445.231284909,"data":"frame=    0 fps=0.0 q=-1.0 size=       0kB time=00:00:00.00 bitrate=N/A speed=   0x    \n"}
+,{"stream_name":"stdout","time":445.231310333,"data":"frame=  382 fps=0.0 q=-1.0 Lsize=     150kB time=00:00:15.16 bitrate=  81.0kbits/s speed=88.3x    \n"}
+,{"stream_name":"stdout","time":445.231314355,"data":"video:7kB audio:129kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 10.194265%\n"}
+,{"stream_name":"stdout","time":445.231318089,"data":"[aac @ 0x5af688e5c580] Qavg: 118.320\n"}
+,{"stream_name":"stdout","time":445.231322076,"data":"\n"}
+,{"stream_name":"stdout","time":445.231325995,"data":"wrote dubbed_video.mp4 and dubbed.srt\n"}
+,{"stream_name":"stdout","time":445.231636128,"data":"===== mux_and_srt OK (0.3s, peak VRAM 0.1 GB) =====\n"}
+,{"stream_name":"stdout","time":445.231645359,"data":"\n"}
+,{"stream_name":"stdout","time":445.231649746,"data":"\n"}
+,{"stream_name":"stdout","time":445.231654304,"data":"===== DUB PIPELINE TEST COMPLETE =====\n"}
+,{"stream_name":"stdout","time":445.231693086,"data":"TIMINGS: {\n"}
+,{"stream_name":"stdout","time":445.23170701,"data":"  \"setup\": 325.1,\n"}
+,{"stream_name":"stdout","time":445.231711586,"data":"  \"build_input\": 27.6,\n"}
+,{"stream_name":"stdout","time":445.231715422,"data":"  \"extract_audio\": 0.1,\n"}
+,{"stream_name":"stdout","time":445.231720377,"data":"  \"demucs_split\": 9.0,\n"}
+,{"stream_name":"stdout","time":445.231724773,"data":"  \"whisper_transcribe\": 10.3,\n"}
+,{"stream_name":"stdout","time":445.231729001,"data":"  \"translate\": 4.0,\n"}
+,{"stream_name":"stdout","time":445.231732221,"data":"  \"chatterbox_revoice\": 60.7,\n"}
+,{"stream_name":"stdout","time":445.231735945,"data":"  \"align_and_mix\": 4.7,\n"}
+,{"stream_name":"stdout","time":445.231739431,"data":"  \"mux_and_srt\": 0.3\n"}
+,{"stream_name":"stdout","time":445.231743441,"data":"}\n"}
+,{"stream_name":"stdout","time":445.231845965,"data":"VRAM_GB: {\n"}
+,{"stream_name":"stdout","time":445.231861912,"data":"  \"build_input\": 1.25,\n"}
+,{"stream_name":"stdout","time":445.231866373,"data":"  \"extract_audio\": 0.01,\n"}
+,{"stream_name":"stdout","time":445.231870076,"data":"  \"demucs_split\": 0.01,\n"}
+,{"stream_name":"stdout","time":445.231873625,"data":"  \"whisper_transcribe\": 0.49,\n"}
+,{"stream_name":"stdout","time":445.23187726,"data":"  \"chatterbox_revoice\": 3.76,\n"}
+,{"stream_name":"stdout","time":445.23188093,"data":"  \"align_and_mix\": 0.1,\n"}
+,{"stream_name":"stdout","time":445.231889842,"data":"  \"mux_and_srt\": 0.1\n"}
+,{"stream_name":"stdout","time":445.231896409,"data":"}\n"}
+,{"stream_name":"stdout","time":445.2321191,"data":"$ ls -la /kaggle/working\n"}
+,{"stream_name":"stdout","time":445.238849553,"data":"total 10472\n"}
+,{"stream_name":"stdout","time":445.238870701,"data":"drwxr-xr-x 3 root root    4096 Sep  3 20:47 .\n"}
+,{"stream_name":"stdout","time":445.238876481,"data":"drwxr-xr-x 8 root root    4096 Sep  3 20:40 ..\n"}
+,{"stream_name":"stdout","time":445.238881028,"data":"-rw-r--r-- 1 root root 2694492 Sep  3 20:46 bed.wav\n"}
+,{"stream_name":"stdout","time":445.23888494,"data":"-rw-r--r-- 1 root root 1411244 Sep  3 20:47 clone_ref.wav\n"}
+,{"stream_name":"stdout","time":445.238888999,"data":"drwxr-xr-x 3 root root    4096 Sep  3 20:46 demucs_out\n"}
+,{"stream_name":"stdout","time":445.238893279,"data":"-rw-r--r-- 1 root root     368 Sep  3 20:47 dubbed.srt\n"}
+,{"stream_name":"stdout","time":445.23889752,"data":"-rw-r--r-- 1 root root  153494 Sep  3 20:47 dubbed_video.mp4\n"}
+,{"stream_name":"stdout","time":445.238901723,"data":"-rw-r--r-- 1 root root  733262 Sep  3 20:46 extracted.wav\n"}
+,{"stream_name":"stdout","time":445.238931869,"data":"-rw-r--r-- 1 root root 1347268 Sep  3 20:47 final_audio.wav\n"}
+,{"stream_name":"stdout","time":445.238936782,"data":"-rw-r--r-- 1 root root     493 Sep  3 20:47 perf_summary.json\n"}
+,{"stream_name":"stdout","time":445.238941294,"data":"-rw-r--r-- 1 root root  117198 Sep  3 20:47 seg_00.wav\n"}
+,{"stream_name":"stdout","time":445.238945672,"data":"-rw-r--r-- 1 root root  172878 Sep  3 20:47 seg_01.wav\n"}
+,{"stream_name":"stdout","time":445.238958311,"data":"-rw-r--r-- 1 root root  278478 Sep  3 20:47 seg_02.wav\n"}
+,{"stream_name":"stdout","time":445.238962718,"data":"-rw-r--r-- 1 root root  188238 Sep  3 20:47 seg_03.wav\n"}
+,{"stream_name":"stdout","time":445.238966576,"data":"-rw-r--r-- 1 root root     476 Sep  3 20:46 segments_original.json\n"}
+,{"stream_name":"stdout","time":445.238970547,"data":"-rw-r--r-- 1 root root  732044 Sep  3 20:46 src_audio.wav\n"}
+,{"stream_name":"stdout","time":445.23897451,"data":"-rw-r--r-- 1 root root  152650 Sep  3 20:46 src_video.mp4\n"}
+,{"stream_name":"stdout","time":445.238978321,"data":"-rw-r--r-- 1 root root      98 Sep  3 20:47 timing_warnings.txt\n"}
+,{"stream_name":"stdout","time":445.238982191,"data":"-rw-r--r-- 1 root root 2694492 Sep  3 20:46 vocals.wav\n"}
+,{"stream_name":"stdout","time":445.238986056,"data":"\n"}
+,{"stream_name":"stderr","time":449.817267391,"data":"/usr/local/lib/python3.12/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":449.817303065,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":450.037368464,"data":"/usr/local/lib/python3.12/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":450.037398248,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":450.870495236,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":451.844095378,"data":"[NbConvertApp] Writing 330886 bytes to __results__.html\n"}
+]

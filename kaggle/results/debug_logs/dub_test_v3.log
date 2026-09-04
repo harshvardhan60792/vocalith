@@ -1,0 +1,408 @@
+[{"stream_name":"stdout","time":1.018302424,"data":"\n"}
+,{"stream_name":"stdout","time":1.018384443,"data":"===== STAGE: setup =====\n"}
+,{"stream_name":"stderr","time":6.740255427,"data":"/usr/local/lib/python3.12/dist-packages/torch/cuda/__init__.py:435: UserWarning: \n"}
+,{"stream_name":"stderr","time":6.740313058,"data":"    Found GPU0 Tesla P100-PCIE-16GB which is of cuda capability 6.0.\n"}
+,{"stream_name":"stderr","time":6.740320608,"data":"    Minimum and Maximum cuda capability supported by this version of PyTorch is\n"}
+,{"stream_name":"stderr","time":6.7403329119999995,"data":"    (7.0) - (12.0)\n"}
+,{"stream_name":"stderr","time":6.740337063,"data":"    \n"}
+,{"stream_name":"stderr","time":6.74034042,"data":"  queued_call()\n"}
+,{"stream_name":"stderr","time":6.740343913,"data":"/usr/local/lib/python3.12/dist-packages/torch/cuda/__init__.py:435: UserWarning: \n"}
+,{"stream_name":"stderr","time":6.740347442,"data":"    Please install PyTorch with a following CUDA\n"}
+,{"stream_name":"stderr","time":6.740350944,"data":"    configurations:  12.6 following instructions at\n"}
+,{"stream_name":"stderr","time":6.740354426,"data":"    https://pytorch.org/get-started/locally/\n"}
+,{"stream_name":"stderr","time":6.74035776,"data":"    \n"}
+,{"stream_name":"stderr","time":6.740361104,"data":"  queued_call()\n"}
+,{"stream_name":"stderr","time":6.7405276,"data":"/usr/local/lib/python3.12/dist-packages/torch/cuda/__init__.py:435: UserWarning: \n"}
+,{"stream_name":"stderr","time":6.740541321,"data":"Tesla P100-PCIE-16GB with CUDA capability sm_60 is not compatible with the current PyTorch installation.\n"}
+,{"stream_name":"stderr","time":6.740547917,"data":"The current PyTorch install supports CUDA capabilities sm_70 sm_75 sm_80 sm_86 sm_90 sm_100 sm_120.\n"}
+,{"stream_name":"stderr","time":6.740553031,"data":"If you want to use the Tesla P100-PCIE-16GB GPU with PyTorch, please check the instructions at https://pytorch.org/get-started/locally/\n"}
+,{"stream_name":"stderr","time":6.740558491,"data":"\n"}
+,{"stream_name":"stderr","time":6.740563408,"data":"  queued_call()\n"}
+,{"stream_name":"stdout","time":6.742310605,"data":"$ apt-get update -qq \u0026\u0026 apt-get install -y -qq espeak-ng ffmpeg \u003e /dev/null\n"}
+,{"stream_name":"stdout","time":23.003957404,"data":"W: Skipping acquire of configured file 'main/source/Sources' as repository 'https://r2u.stat.illinois.edu/ubuntu jammy InRelease' does not seem to provide it (sources.list entry misspelt?)\n"}
+,{"stream_name":"stdout","time":23.004006811,"data":"\n"}
+,{"stream_name":"stdout","time":23.004012173,"data":"$ /usr/bin/python3 -m pip install -q kokoro==0.9.4 misaki[en] soundfile librosa\n"}
+,{"stream_name":"stdout","time":36.396423863,"data":"     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 48.3/48.3 kB 1.3 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":36.396469058,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.6/3.6 MB 32.0 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":36.396476372,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 10.1/10.1 MB 101.9 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":36.396482286,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 61.6/61.6 kB 3.9 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":36.396524074,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 163.5/163.5 kB 11.1 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":36.396544147,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 82.7/82.7 kB 5.5 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":36.396549471,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 237.9/237.9 kB 15.5 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":36.396553834,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 6.3/6.3 MB 88.2 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":36.396558181,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 69.5/69.5 kB 5.1 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":36.396562872,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 216.7/216.7 kB 14.1 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":36.396567287,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 615.4/615.4 kB 36.0 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":36.396571664,"data":"\n"}
+,{"stream_name":"stdout","time":36.396575391,"data":"$ /usr/bin/python3 -m pip install -q chatterbox-tts\n"}
+,{"stream_name":"stdout","time":288.649131174,"data":"     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 61.0/61.0 kB 1.4 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":288.649306905,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 108.5/108.5 kB 2.8 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":288.649314566,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.2/2.2 MB 22.4 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":288.649320935,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 24.2/24.2 MB 59.2 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":288.649327395,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.4/2.4 MB 74.6 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":288.649333833,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 471.6/471.6 kB 28.4 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":288.64934063,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 766.6/766.6 MB 2.3 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":288.649347118,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.4/3.4 MB 9.9 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":288.649353966,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 10.4/10.4 MB 40.5 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":288.649361331,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 58.3/58.3 kB 3.4 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":288.649366877,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 363.4/363.4 MB 4.1 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":288.649390082,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 13.8/13.8 MB 25.3 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":288.649398545,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 24.6/24.6 MB 23.3 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":288.649407922,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 883.7/883.7 kB 22.0 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":288.649411054,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 664.8/664.8 MB 2.2 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":288.649413934,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 211.5/211.5 MB 5.3 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":288.649417347,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 56.3/56.3 MB 26.6 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":288.649420148,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 127.9/127.9 MB 7.8 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":288.649422923,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 207.5/207.5 MB 8.0 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":288.649425874,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 150.1/150.1 MB 4.6 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":288.649428631,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 188.7/188.7 MB 5.9 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":288.649431386,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 21.1/21.1 MB 44.8 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":288.649434159,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 99.1/99.1 kB 6.9 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":288.649436994,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 6.2/6.2 MB 54.8 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":288.649439802,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 253.2/253.2 MB 2.8 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":288.649444029,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 18.0/18.0 MB 38.3 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":288.649493229,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 34.4/34.4 MB 33.0 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":288.649498077,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 226.4/226.4 kB 14.6 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":288.649502629,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.1/4.1 MB 43.0 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":288.649518231,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 226.2/226.2 kB 9.8 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":288.649521464,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 99.4/99.4 kB 5.9 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":288.649524252,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.3/5.3 MB 45.1 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":288.649527246,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 470.6/470.6 kB 20.8 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":288.649530131,"data":"\n"}
+,{"stream_name":"stdout","time":288.649532524,"data":"ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.\n"}
+,{"stream_name":"stdout","time":288.649535564,"data":"bigframes 2.39.0 requires google-cloud-bigquery-storage\u003c3.0.0,\u003e=2.30.0, which is not installed.\n"}
+,{"stream_name":"stdout","time":288.649538581,"data":"kaggle-environments 1.29.3 requires numpy\u003e=2.0, but you have numpy 1.26.4 which is incompatible.\n"}
+,{"stream_name":"stdout","time":288.649541315,"data":"cesium 0.12.4 requires numpy\u003c3.0,\u003e=2.0, but you have numpy 1.26.4 which is incompatible.\n"}
+,{"stream_name":"stdout","time":288.649544107,"data":"google-colab 1.0.0 requires jupyter-server==2.14.0, but you have jupyter-server 2.12.5 which is incompatible.\n"}
+,{"stream_name":"stdout","time":288.649546709,"data":"google-colab 1.0.0 requires pandas==2.2.2, but you have pandas 2.3.3 which is incompatible.\n"}
+,{"stream_name":"stdout","time":288.64954929,"data":"dopamine-rl 4.1.2 requires gym\u003c=0.25.2, but you have gym 0.26.2 which is incompatible.\n"}
+,{"stream_name":"stdout","time":288.649551967,"data":"jaxlib 0.7.2 requires numpy\u003e=2.0, but you have numpy 1.26.4 which is incompatible.\n"}
+,{"stream_name":"stdout","time":288.649555582,"data":"cupy-cuda12x 14.0.1 requires numpy\u003c2.6,\u003e=2.0, but you have numpy 1.26.4 which is incompatible.\n"}
+,{"stream_name":"stdout","time":288.649558496,"data":"moviepy 1.0.3 requires decorator\u003c5.0,\u003e=4.0.2, but you have decorator 5.3.1 which is incompatible.\n"}
+,{"stream_name":"stdout","time":288.649561171,"data":"opencv-python 4.13.0.92 requires numpy\u003e=2; python_version \u003e= \"3.9\", but you have numpy 1.26.4 which is incompatible.\n"}
+,{"stream_name":"stdout","time":288.649564032,"data":"tobler 0.14.0 requires numpy\u003e=2.0, but you have numpy 1.26.4 which is incompatible.\n"}
+,{"stream_name":"stdout","time":288.649566614,"data":"jax 0.7.2 requires numpy\u003e=2.0, but you have numpy 1.26.4 which is incompatible.\n"}
+,{"stream_name":"stdout","time":288.649569525,"data":"opencv-python-headless 4.13.0.92 requires numpy\u003e=2; python_version \u003e= \"3.9\", but you have numpy 1.26.4 which is incompatible.\n"}
+,{"stream_name":"stdout","time":288.649572313,"data":"rasterio 1.5.0 requires numpy\u003e=2, but you have numpy 1.26.4 which is incompatible.\n"}
+,{"stream_name":"stdout","time":288.649574918,"data":"torchvision 0.25.0+cu128 requires torch==2.10.0, but you have torch 2.6.0 which is incompatible.\n"}
+,{"stream_name":"stdout","time":288.649577512,"data":"pytensor 2.38.2 requires numpy\u003e=2.0, but you have numpy 1.26.4 which is incompatible.\n"}
+,{"stream_name":"stdout","time":288.64958009,"data":"xarray-einstats 0.10.0 requires numpy\u003e=2.0, but you have numpy 1.26.4 which is incompatible.\n"}
+,{"stream_name":"stdout","time":288.649620664,"data":"tifffile 2026.4.11 requires numpy\u003e=2.0, but you have numpy 1.26.4 which is incompatible.\n"}
+,{"stream_name":"stdout","time":288.649630376,"data":"opencv-contrib-python 4.13.0.92 requires numpy\u003e=2; python_version \u003e= \"3.9\", but you have numpy 1.26.4 which is incompatible.\n"}
+,{"stream_name":"stdout","time":288.649635686,"data":"shap 0.51.0 requires numpy\u003e=2, but you have numpy 1.26.4 which is incompatible.\n"}
+,{"stream_name":"stdout","time":288.649639941,"data":"\n"}
+,{"stream_name":"stdout","time":288.649643738,"data":"$ /usr/bin/python3 -m pip install -q demucs\n"}
+,{"stream_name":"stdout","time":294.308259392,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100.6/100.6 kB 2.6 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":294.308326547,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 247.5/247.5 kB 7.3 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":294.308334595,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 18.1/18.1 MB 75.8 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":294.308349792,"data":"\n"}
+,{"stream_name":"stdout","time":294.308355667,"data":"$ /usr/bin/python3 -m pip install -q openai-whisper\n"}
+,{"stream_name":"stdout","time":304.127186313,"data":"     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 803.2/803.2 kB 9.5 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":304.12725348,"data":"\n"}
+,{"stream_name":"stdout","time":304.127261206,"data":"$ /usr/bin/python3 -m pip install -q sentencepiece\n"}
+,{"stream_name":"stdout","time":307.590241136,"data":"$ /usr/bin/python3 -m pip install -q --force-reinstall --no-deps torch==2.6.0\n"}
+,{"stream_name":"stdout","time":339.429818191,"data":"$ /usr/bin/python3 -m pip install -q --force-reinstall --no-deps torchvision==0.21.0\n"}
+,{"stream_name":"stdout","time":342.482977537,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 7.2/7.2 MB 42.4 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":342.483020278,"data":"\n"}
+,{"stream_name":"stdout","time":342.483039507,"data":"$ /usr/bin/python3 -m pip install -q --force-reinstall --no-deps torchaudio==2.6.0\n"}
+,{"stream_name":"stdout","time":344.954072299,"data":"$ /usr/bin/python3 -m pip install -q --force-reinstall --no-deps 'numpy\u003c2.0'\n"}
+,{"stream_name":"stdout","time":349.291742672,"data":"===== setup OK (348.3s, peak VRAM 0.0 GB) =====\n"}
+,{"stream_name":"stdout","time":349.291786676,"data":"\n"}
+,{"stream_name":"stdout","time":349.291795166,"data":"===== STAGE: import_check =====\n"}
+,{"stream_name":"stdout","time":349.31131062,"data":"===== import_check FAILED (0.0s) =====\n"}
+,{"stream_name":"stderr","time":349.31190848,"data":"Traceback (most recent call last):\n"}
+,{"stream_name":"stderr","time":349.312333073,"data":"  File \"/kaggle/src/script.py\", line 34, in stage\n"}
+,{"stream_name":"stderr","time":349.312352607,"data":"    fn()\n"}
+,{"stream_name":"stderr","time":349.312359245,"data":"  File \"/kaggle/src/script.py\", line 64, in check_imports\n"}
+,{"stream_name":"stderr","time":349.31236576,"data":"    import torch, torchvision, numpy as np\n"}
+,{"stream_name":"stderr","time":349.312371893,"data":"  File \"/usr/local/lib/python3.12/dist-packages/torchvision/__init__.py\", line 10, in \u003cmodule\u003e\n"}
+,{"stream_name":"stderr","time":349.31239228,"data":"    from torchvision import _meta_registrations, datasets, io, models, ops, transforms, utils  # usort:skip\n"}
+,{"stream_name":"stderr","time":349.312397027,"data":"    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":349.312401417,"data":"  File \"/usr/local/lib/python3.12/dist-packages/torchvision/_meta_registrations.py\", line 163, in \u003cmodule\u003e\n"}
+,{"stream_name":"stderr","time":349.312412348,"data":"    @torch.library.register_fake(\"torchvision::nms\")\n"}
+,{"stream_name":"stderr","time":349.312415378,"data":"     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":349.312417915,"data":"  File \"/usr/local/lib/python3.12/dist-packages/torch/library.py\", line 1073, in register\n"}
+,{"stream_name":"stderr","time":349.312420648,"data":"    specifying what dimension of the Tensor is being vmapped over.\n"}
+,{"stream_name":"stderr","time":349.312423173,"data":"        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":349.312425703,"data":"  File \"/usr/local/lib/python3.12/dist-packages/torch/library.py\", line 203, in _register_fake\n"}
+,{"stream_name":"stderr","time":349.312428405,"data":"  File \"/usr/local/lib/python3.12/dist-packages/torch/_library/fake_impl.py\", line 50, in register\n"}
+,{"stream_name":"stderr","time":349.312431059,"data":"    f\"instead, the operator will decompose into its constituents \"\n"}
+,{"stream_name":"stderr","time":349.312452355,"data":"RuntimeError: operator torchvision::nms does not exist\n"}
+,{"stream_name":"stdout","time":349.312658605,"data":"device: cuda\n"}
+,{"stream_name":"stdout","time":349.312679414,"data":"\n"}
+,{"stream_name":"stdout","time":349.312684342,"data":"===== STAGE: build_input =====\n"}
+,{"stream_name":"stdout","time":355.549397375,"data":"===== build_input FAILED (6.2s) =====\n"}
+,{"stream_name":"stderr","time":355.558569301,"data":"Traceback (most recent call last):\n"}
+,{"stream_name":"stderr","time":355.559632726,"data":"  File \"/kaggle/src/script.py\", line 34, in stage\n"}
+,{"stream_name":"stderr","time":355.559656206,"data":"    fn()\n"}
+,{"stream_name":"stderr","time":355.559831906,"data":"  File \"/kaggle/src/script.py\", line 78, in build_input\n"}
+,{"stream_name":"stderr","time":355.559845015,"data":"    from kokoro import KPipeline\n"}
+,{"stream_name":"stderr","time":355.559967064,"data":"  File \"/usr/local/lib/python3.12/dist-packages/kokoro/__init__.py\", line 22, in \u003cmodule\u003e\n"}
+,{"stream_name":"stderr","time":355.559979298,"data":"    from .model import KModel\n"}
+,{"stream_name":"stderr","time":355.560103775,"data":"  File \"/usr/local/lib/python3.12/dist-packages/kokoro/model.py\", line 2, in \u003cmodule\u003e\n"}
+,{"stream_name":"stderr","time":355.560115182,"data":"    from .modules import CustomAlbert, ProsodyPredictor, TextEncoder\n"}
+,{"stream_name":"stderr","time":355.560247555,"data":"  File \"/usr/local/lib/python3.12/dist-packages/kokoro/modules.py\", line 4, in \u003cmodule\u003e\n"}
+,{"stream_name":"stderr","time":355.560258629,"data":"    from transformers import AlbertModel\n"}
+,{"stream_name":"stderr","time":355.560380552,"data":"  File \"\u003cfrozen importlib._bootstrap\u003e\", line 1412, in _handle_fromlist\n"}
+,{"stream_name":"stderr","time":355.560546382,"data":"  File \"/usr/local/lib/python3.12/dist-packages/transformers/utils/import_utils.py\", line 2044, in __getattr__\n"}
+,{"stream_name":"stderr","time":355.560558648,"data":"    module = self._get_module(self._class_to_module[name])\n"}
+,{"stream_name":"stderr","time":355.560581319,"data":"             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":355.560732451,"data":"  File \"/usr/local/lib/python3.12/dist-packages/transformers/utils/import_utils.py\", line 2238, in _get_module\n"}
+,{"stream_name":"stderr","time":355.560749766,"data":"    raise e\n"}
+,{"stream_name":"stderr","time":355.560861986,"data":"  File \"/usr/local/lib/python3.12/dist-packages/transformers/utils/import_utils.py\", line 2236, in _get_module\n"}
+,{"stream_name":"stderr","time":355.560871142,"data":"    return importlib.import_module(\".\" + module_name, self.__name__)\n"}
+,{"stream_name":"stderr","time":355.560876866,"data":"           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":355.561014892,"data":"  File \"/usr/lib/python3.12/importlib/__init__.py\", line 90, in import_module\n"}
+,{"stream_name":"stderr","time":355.561023904,"data":"    return _bootstrap._gcd_import(name[level:], package, level)\n"}
+,{"stream_name":"stderr","time":355.561029363,"data":"           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":355.561165217,"data":"  File \"/usr/local/lib/python3.12/dist-packages/transformers/models/albert/modeling_albert.py\", line 25, in \u003cmodule\u003e\n"}
+,{"stream_name":"stderr","time":355.561174407,"data":"    from ...masking_utils import create_bidirectional_mask\n"}
+,{"stream_name":"stderr","time":355.561302769,"data":"  File \"/usr/local/lib/python3.12/dist-packages/transformers/masking_utils.py\", line 29, in \u003cmodule\u003e\n"}
+,{"stream_name":"stderr","time":355.561311886,"data":"    from torch.nn.attention.flex_attention import _DEFAULT_SPARSE_BLOCK_SIZE as flex_default_block_size\n"}
+,{"stream_name":"stderr","time":355.56145084,"data":"  File \"/usr/local/lib/python3.12/dist-packages/torch/nn/attention/flex_attention.py\", line 16, in \u003cmodule\u003e\n"}
+,{"stream_name":"stderr","time":355.561459985,"data":"    from torch._dynamo._trace_wrapped_higher_order_op import TransformGetItemToIndex\n"}
+,{"stream_name":"stderr","time":355.561622712,"data":"  File \"/usr/local/lib/python3.12/dist-packages/torch/_dynamo/__init__.py\", line 3, in \u003cmodule\u003e\n"}
+,{"stream_name":"stderr","time":355.561636512,"data":"    from . import convert_frame, eval_frame, resume_execution\n"}
+,{"stream_name":"stderr","time":355.56179574,"data":"  File \"/usr/local/lib/python3.12/dist-packages/torch/_dynamo/convert_frame.py\", line 33, in \u003cmodule\u003e\n"}
+,{"stream_name":"stderr","time":355.561805327,"data":"    from torch._dynamo.symbolic_convert import TensorifyState\n"}
+,{"stream_name":"stderr","time":355.561931283,"data":"  File \"/usr/local/lib/python3.12/dist-packages/torch/_dynamo/symbolic_convert.py\", line 27, in \u003cmodule\u003e\n"}
+,{"stream_name":"stderr","time":355.561939785,"data":"    from torch._dynamo.exc import TensorifyScalarRestartAnalysis\n"}
+,{"stream_name":"stderr","time":355.56209573,"data":"  File \"/usr/local/lib/python3.12/dist-packages/torch/_dynamo/exc.py\", line 11, in \u003cmodule\u003e\n"}
+,{"stream_name":"stderr","time":355.562105477,"data":"    from .utils import counters\n"}
+,{"stream_name":"stderr","time":355.562241589,"data":"  File \"/usr/local/lib/python3.12/dist-packages/torch/_dynamo/utils.py\", line 111, in \u003cmodule\u003e\n"}
+,{"stream_name":"stderr","time":355.562250316,"data":"    np.random,\n"}
+,{"stream_name":"stderr","time":355.562255581,"data":"    ^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":355.56238668,"data":"  File \"/usr/local/lib/python3.12/dist-packages/numpy/__init__.py\", line 337, in __getattr__\n"}
+,{"stream_name":"stderr","time":355.562395366,"data":"    public_symbols = globals().keys() | {'testing'}\n"}
+,{"stream_name":"stderr","time":355.562409986,"data":"        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":355.563675473,"data":"  File \"/usr/local/lib/python3.12/dist-packages/numpy/random/__init__.py\", line 180, in \u003cmodule\u003e\n"}
+,{"stream_name":"stderr","time":355.563699068,"data":"    from . import _pickle\n"}
+,{"stream_name":"stderr","time":355.563817544,"data":"  File \"/usr/local/lib/python3.12/dist-packages/numpy/random/_pickle.py\", line 1, in \u003cmodule\u003e\n"}
+,{"stream_name":"stderr","time":355.563824876,"data":"    from .mtrand import RandomState\n"}
+,{"stream_name":"stderr","time":355.563829196,"data":"  File \"numpy/random/mtrand.pyx\", line 1, in init numpy.random.mtrand\n"}
+,{"stream_name":"stderr","time":355.563833726,"data":"ValueError: numpy.dtype size changed, may indicate binary incompatibility. Expected 96 from C header, got 88 from PyObject\n"}
+,{"stream_name":"stdout","time":355.564138686,"data":"\n"}
+,{"stream_name":"stdout","time":355.564267438,"data":"===== STAGE: extract_audio =====\n"}
+,{"stream_name":"stdout","time":355.564591443,"data":"$ ffmpeg -y -i /kaggle/working/src_video.mp4 -vn -acodec pcm_s16le -ar 24000 -ac 1 /kaggle/working/extracted.wav\n"}
+,{"stream_name":"stdout","time":356.031274293,"data":"ffmpeg version 4.4.2-0ubuntu0.22.04.1 Copyright (c) 2000-2021 the FFmpeg developers\n"}
+,{"stream_name":"stdout","time":356.031309193,"data":"  built with gcc 11 (Ubuntu 11.2.0-19ubuntu1)\n"}
+,{"stream_name":"stdout","time":356.031321537,"data":"  configuration: --prefix=/usr --extra-version=0ubuntu0.22.04.1 --toolchain=hardened --libdir=/usr/lib/x86_64-linux-gnu --incdir=/usr/include/x86_64-linux-gnu --arch=amd64 --enable-gpl --disable-stripping --enable-gnutls --enable-ladspa --enable-libaom --enable-libass --enable-libbluray --enable-libbs2b --enable-libcaca --enable-libcdio --enable-libcodec2 --enable-libdav1d --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libgme --enable-libgsm --enable-libjack --enable-libmp3lame --enable-libmysofa --enable-libopenjpeg --enable-libopenmpt --enable-libopus --enable-libpulse --enable-librabbitmq --enable-librubberband --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libsrt --enable-libssh --enable-libtheora --enable-libtwolame --enable-libvidstab --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx265 --enable-libxml2 --enable-libxvid --enable-libzimg --enable-libzmq --enable-libzvbi --enable-lv2 --enable-omx --enable-openal --enable-opencl --enable-opengl --enable-sdl2 --enable-pocketsphinx --enable-librsvg --enable-libmfx --enable-libdc1394 --enable-libdrm --enable-libiec61883 --enable-chromaprint --enable-frei0r --enable-libx264 --enable-shared\n"}
+,{"stream_name":"stdout","time":356.031334347,"data":"  libavutil      56. 70.100 / 56. 70.100\n"}
+,{"stream_name":"stdout","time":356.031343756,"data":"  libavcodec     58.134.100 / 58.134.100\n"}
+,{"stream_name":"stdout","time":356.031346687,"data":"  libavformat    58. 76.100 / 58. 76.100\n"}
+,{"stream_name":"stdout","time":356.031349147,"data":"  libavdevice    58. 13.100 / 58. 13.100\n"}
+,{"stream_name":"stdout","time":356.031351858,"data":"  libavfilter     7.110.100 /  7.110.100\n"}
+,{"stream_name":"stdout","time":356.031354311,"data":"  libswscale      5.  9.100 /  5.  9.100\n"}
+,{"stream_name":"stdout","time":356.031356678,"data":"  libswresample   3.  9.100 /  3.  9.100\n"}
+,{"stream_name":"stdout","time":356.031359113,"data":"  libpostproc    55.  9.100 / 55.  9.100\n"}
+,{"stream_name":"stdout","time":356.031361458,"data":"/kaggle/working/src_video.mp4: No such file or directory\n"}
+,{"stream_name":"stdout","time":356.031363839,"data":"\n"}
+,{"stream_name":"stdout","time":356.031376828,"data":"===== extract_audio FAILED (0.5s) =====\n"}
+,{"stream_name":"stderr","time":356.031511243,"data":"Traceback (most recent call last):\n"}
+,{"stream_name":"stdout","time":356.031926543,"data":"\n"}
+,{"stream_name":"stderr","time":356.031937135,"data":"  File \"/kaggle/src/script.py\", line 34, in stage\n"}
+,{"stream_name":"stdout","time":356.031948477,"data":"===== STAGE: demucs_split =====\n"}
+,{"stream_name":"stderr","time":356.031955127,"data":"    fn()\n"}
+,{"stream_name":"stderr","time":356.031961383,"data":"  File \"/kaggle/src/script.py\", line 102, in extract_audio\n"}
+,{"stream_name":"stderr","time":356.031965336,"data":"    sh(f\"ffmpeg -y -i {OUT}/src_video.mp4 -vn -acodec pcm_s16le -ar 24000 -ac 1 {OUT}/extracted.wav\", check=True)\n"}
+,{"stream_name":"stderr","time":356.031969855,"data":"  File \"/kaggle/src/script.py\", line 24, in sh\n"}
+,{"stream_name":"stderr","time":356.031974329,"data":"    raise RuntimeError(f\"command failed rc={r.returncode}: {cmd}\")\n"}
+,{"stream_name":"stderr","time":356.031978273,"data":"RuntimeError: command failed rc=1: ffmpeg -y -i /kaggle/working/src_video.mp4 -vn -acodec pcm_s16le -ar 24000 -ac 1 /kaggle/working/extracted.wav\n"}
+,{"stream_name":"stdout","time":356.032014252,"data":"$ /usr/bin/python3 -m demucs --two-stems=vocals -n htdemucs -o /kaggle/working/demucs_out /kaggle/working/extracted.wav\n"}
+,{"stream_name":"stdout","time":362.594177471,"data":"Selected model is a bag of 1 models. You will see that many progress bars per track.\n"}
+,{"stream_name":"stdout","time":362.594221471,"data":"Separated tracks will be stored in /kaggle/working/demucs_out/htdemucs\n"}
+,{"stream_name":"stdout","time":362.594226799,"data":"\n"}
+,{"stream_name":"stdout","time":362.594230627,"data":"Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n"}
+,{"stream_name":"stdout","time":362.594234307,"data":"File /kaggle/working/extracted.wav does not exist. If the path contains spaces, please try again after surrounding the entire path with quotes \"\".\n"}
+,{"stream_name":"stdout","time":362.594237962,"data":"\n"}
+,{"stream_name":"stdout","time":362.594500123,"data":"===== demucs_split FAILED (6.6s) =====\n"}
+,{"stream_name":"stderr","time":362.594774698,"data":"Traceback (most recent call last):\n"}
+,{"stream_name":"stderr","time":362.594993279,"data":"  File \"/kaggle/src/script.py\", line 34, in stage\n"}
+,{"stream_name":"stderr","time":362.595005441,"data":"    fn()\n"}
+,{"stream_name":"stderr","time":362.595011214,"data":"  File \"/kaggle/src/script.py\", line 110, in demucs_split\n"}
+,{"stream_name":"stderr","time":362.595016086,"data":"    vocals = glob.glob(f\"{OUT}/demucs_out/htdemucs/*/vocals.wav\")[0]\n"}
+,{"stream_name":"stderr","time":362.595020991,"data":"             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^\n"}
+,{"stream_name":"stderr","time":362.595025665,"data":"IndexError: list index out of range\n"}
+,{"stream_name":"stdout","time":362.595744043,"data":"\n"}
+,{"stream_name":"stdout","time":362.595769513,"data":"===== STAGE: whisper_transcribe =====\n"}
+,{"stream_name":"stdout","time":363.156021602,"data":"===== whisper_transcribe FAILED (0.6s) =====\n"}
+,{"stream_name":"stderr","time":363.157173804,"data":"Traceback (most recent call last):\n"}
+,{"stream_name":"stderr","time":363.15752347,"data":"  File \"/kaggle/src/script.py\", line 34, in stage\n"}
+,{"stream_name":"stderr","time":363.157536795,"data":"    fn()\n"}
+,{"stream_name":"stderr","time":363.157542835,"data":"  File \"/kaggle/src/script.py\", line 120, in transcribe\n"}
+,{"stream_name":"stderr","time":363.157575298,"data":"    import whisper\n"}
+,{"stream_name":"stderr","time":363.157600208,"data":"  File \"/usr/local/lib/python3.12/dist-packages/whisper/__init__.py\", line 13, in \u003cmodule\u003e\n"}
+,{"stream_name":"stderr","time":363.157605835,"data":"    from .model import ModelDimensions, Whisper\n"}
+,{"stream_name":"stderr","time":363.157609767,"data":"  File \"/usr/local/lib/python3.12/dist-packages/whisper/model.py\", line 14, in \u003cmodule\u003e\n"}
+,{"stream_name":"stderr","time":363.157614315,"data":"    from .transcribe import transcribe as transcribe_function\n"}
+,{"stream_name":"stderr","time":363.157618496,"data":"  File \"/usr/local/lib/python3.12/dist-packages/whisper/transcribe.py\", line 21, in \u003cmodule\u003e\n"}
+,{"stream_name":"stderr","time":363.157622743,"data":"    from .timing import add_word_timestamps\n"}
+,{"stream_name":"stderr","time":363.157626523,"data":"  File \"/usr/local/lib/python3.12/dist-packages/whisper/timing.py\", line 7, in \u003cmodule\u003e\n"}
+,{"stream_name":"stderr","time":363.157630757,"data":"    import numba\n"}
+,{"stream_name":"stderr","time":363.157651167,"data":"  File \"/usr/local/lib/python3.12/dist-packages/numba/__init__.py\", line 77, in \u003cmodule\u003e\n"}
+,{"stream_name":"stderr","time":363.157655322,"data":"    from numba.misc.special import (\n"}
+,{"stream_name":"stderr","time":363.15765937,"data":"  File \"/usr/local/lib/python3.12/dist-packages/numba/misc/special.py\", line 3, in \u003cmodule\u003e\n"}
+,{"stream_name":"stderr","time":363.157663748,"data":"    from numba.core.typing.typeof import typeof\n"}
+,{"stream_name":"stderr","time":363.157667366,"data":"  File \"/usr/local/lib/python3.12/dist-packages/numba/core/typing/__init__.py\", line 1, in \u003cmodule\u003e\n"}
+,{"stream_name":"stderr","time":363.157671274,"data":"    from .context import BaseContext, Context\n"}
+,{"stream_name":"stderr","time":363.157674864,"data":"  File \"/usr/local/lib/python3.12/dist-packages/numba/core/typing/context.py\", line 14, in \u003cmodule\u003e\n"}
+,{"stream_name":"stderr","time":363.157680572,"data":"    from .typeof import typeof, Purpose\n"}
+,{"stream_name":"stderr","time":363.157687916,"data":"  File \"/usr/local/lib/python3.12/dist-packages/numba/core/typing/typeof.py\", line 7, in \u003cmodule\u003e\n"}
+,{"stream_name":"stderr","time":363.157706625,"data":"    from numpy.random.bit_generator import BitGenerator\n"}
+,{"stream_name":"stderr","time":363.157713344,"data":"  File \"/usr/local/lib/python3.12/dist-packages/numpy/random/__init__.py\", line 180, in \u003cmodule\u003e\n"}
+,{"stream_name":"stderr","time":363.157717902,"data":"    from . import _pickle\n"}
+,{"stream_name":"stderr","time":363.157721815,"data":"  File \"/usr/local/lib/python3.12/dist-packages/numpy/random/_pickle.py\", line 1, in \u003cmodule\u003e\n"}
+,{"stream_name":"stderr","time":363.157726252,"data":"    from .mtrand import RandomState\n"}
+,{"stream_name":"stderr","time":363.157742027,"data":"  File \"numpy/random/mtrand.pyx\", line 1, in init numpy.random.mtrand\n"}
+,{"stream_name":"stderr","time":363.157746362,"data":"ValueError: numpy.dtype size changed, may indicate binary incompatibility. Expected 96 from C header, got 88 from PyObject\n"}
+,{"stream_name":"stdout","time":363.157941569,"data":"\n"}
+,{"stream_name":"stdout","time":363.157948626,"data":"===== STAGE: translate =====\n"}
+,{"stream_name":"stdout","time":363.170095402,"data":"===== translate FAILED (0.0s) =====\n"}
+,{"stream_name":"stderr","time":363.171754543,"data":"Traceback (most recent call last):\n"}
+,{"stream_name":"stderr","time":363.172191307,"data":"  File \"/usr/local/lib/python3.12/dist-packages/transformers/utils/import_utils.py\", line 2044, in __getattr__\n"}
+,{"stream_name":"stderr","time":363.172215842,"data":"    module = self._get_module(self._class_to_module[name])\n"}
+,{"stream_name":"stderr","time":363.172221544,"data":"             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":363.17222647,"data":"  File \"/usr/local/lib/python3.12/dist-packages/transformers/utils/import_utils.py\", line 2238, in _get_module\n"}
+,{"stream_name":"stderr","time":363.172230609,"data":"    raise e\n"}
+,{"stream_name":"stderr","time":363.172235099,"data":"  File \"/usr/local/lib/python3.12/dist-packages/transformers/utils/import_utils.py\", line 2236, in _get_module\n"}
+,{"stream_name":"stderr","time":363.172239977,"data":"    return importlib.import_module(\".\" + module_name, self.__name__)\n"}
+,{"stream_name":"stderr","time":363.172244878,"data":"           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":363.172257049,"data":"  File \"/usr/lib/python3.12/importlib/__init__.py\", line 90, in import_module\n"}
+,{"stream_name":"stderr","time":363.172261824,"data":"    return _bootstrap._gcd_import(name[level:], package, level)\n"}
+,{"stream_name":"stderr","time":363.172265992,"data":"           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":363.172270223,"data":"  File \"\u003cfrozen importlib._bootstrap\u003e\", line 1387, in _gcd_import\n"}
+,{"stream_name":"stderr","time":363.172274998,"data":"  File \"\u003cfrozen importlib._bootstrap\u003e\", line 1360, in _find_and_load\n"}
+,{"stream_name":"stderr","time":363.172279569,"data":"  File \"\u003cfrozen importlib._bootstrap\u003e\", line 1331, in _find_and_load_unlocked\n"}
+,{"stream_name":"stderr","time":363.172284334,"data":"  File \"\u003cfrozen importlib._bootstrap\u003e\", line 935, in _load_unlocked\n"}
+,{"stream_name":"stderr","time":363.172288814,"data":"  File \"\u003cfrozen importlib._bootstrap_external\u003e\", line 999, in exec_module\n"}
+,{"stream_name":"stderr","time":363.172293719,"data":"  File \"\u003cfrozen importlib._bootstrap\u003e\", line 488, in _call_with_frames_removed\n"}
+,{"stream_name":"stderr","time":363.172298536,"data":"  File \"/usr/local/lib/python3.12/dist-packages/transformers/pipelines/__init__.py\", line 27, in \u003cmodule\u003e\n"}
+,{"stream_name":"stderr","time":363.172303717,"data":"    from ..image_processing_utils import BaseImageProcessor\n"}
+,{"stream_name":"stderr","time":363.172307732,"data":"  File \"/usr/local/lib/python3.12/dist-packages/transformers/image_processing_utils.py\", line 20, in \u003cmodule\u003e\n"}
+,{"stream_name":"stderr","time":363.172312021,"data":"    from .image_processing_base import BatchFeature, ImageProcessingMixin\n"}
+,{"stream_name":"stderr","time":363.172316085,"data":"  File \"/usr/local/lib/python3.12/dist-packages/transformers/image_processing_base.py\", line 25, in \u003cmodule\u003e\n"}
+,{"stream_name":"stderr","time":363.17232039,"data":"    from .image_utils import is_valid_image, load_image\n"}
+,{"stream_name":"stderr","time":363.172334212,"data":"  File \"/usr/local/lib/python3.12/dist-packages/transformers/image_utils.py\", line 53, in \u003cmodule\u003e\n"}
+,{"stream_name":"stderr","time":363.17233764,"data":"    from torchvision.transforms import InterpolationMode\n"}
+,{"stream_name":"stderr","time":363.172340222,"data":"  File \"/usr/local/lib/python3.12/dist-packages/torchvision/__init__.py\", line 10, in \u003cmodule\u003e\n"}
+,{"stream_name":"stderr","time":363.17234296,"data":"    from torchvision import _meta_registrations, datasets, io, models, ops, transforms, utils  # usort:skip\n"}
+,{"stream_name":"stderr","time":363.172345584,"data":"    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":363.172370131,"data":"  File \"/usr/local/lib/python3.12/dist-packages/torchvision/_meta_registrations.py\", line 25, in \u003cmodule\u003e\n"}
+,{"stream_name":"stderr","time":363.172375464,"data":"    @register_meta(\"roi_align\")\n"}
+,{"stream_name":"stderr","time":363.172380174,"data":"     ^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":363.172384498,"data":"  File \"/usr/local/lib/python3.12/dist-packages/torchvision/_meta_registrations.py\", line 18, in wrapper\n"}
+,{"stream_name":"stderr","time":363.17238875,"data":"    if torchvision.extension._has_ops():\n"}
+,{"stream_name":"stderr","time":363.17239342,"data":"       ^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":363.172397782,"data":"AttributeError: partially initialized module 'torchvision' has no attribute 'extension' (most likely due to a circular import)\n"}
+,{"stream_name":"stderr","time":363.172402566,"data":"\n"}
+,{"stream_name":"stderr","time":363.172406723,"data":"The above exception was the direct cause of the following exception:\n"}
+,{"stream_name":"stderr","time":363.172410646,"data":"\n"}
+,{"stream_name":"stderr","time":363.172414261,"data":"Traceback (most recent call last):\n"}
+,{"stream_name":"stderr","time":363.172445371,"data":"  File \"/kaggle/src/script.py\", line 34, in stage\n"}
+,{"stream_name":"stderr","time":363.172462248,"data":"    fn()\n"}
+,{"stream_name":"stderr","time":363.172467073,"data":"  File \"/kaggle/src/script.py\", line 134, in translate\n"}
+,{"stream_name":"stderr","time":363.172471207,"data":"    from transformers import pipeline as hf_pipeline\n"}
+,{"stream_name":"stderr","time":363.172475429,"data":"  File \"/usr/local/lib/python3.12/dist-packages/transformers/utils/import_utils.py\", line 2132, in __getattr__\n"}
+,{"stream_name":"stderr","time":363.172479822,"data":"    raise ModuleNotFoundError(\n"}
+,{"stream_name":"stderr","time":363.172483601,"data":"ModuleNotFoundError: Could not import module 'pipeline'. Are this object's requirements defined correctly?\n"}
+,{"stream_name":"stdout","time":363.172669657,"data":"\n"}
+,{"stream_name":"stdout","time":363.17268194,"data":"===== STAGE: chatterbox_revoice =====\n"}
+,{"stream_name":"stdout","time":363.175067543,"data":"===== chatterbox_revoice FAILED (0.0s) =====\n"}
+,{"stream_name":"stderr","time":363.176917515,"data":"Traceback (most recent call last):\n"}
+,{"stream_name":"stderr","time":363.177105246,"data":"  File \"/usr/local/lib/python3.12/dist-packages/torch/_ops.py\", line 1442, in load_library\n"}
+,{"stream_name":"stderr","time":363.177114268,"data":"  File \"/usr/lib/python3.12/ctypes/__init__.py\", line 379, in __init__\n"}
+,{"stream_name":"stderr","time":363.177119374,"data":"    self._handle = _dlopen(self._name, mode)\n"}
+,{"stream_name":"stderr","time":363.177123425,"data":"                   ^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":363.177127317,"data":"OSError: /usr/local/lib/python3.12/dist-packages/torchaudio/lib/libtorchaudio.so: undefined symbol: _ZNK5torch8autograd4Node4nameEv\n"}
+,{"stream_name":"stderr","time":363.177131503,"data":"\n"}
+,{"stream_name":"stderr","time":363.177135247,"data":"The above exception was the direct cause of the following exception:\n"}
+,{"stream_name":"stderr","time":363.177139178,"data":"\n"}
+,{"stream_name":"stderr","time":363.177142769,"data":"Traceback (most recent call last):\n"}
+,{"stream_name":"stderr","time":363.177395863,"data":"  File \"/kaggle/src/script.py\", line 34, in stage\n"}
+,{"stream_name":"stdout","time":363.17739817,"data":"\n"}
+,{"stream_name":"stderr","time":363.177408683,"data":"    fn()\n"}
+,{"stream_name":"stderr","time":363.177457914,"data":"  File \"/kaggle/src/script.py\", line 149, in revoice\n"}
+,{"stream_name":"stderr","time":363.177464361,"data":"    import torchaudio as ta, soundfile as sf, numpy as np\n"}
+,{"stream_name":"stderr","time":363.177468463,"data":"  File \"/usr/local/lib/python3.12/dist-packages/torchaudio/__init__.py\", line 2, in \u003cmodule\u003e\n"}
+,{"stream_name":"stderr","time":363.177472918,"data":"    from . import _extension  # noqa  # usort: skip\n"}
+,{"stream_name":"stderr","time":363.177477077,"data":"    ^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":363.177480927,"data":"  File \"/usr/local/lib/python3.12/dist-packages/torchaudio/_extension/__init__.py\", line 38, in \u003cmodule\u003e\n"}
+,{"stream_name":"stderr","time":363.17748565,"data":"    _load_lib(\"libtorchaudio\")\n"}
+,{"stream_name":"stderr","time":363.177489615,"data":"  File \"/usr/local/lib/python3.12/dist-packages/torchaudio/_extension/utils.py\", line 60, in _load_lib\n"}
+,{"stream_name":"stderr","time":363.177494254,"data":"    torch.ops.load_library(path)\n"}
+,{"stream_name":"stderr","time":363.17749848,"data":"  File \"/usr/local/lib/python3.12/dist-packages/torch/_ops.py\", line 1444, in load_library\n"}
+,{"stream_name":"stderr","time":363.177502751,"data":"OSError: Could not load this library: /usr/local/lib/python3.12/dist-packages/torchaudio/lib/libtorchaudio.so\n"}
+,{"stream_name":"stdout","time":363.177419039,"data":"===== STAGE: align_and_mix =====\n"}
+,{"stream_name":"stdout","time":363.206120939,"data":"===== align_and_mix FAILED (0.0s) =====\n"}
+,{"stream_name":"stderr","time":363.206738908,"data":"Traceback (most recent call last):\n"}
+,{"stream_name":"stderr","time":363.207015036,"data":"  File \"/kaggle/src/script.py\", line 34, in stage\n"}
+,{"stream_name":"stderr","time":363.207028999,"data":"    fn()\n"}
+,{"stream_name":"stderr","time":363.207033594,"data":"  File \"/kaggle/src/script.py\", line 171, in align_and_mix\n"}
+,{"stream_name":"stderr","time":363.207037821,"data":"    bed, bed_sr = sf.read(f\"{OUT}/bed.wav\")\n"}
+,{"stream_name":"stderr","time":363.207042279,"data":"                  ^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stdout","time":363.207043907,"data":"\n"}
+,{"stream_name":"stdout","time":363.207051371,"data":"===== STAGE: mux_and_srt =====\n"}
+,{"stream_name":"stderr","time":363.207045991,"data":"  File \"/usr/local/lib/python3.12/dist-packages/soundfile.py\", line 305, in read\n"}
+,{"stream_name":"stderr","time":363.207079358,"data":"    with SoundFile(file, 'r', samplerate, channels,\n"}
+,{"stream_name":"stderr","time":363.207084182,"data":"         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":363.20708856,"data":"  File \"/usr/local/lib/python3.12/dist-packages/soundfile.py\", line 690, in __init__\n"}
+,{"stream_name":"stderr","time":363.20709259,"data":"    self._file = self._open(file, mode_int, closefd)\n"}
+,{"stream_name":"stderr","time":363.207096221,"data":"                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":363.207100141,"data":"  File \"/usr/local/lib/python3.12/dist-packages/soundfile.py\", line 1265, in _open\n"}
+,{"stream_name":"stderr","time":363.207105954,"data":"    raise LibsndfileError(err, prefix=\"Error opening {0!r}: \".format(self.name))\n"}
+,{"stream_name":"stderr","time":363.207112869,"data":"soundfile.LibsndfileError: Error opening '/kaggle/working/bed.wav': System error.\n"}
+,{"stream_name":"stdout","time":363.207180439,"data":"$ ffmpeg -y -i /kaggle/working/src_video.mp4 -i /kaggle/working/final_audio.wav -map 0:v -map 1:a -c:v copy -c:a aac -shortest /kaggle/working/dubbed_video.mp4\n"}
+,{"stream_name":"stdout","time":363.298804285,"data":"ffmpeg version 4.4.2-0ubuntu0.22.04.1 Copyright (c) 2000-2021 the FFmpeg developers\n"}
+,{"stream_name":"stdout","time":363.298837191,"data":"  built with gcc 11 (Ubuntu 11.2.0-19ubuntu1)\n"}
+,{"stream_name":"stdout","time":363.298845358,"data":"  configuration: --prefix=/usr --extra-version=0ubuntu0.22.04.1 --toolchain=hardened --libdir=/usr/lib/x86_64-linux-gnu --incdir=/usr/include/x86_64-linux-gnu --arch=amd64 --enable-gpl --disable-stripping --enable-gnutls --enable-ladspa --enable-libaom --enable-libass --enable-libbluray --enable-libbs2b --enable-libcaca --enable-libcdio --enable-libcodec2 --enable-libdav1d --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libgme --enable-libgsm --enable-libjack --enable-libmp3lame --enable-libmysofa --enable-libopenjpeg --enable-libopenmpt --enable-libopus --enable-libpulse --enable-librabbitmq --enable-librubberband --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libsrt --enable-libssh --enable-libtheora --enable-libtwolame --enable-libvidstab --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx265 --enable-libxml2 --enable-libxvid --enable-libzimg --enable-libzmq --enable-libzvbi --enable-lv2 --enable-omx --enable-openal --enable-opencl --enable-opengl --enable-sdl2 --enable-pocketsphinx --enable-librsvg --enable-libmfx --enable-libdc1394 --enable-libdrm --enable-libiec61883 --enable-chromaprint --enable-frei0r --enable-libx264 --enable-shared\n"}
+,{"stream_name":"stdout","time":363.298867133,"data":"  libavutil      56. 70.100 / 56. 70.100\n"}
+,{"stream_name":"stdout","time":363.298871586,"data":"  libavcodec     58.134.100 / 58.134.100\n"}
+,{"stream_name":"stdout","time":363.298875787,"data":"  libavformat    58. 76.100 / 58. 76.100\n"}
+,{"stream_name":"stdout","time":363.298879815,"data":"  libavdevice    58. 13.100 / 58. 13.100\n"}
+,{"stream_name":"stdout","time":363.298884748,"data":"  libavfilter     7.110.100 /  7.110.100\n"}
+,{"stream_name":"stdout","time":363.298889128,"data":"  libswscale      5.  9.100 /  5.  9.100\n"}
+,{"stream_name":"stdout","time":363.298892882,"data":"  libswresample   3.  9.100 /  3.  9.100\n"}
+,{"stream_name":"stdout","time":363.298896463,"data":"  libpostproc    55.  9.100 / 55.  9.100\n"}
+,{"stream_name":"stdout","time":363.298900614,"data":"/kaggle/working/src_video.mp4: No such file or directory\n"}
+,{"stream_name":"stdout","time":363.298904795,"data":"\n"}
+,{"stream_name":"stdout","time":363.298908611,"data":"===== mux_and_srt FAILED (0.1s) =====\n"}
+,{"stream_name":"stderr","time":363.298956757,"data":"Traceback (most recent call last):\n"}
+,{"stream_name":"stderr","time":363.2992448,"data":"  File \"/kaggle/src/script.py\", line 34, in stage\n"}
+,{"stream_name":"stderr","time":363.299255055,"data":"    fn()\n"}
+,{"stream_name":"stderr","time":363.299259808,"data":"  File \"/kaggle/src/script.py\", line 211, in mux_and_srt\n"}
+,{"stream_name":"stderr","time":363.299264395,"data":"    sh(f\"ffmpeg -y -i {OUT}/src_video.mp4 -i {OUT}/final_audio.wav \"\n"}
+,{"stream_name":"stdout","time":363.299266069,"data":"\n"}
+,{"stream_name":"stderr","time":363.299268268,"data":"  File \"/kaggle/src/script.py\", line 24, in sh\n"}
+,{"stream_name":"stdout","time":363.299273069,"data":"\n"}
+,{"stream_name":"stderr","time":363.299275773,"data":"    raise RuntimeError(f\"command failed rc={r.returncode}: {cmd}\")\n"}
+,{"stream_name":"stdout","time":363.299278693,"data":"===== DUB PIPELINE TEST COMPLETE =====\n"}
+,{"stream_name":"stderr","time":363.299281643,"data":"RuntimeError: command failed rc=1: ffmpeg -y -i /kaggle/working/src_video.mp4 -i /kaggle/working/final_audio.wav -map 0:v -map 1:a -c:v copy -c:a aac -shortest /kaggle/working/dubbed_video.mp4\n"}
+,{"stream_name":"stdout","time":363.299388456,"data":"TIMINGS: {\n"}
+,{"stream_name":"stdout","time":363.2993963,"data":"  \"setup\": 348.3,\n"}
+,{"stream_name":"stdout","time":363.299400834,"data":"  \"import_check\": 0.0,\n"}
+,{"stream_name":"stdout","time":363.299405337,"data":"  \"build_input\": 6.2,\n"}
+,{"stream_name":"stdout","time":363.299408861,"data":"  \"extract_audio\": 0.5,\n"}
+,{"stream_name":"stdout","time":363.299412577,"data":"  \"demucs_split\": 6.6,\n"}
+,{"stream_name":"stdout","time":363.299416173,"data":"  \"whisper_transcribe\": 0.6,\n"}
+,{"stream_name":"stdout","time":363.299419739,"data":"  \"translate\": 0.0,\n"}
+,{"stream_name":"stdout","time":363.299423267,"data":"  \"chatterbox_revoice\": 0.0,\n"}
+,{"stream_name":"stdout","time":363.299426793,"data":"  \"align_and_mix\": 0.0,\n"}
+,{"stream_name":"stdout","time":363.299430382,"data":"  \"mux_and_srt\": 0.1\n"}
+,{"stream_name":"stdout","time":363.299433973,"data":"}\n"}
+,{"stream_name":"stdout","time":363.299437378,"data":"VRAM_GB: {\n"}
+,{"stream_name":"stdout","time":363.299440951,"data":"  \"setup\": 0.0\n"}
+,{"stream_name":"stdout","time":363.299444539,"data":"}\n"}
+,{"stream_name":"stdout","time":363.299769557,"data":"$ ls -la /kaggle/working\n"}
+,{"stream_name":"stdout","time":363.305797692,"data":"total 16\n"}
+,{"stream_name":"stdout","time":363.305840935,"data":"drwxr-xr-x 3 root root 4096 Sep  3 20:13 .\n"}
+,{"stream_name":"stdout","time":363.305851558,"data":"drwxr-xr-x 8 root root 4096 Sep  3 20:07 ..\n"}
+,{"stream_name":"stdout","time":363.305857125,"data":"drwxr-xr-x 3 root root 4096 Sep  3 20:13 demucs_out\n"}
+,{"stream_name":"stdout","time":363.305861998,"data":"-rw-r--r-- 1 root root  341 Sep  3 20:13 perf_summary.json\n"}
+,{"stream_name":"stdout","time":363.305866847,"data":"\n"}
+,{"stream_name":"stderr","time":366.707553438,"data":"/usr/local/lib/python3.12/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":366.707585065,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":366.909537211,"data":"/usr/local/lib/python3.12/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":366.909571448,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":367.619620525,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":368.805660568,"data":"[NbConvertApp] Writing 329584 bytes to __results__.html\n"}
+]
