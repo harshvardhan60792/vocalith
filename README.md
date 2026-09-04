@@ -17,11 +17,12 @@ Full license table and an ethics note on voice cloning: [docs/LICENSES.md](docs/
 
 ## Status
 
-**Not yet released.** The model pipeline is proven end-to-end on a real GPU (see
-[kaggle/results/](kaggle/results/)) and the application code (`src/vocalith/`) is
-written and unit-tested for its model-free logic. The one-click installers
-(`launcher/{windows,macos,linux}/build.*`) are first-draft and **not yet verified**
-on a clean machine. See [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md) for exactly
+**Not yet released — code-complete, not yet pushed to GitHub.** The model pipeline is
+proven end-to-end on a real GPU (see [kaggle/results/](kaggle/results/)), the app code
+(`src/vocalith/`) has been GPU-verified running its actual pipelines, and the Windows
+and Linux one-click installers have each been built and launched for real (macOS is a
+complete draft, untested for lack of Mac hardware). See
+[IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md)'s "AT A GLANCE" section for exactly
 what's done, what's left, and why each major decision was made — that file is the
 project's source of truth and is written so any AI agent or contributor can pick up
 the work with no prior context.

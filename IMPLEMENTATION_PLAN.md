@@ -69,6 +69,29 @@ without reading the full history below — read the history when you need the *w
 no push without the user) are not problems for you to solve by working around them —
 respect them the same way. Everything else in this list is fair game to keep pushing on.
 
+**For the human, when you're back — this is genuinely a 30-second copy-paste, no
+research needed.** There's no GitHub remote configured yet (`git remote -v` is empty),
+so the very first push also means picking a repo name/visibility, which is exactly
+the kind of call that waits for you specifically. Once you've created an empty repo
+on GitHub (name it whatever you like — "vocalith" was this session's working
+placeholder, nothing forces it):
+
+```bash
+cd "D:\study\claude projects\audio-toolkit"
+git remote add origin https://github.com/<your-username>/<your-repo-name>.git
+git push -u origin main
+```
+
+That alone gets the code up. To also produce real installers via CI, tag a release
+once you're ready (this triggers `release.yml`, which builds all three OSes and
+uploads them — the macOS job will very likely need a follow-up fix since it's never
+run for real, see the Phase 3 notes above):
+
+```bash
+git tag v0.1.0
+git push origin v0.1.0
+```
+
 ---
 
 ## 1. What this is
