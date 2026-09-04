@@ -44,10 +44,14 @@ without reading the full history below — read the history when you need the *w
 
 **Not done, and why — these are real constraints, not skipped effort:**
 - **macOS packaging is untested.** There is no Mac hardware anywhere in this session's
-  reach — not this machine, not Kaggle (Linux/GPU only), nothing. `launcher/macos/
-  build.sh` is a careful draft mirroring the proven Linux/Windows pattern, but "careful
-  draft" is honestly what it is until it runs on an actual Mac. Whoever has one: that's
-  the single highest-value next step for Phase 3.
+  reach — not this machine, not Kaggle (Linux/GPU only), nothing that exists to try.
+  `launcher/macos/build.sh` is now a *complete* draft (the ffmpeg step used to be a
+  bare TODO stub; it now resolves a real evermeet.cx build dynamically, flagging a
+  real open license question — that build is GPL, not the LGPL used on Windows/Linux,
+  see docs/LICENSES.md) mirroring the now-twice-proven Linux/Windows pattern. But
+  "complete draft" is honestly what it is until it runs on an actual Mac — no amount
+  of further reasoning about it substitutes for that. Whoever has a Mac: this is the
+  single highest-value next step for Phase 3, full stop.
 - ~~Linux packaging is untested~~ **Done — see the Phase 3 line above.** Also caught
   and fixed a real cross-platform bug along the way: the shell scripts had silently
   picked up CRLF line endings from Windows editing, which breaks bash on real Linux.
