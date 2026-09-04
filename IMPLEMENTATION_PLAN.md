@@ -26,10 +26,16 @@ without reading the full history below — read the history when you need the *w
 - **Phase 2** — the Gradio UI, dark Linear/Vercel-style theme, verified across all four
   tabs in a real browser. `src/vocalith/ui/design.py`'s own header explains 4 design
   passes and why each was superseded — read it before changing the look again.
-- **Phase 3, Windows only** — `launcher/windows/build.ps1` actually run on real Windows:
-  embedded Python bootstrapped, the full ML stack installed, ffmpeg bundled, and the
-  resulting standalone app launched and served the real UI on its own. 716MB archive,
-  60,022 files, integrity-verified.
+- **Phase 3, Windows AND Linux** — both `launcher/windows/build.ps1` and `launcher/
+  linux/build.sh` actually run for real (Windows on this machine; Linux on a Kaggle
+  kernel, since Kaggle's own infra is Linux — zero GPU cost, packaging needs none).
+  Both: embedded/standalone Python bootstrapped, the full ML stack installed, ffmpeg
+  bundled, and the resulting app launched and served the real UI on its own, confirmed
+  via HTTP 200. Windows: 716MB archive, 60,022 files, integrity-verified. Linux: 1.0GB
+  tarball, built and launched in 389s. 5 real bugs found and fixed across both runs
+  (7-Zip dependency, dead `ffmpeg-python` dependency, `Compress-Archive` OOM, CRLF line
+  endings breaking bash, a stale hardcoded `python-build-standalone` release tag) —
+  see `kaggle/results/README.md` for the full blow-by-blow on each.
 - **Phase 5** — README, LICENSES (Demucs resolved), TROUBLESHOOTING all written; the
   ethics note on voice cloning consent is in place.
 - `ruff check` and `pytest` (the two real commands `ci.yml` runs) both verified passing
@@ -42,10 +48,9 @@ without reading the full history below — read the history when you need the *w
   build.sh` is a careful draft mirroring the proven Linux/Windows pattern, but "careful
   draft" is honestly what it is until it runs on an actual Mac. Whoever has one: that's
   the single highest-value next step for Phase 3.
-- **Linux packaging: check `kaggle/results/README.md`'s Linux section for current
-  status** — a real test was run on a Kaggle kernel (Kaggle's own infrastructure is
-  Linux, so this was actually reachable tonight, no GPU needed) using `launcher/linux/
-  build.sh`; the result is recorded there, not summarized twice in two places.
+- ~~Linux packaging is untested~~ **Done — see the Phase 3 line above.** Also caught
+  and fixed a real cross-platform bug along the way: the shell scripts had silently
+  picked up CRLF line endings from Windows editing, which breaks bash on real Linux.
 - **GitHub Actions has never executed.** Running it means pushing to a GitHub remote,
   which is the user's call to make, not something an AI session takes on its own
   authority overnight regardless of how the instructions for the rest of the work were
@@ -103,7 +108,7 @@ signed off** — packaging a pipeline that doesn't work yet wastes days.
 Phase 0  Kaggle spike        — prove the 4 models load and run on free GPU      [DONE — all 4 features + full dub chain (9/9 stages) proven on real GPU]
 Phase 1  Core engine         — the 4 pipelines as a clean importable package    [DONE — the real package (not a mirror) ran all 4 pipelines on real GPU, 2 more real bugs found+fixed]
 Phase 2  Gradio UI           — the app a non-technical user actually sees       [DONE — premium redesign, verified in-browser across all 4 tabs, no GPU needed]
-Phase 3  Packaging           — one-click installers per OS                      [WINDOWS PROVEN WORKING end-to-end; macOS/Linux still drafted-only]
+Phase 3  Packaging           — one-click installers per OS                      [WINDOWS + LINUX PROVEN WORKING end-to-end; macOS still drafted-only, no Mac hardware available]
 Phase 4  CI + Release        — GitHub Actions builds all 3 OSes, publishes      [WRITTEN, NEVER RUN — no push yet]
 Phase 5  Docs + polish       — README, licenses, first-run UX, error messages   [DONE — refine as issues surface]
 ```
@@ -733,9 +738,12 @@ demonstrated, not merely written.
      instead of buffering the whole tree and has no such ceiling.
 - [ ] macOS bundle launches; Gatekeeper workaround documented — still drafted-only,
       unverified (no Mac available this session)
-- [ ] Linux tarball launches on a clean container — still drafted-only, unverified
-      (bash syntax-checked with `bash -n`, which caught nothing, but that only proves
-      the script parses, not that it runs)
+- [x] **Linux tarball launches — verified for real on a Kaggle kernel, 2026-09-04.**
+      `bash -n` had only proven the script parses; actually running it found two real
+      bugs (CRLF line endings, a stale python-build-standalone tag) before it produced
+      a working 1.0GB tarball that extracted and served the real UI (HTTP 200). Not yet
+      run on a clean *container* specifically (Kaggle's own environment isn't literally
+      that), so a genuinely clean-container pass is still worth doing before release.
 - [ ] Windows bundle re-tested on an actually clean VM (no dev Python, no Visual C++
       redistributables preinstalled) — the real bar for "works," per this script's own
       header note

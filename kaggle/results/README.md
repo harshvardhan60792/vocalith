@@ -1,4 +1,4 @@
-## linux_package_test/ — Linux packaging (`launcher/linux/build.sh`), 2026-09-04
+## linux_package_test/ — DONE, Linux packaging (`launcher/linux/build.sh`), 2026-09-04
 
 No Linux machine was directly available this session, but Kaggle kernels *run on*
 Linux — genuinely the only real Linux access reachable tonight, and it needed zero
@@ -7,8 +7,32 @@ no GPU quota spent). Uploaded a slice of the repo (`src/`, `launcher/`, `pyproje
 as a dataset and ran `launcher/linux/build.sh` for real, then extracted the resulting
 tarball and launched `vocalith.sh` to confirm it actually serves the UI.
 
-**Result: _(fill in once `kaggle/linux_package_test/out/` lands — check
-`vocalith-linux-package-test.log` for LINUX PACKAGE TEST: SUCCESS or FAILED)_.**
+**Result (v3): SUCCESS.** Built a 1,003,119,754-byte (1.0 GB) `Vocalith-linux-x86_64.tar.gz`
+in 389s, extracted it cleanly, launched `vocalith.sh`, and `curl` got a real `200` from
+`http://127.0.0.1:7860` — the packaged app, running from its own bundled Python runtime,
+serving the actual UI. Mirrors the Windows result exactly.
+
+Two real bugs found and fixed getting from v1 to v3 (both also pre-emptively fixed in
+`launcher/macos/build.sh`, which shares the same code pattern but is still unverified —
+no Mac hardware exists in this session's reach):
+1. **v1: CRLF line endings.** `set: pipefail: invalid option name` at "line 7" --
+   `launcher/linux/build.sh` and `launcher/macos/build.sh` had silently picked up CRLF
+   line endings from being edited on this Windows machine (git's `autocrlf`). bash chokes
+   on the trailing `\r`. Fixed the files to LF and added `.gitattributes` (`*.sh text
+   eol=lf`) so this can't silently recur for anyone else editing on Windows either.
+2. **v2: stale hardcoded release tag.** `gzip: stdin: not in gzip format` -- the
+   `python-build-standalone` release tag ("20250612") was a never-verified placeholder
+   that no longer exists (that project cuts releases roughly weekly); GitHub returned a
+   9-byte error stub instead of a tarball. Fixed by resolving the latest release via
+   GitHub's API at build time instead of hardcoding a tag, plus a size check (>1MB) on
+   the download before extracting, so a bad URL fails with a clear message instead of a
+   cryptic `tar` error.
+
+**Practical note for next time:** don't let a packaging-test kernel extract its own
+output a second time into `/kaggle/working/` -- the resulting multi-thousand-file output
+makes `kaggle kernels output` (which fetches everything the kernel wrote) impractically
+slow to download. Use `kaggle kernels output ... --file-pattern ".*\.log$"` to fetch just
+the log when you only need to confirm pass/fail, not the built artifact itself.
 
 ## phase1_real_package_test/ — DONE, 2026-09-04, kernel v3, Tesla P100
 
