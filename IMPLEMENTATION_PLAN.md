@@ -12,11 +12,17 @@ and know exactly what "done" means for the next task.
 
 ## AT A GLANCE — read this block first, it's the whole status in one place
 
-*Last updated 2026-09-04, end of an overnight autonomous session. If you're an AI picking
-this project up cold, this block plus §2's table is enough to know where things stand
-without reading the full history below — read the history when you need the *why*.*
+*Last updated 2026-09-05. Project is shipped. If you're an AI picking this project up
+cold, this block plus §2's table is enough to know where things stand without reading
+the full history below — read the history when you need the *why*.*
 
-**Genuinely done and GPU/browser-verified (not just written):**
+**Released:** [github.com/harshvardhan60792/vocalith](https://github.com/harshvardhan60792/vocalith),
+latest tag `v0.1.3`. Real installers for Windows, macOS (arm64), and Linux are attached
+to the [GitHub Release](https://github.com/harshvardhan60792/vocalith/releases/latest),
+each built by `release.yml` on GitHub's own hosted runners — not simulated, not just
+Kaggle. `ci.yml` (lint + logic tests) is green on real GitHub Actions too.
+
+**Genuinely done and verified on real infra (not just written):**
 - **Phase 0** — Kokoro, Chatterbox, Demucs, Whisper all load and chain correctly; the
   full dubbing pipeline (video → translated, re-voiced video) passes all 9 stages on a
   real Kaggle GPU. Evidence: `kaggle/results/`.
@@ -26,71 +32,41 @@ without reading the full history below — read the history when you need the *w
 - **Phase 2** — the Gradio UI, dark Linear/Vercel-style theme, verified across all four
   tabs in a real browser. `src/vocalith/ui/design.py`'s own header explains 4 design
   passes and why each was superseded — read it before changing the look again.
-- **Phase 3, Windows AND Linux** — both `launcher/windows/build.ps1` and `launcher/
-  linux/build.sh` actually run for real (Windows on this machine; Linux on a Kaggle
-  kernel, since Kaggle's own infra is Linux — zero GPU cost, packaging needs none).
-  Both: embedded/standalone Python bootstrapped, the full ML stack installed, ffmpeg
-  bundled, and the resulting app launched and served the real UI on its own, confirmed
-  via HTTP 200. Windows: 716MB archive, 60,022 files, integrity-verified. Linux: 1.0GB
-  tarball, built and launched in 389s. 5 real bugs found and fixed across both runs
-  (7-Zip dependency, dead `ffmpeg-python` dependency, `Compress-Archive` OOM, CRLF line
-  endings breaking bash, a stale hardcoded `python-build-standalone` release tag) —
-  see `kaggle/results/README.md` for the full blow-by-blow on each.
+- **Phase 3, all three platforms** — `launcher/{windows,macos,linux}/build.sh|.ps1` all
+  ran for real and produced a working installer that launched the actual app and served
+  the real UI (HTTP 200). Windows and Linux were first proven locally/on Kaggle, then
+  all three were proven again independently on GitHub Actions' own `windows-latest`,
+  `macos-14` (arm64), and `ubuntu-latest` runners via `release.yml` — the macOS run in
+  particular is the first time this project ever touched real Mac hardware of any kind.
+  Real bugs found and fixed, in order: 7-Zip dependency, dead `ffmpeg-python` dependency,
+  `Compress-Archive` OOM, CRLF line endings breaking bash, a stale hardcoded
+  `python-build-standalone` release tag, a `pipefail`-triggered silent abort on macOS
+  (grep-no-match killed the script before its own error message could print), a
+  read-only default `GITHUB_TOKEN` blocking release creation, and a transient DNS/connect
+  failure to an external ffmpeg host (fixed with `curl --retry`, since it wasn't a code
+  bug). Full blow-by-blow: `kaggle/results/README.md` for the pre-push history, and this
+  repo's own Actions tab / `git log` for the push-time fixes.
 - **Phase 5** — README, LICENSES (Demucs resolved), TROUBLESHOOTING all written; the
   ethics note on voice cloning consent is in place.
-- `ruff check` and `pytest` (the two real commands `ci.yml` runs) both verified passing
-  locally, with an explicit pinned lint rule set so a future ruff version can't quietly
-  change what counts as clean.
+- `ruff check` and `pytest` (the two real commands `ci.yml` runs) verified passing both
+  locally and for real in GitHub Actions.
+- **GitHub Actions has executed for real**, repeatedly, across `v0.1.0`–`v0.1.3`: every
+  fix above was found by an actual CI failure, not by inspection.
 
-**Not done, and why — these are real constraints, not skipped effort:**
-- **macOS packaging is untested.** There is no Mac hardware anywhere in this session's
-  reach — not this machine, not Kaggle (Linux/GPU only), nothing that exists to try.
-  `launcher/macos/build.sh` is now a *complete* draft (the ffmpeg step used to be a
-  bare TODO stub; it now resolves a real evermeet.cx build dynamically, flagging a
-  real open license question — that build is GPL, not the LGPL used on Windows/Linux,
-  see docs/LICENSES.md) mirroring the now-twice-proven Linux/Windows pattern. But
-  "complete draft" is honestly what it is until it runs on an actual Mac — no amount
-  of further reasoning about it substitutes for that. Whoever has a Mac: this is the
-  single highest-value next step for Phase 3, full stop.
-- ~~Linux packaging is untested~~ **Done — see the Phase 3 line above.** Also caught
-  and fixed a real cross-platform bug along the way: the shell scripts had silently
-  picked up CRLF line endings from Windows editing, which breaks bash on real Linux.
-- **GitHub Actions has never executed.** Running it means pushing to a GitHub remote,
-  which is the user's call to make, not something an AI session takes on its own
-  authority overnight regardless of how the instructions for the rest of the work were
-  phrased — this is a deliberate, held boundary, not an oversight. `ci.yml`/`release.yml`
-  are YAML-valid and their real steps work locally; actually running them in Actions is
-  the one item that waits on the user, by design.
-- Windows packaging hasn't been tried on a genuinely clean VM (no dev Python, no VC++
-  redistributables) — this machine has other tools installed, so "it works here" isn't
-  yet "it works on a stranger's machine."
+**Known open items (not blockers, just not yet done):**
+- **macOS ffmpeg is GPL, not LGPL** — `launcher/macos/build.sh` bundles evermeet.cx's
+  static build, which links x264/x265. Windows/Linux use LGPL "essentials" builds. See
+  `docs/LICENSES.md`'s table. Resolve before caring about strict license uniformity
+  across platforms; it doesn't block using or distributing the app today.
+- Windows packaging hasn't been tried on a genuinely clean consumer machine (no dev
+  tools installed) — proven on a dev machine and on GitHub's clean `windows-latest`
+  runner, which is a reasonable proxy but not identical to a random user's PC.
+- No code-signing/notarization on macOS (deliberate — costs money, violates the
+  "everything free" constraint; documented Gatekeeper workaround in the README instead).
 
-**If you are an AI resuming this session:** the two boundaries above (no macOS hardware,
-no push without the user) are not problems for you to solve by working around them —
-respect them the same way. Everything else in this list is fair game to keep pushing on.
-
-**For the human, when you're back — this is genuinely a 30-second copy-paste, no
-research needed.** There's no GitHub remote configured yet (`git remote -v` is empty),
-so the very first push also means picking a repo name/visibility, which is exactly
-the kind of call that waits for you specifically. Once you've created an empty repo
-on GitHub (name it whatever you like — "vocalith" was this session's working
-placeholder, nothing forces it):
-
-```bash
-cd "D:\study\claude projects\audio-toolkit"
-git remote add origin https://github.com/<your-username>/<your-repo-name>.git
-git push -u origin main
-```
-
-That alone gets the code up. To also produce real installers via CI, tag a release
-once you're ready (this triggers `release.yml`, which builds all three OSes and
-uploads them — the macOS job will very likely need a follow-up fix since it's never
-run for real, see the Phase 3 notes above):
-
-```bash
-git tag v0.1.0
-git push origin v0.1.0
-```
+**If you are an AI resuming this session:** there are no held boundaries left on this
+project — it's pushed, tagged, and released. Normal engineering judgment applies from
+here: treat the open items above as a backlog, not a gate.
 
 ---
 

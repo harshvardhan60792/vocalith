@@ -17,17 +17,27 @@ Full license table and an ethics note on voice cloning: [docs/LICENSES.md](docs/
 
 ## Status
 
-**Not yet released — code-complete, not yet pushed to GitHub.** The model pipeline is
-proven end-to-end on a real GPU (see [kaggle/results/](kaggle/results/)), the app code
-(`src/vocalith/`) has been GPU-verified running its actual pipelines, and the Windows
-and Linux one-click installers have each been built and launched for real (macOS is a
-complete draft, untested for lack of Mac hardware). See
+**Released.** [Download the latest release](https://github.com/harshvardhan60792/vocalith/releases/latest) —
+one-click installers for Windows, macOS (arm64), and Linux, each built and verified
+for real on GitHub Actions' own runners (not just Kaggle spikes). The model pipeline
+is proven end-to-end on a real GPU (see [kaggle/results/](kaggle/results/)), and the
+app code (`src/vocalith/`) has been GPU-verified running its actual pipelines. See
 [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md)'s "AT A GLANCE" section for exactly
-what's done, what's left, and why each major decision was made — that file is the
-project's source of truth and is written so any AI agent or contributor can pick up
-the work with no prior context.
+what's done and why each major decision was made — that file is the project's source
+of truth and is written so any AI agent or contributor can pick up the work with no
+prior context.
 
-## Running from source (for development — not the target end-user experience)
+## Installing (end users)
+
+Download the archive for your OS from the
+[latest release](https://github.com/harshvardhan60792/vocalith/releases/latest),
+extract it, and run `Vocalith.exe` (Windows) or `vocalith.sh` (macOS/Linux). No
+Python, no terminal, nothing to install first — the archive bundles its own Python
+runtime and ffmpeg. macOS is unsigned (Gatekeeper will block it on first launch) —
+right-click the app and choose Open to bypass this once; there's no paid Apple
+Developer cert behind this project, by design (see "Why local-only" below).
+
+## Running from source (for development — not the end-user path above)
 
 ```bash
 pip install -e .
