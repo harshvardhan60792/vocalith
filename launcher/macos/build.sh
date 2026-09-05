@@ -15,6 +15,7 @@ set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 DIST="$ROOT/dist/macos"
+CURL_RETRY="--retry 3 --retry-delay 5 --retry-connrefused"
 PY_ASSET_PATTERN="aarch64-apple-darwin-install_only.tar.gz"
 # `|| true` on each pipeline: with `pipefail` set, a `grep` that matches nothing exits
 # 1, which would abort the script right here via `set -e` -- BEFORE the friendly
@@ -22,7 +23,7 @@ PY_ASSET_PATTERN="aarch64-apple-darwin-install_only.tar.gz"
 # runner: the job failed in ~0.1s with zero output, because pipefail killed it silently
 # on this exact line before any echo could print. `|| true` lets an empty match reach
 # the intended graceful error message instead of a silent, unexplained failure.
-PY_URL="$(curl -sL https://api.github.com/repos/astral-sh/python-build-standalone/releases/latest \
+PY_URL="$(curl -sL $CURL_RETRY https://api.github.com/repos/astral-sh/python-build-standalone/releases/latest \
     | grep -o "https://[^\"]*cpython-3\.11[^\"]*${PY_ASSET_PATTERN}" | head -1 || true)"
 if [ -z "$PY_URL" ]; then
     echo "Could not resolve a python-build-standalone download URL for pattern: $PY_ASSET_PATTERN" >&2
@@ -33,7 +34,7 @@ rm -rf "$DIST"
 mkdir -p "$DIST"
 
 echo "Resolved Python build: $PY_URL"
-curl -L "$PY_URL" -o "$DIST/python.tar.gz"
+curl -L $CURL_RETRY "$PY_URL" -o "$DIST/python.tar.gz"
 PY_SIZE=$(stat -f%z "$DIST/python.tar.gz" 2>/dev/null || stat -c%s "$DIST/python.tar.gz")
 if [ "$PY_SIZE" -lt 1000000 ]; then
     echo "Downloaded Python build is only $PY_SIZE bytes -- not a real tarball. URL: $PY_URL" >&2
@@ -61,14 +62,14 @@ rm "$DIST/python.tar.gz"
 # accept GPL on macOS specifically and update docs/LICENSES.md to say so explicitly
 # rather than implying LGPL applies uniformly across all three platforms.
 mkdir -p "$DIST/ffmpeg"
-FFMPEG_INFO="$(curl -sL https://evermeet.cx/ffmpeg/info/ffmpeg/release)"
+FFMPEG_INFO="$(curl -sL $CURL_RETRY https://evermeet.cx/ffmpeg/info/ffmpeg/release)"
 FFMPEG_URL="$(echo "$FFMPEG_INFO" | grep -o '"zip":{"url":"[^"]*"' | grep -o 'https://[^"]*' || true)"
 if [ -z "$FFMPEG_URL" ]; then
     echo "Could not resolve a macOS ffmpeg download URL from evermeet.cx" >&2
     exit 1
 fi
 echo "Resolved macOS ffmpeg build: $FFMPEG_URL"
-curl -L "$FFMPEG_URL" -o "$DIST/ffmpeg.zip"
+curl -L $CURL_RETRY "$FFMPEG_URL" -o "$DIST/ffmpeg.zip"
 FFMPEG_SIZE=$(stat -f%z "$DIST/ffmpeg.zip" 2>/dev/null || stat -c%s "$DIST/ffmpeg.zip")
 if [ "$FFMPEG_SIZE" -lt 1000000 ]; then
     echo "Downloaded ffmpeg build is only $FFMPEG_SIZE bytes -- not real. URL: $FFMPEG_URL" >&2
