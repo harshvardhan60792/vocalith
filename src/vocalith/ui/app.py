@@ -9,6 +9,7 @@ import traceback
 
 import gradio as gr
 
+from .. import paths
 from ..device import describe_device
 from ..pipelines import clone as clone_mod
 from ..pipelines import dub as dub_mod
@@ -203,8 +204,14 @@ def _dub_tab():
 
 def launch(server_port: int = 7860):
     app = build_app()
+    # Every pipeline writes its result under paths.outputs_dir() (a per-OS user data
+    # dir, e.g. %LOCALAPPDATA%\Vocalith\outputs on Windows) -- outside Gradio 6.x's
+    # default allowed roots (cwd + system temp dir). Without this, serving the very
+    # first real generation's output file back to the browser raises
+    # gradio.exceptions.InvalidPathError. Found for real running the packaged app.
     app.launch(server_name="127.0.0.1", server_port=server_port, share=False,
-               inbrowser=False, theme=theme, css=design.CSS, head=design.head_script())
+               inbrowser=False, theme=theme, css=design.CSS, head=design.head_script(),
+               allowed_paths=[str(paths.outputs_dir())])
 
 
 if __name__ == "__main__":
