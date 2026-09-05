@@ -5,25 +5,25 @@
 # right-click -> Open workaround in the README rather than paying for a cert (violates
 # the "everything free" constraint). See IMPLEMENTATION_PLAN.md §7.1.
 #
-# STATUS: complete draft, but NOT YET RUN on an actual Mac -- no Mac hardware was
-# reachable anywhere this session (not this machine, not Kaggle, which is Linux/GPU
-# only). Two fixes were still applied pre-emptively, both proven necessary by actually
-# running the sibling launcher/linux/build.sh for real on Kaggle: (1) the identical
-# python-build-standalone URL-construction bug -- a hand-guessed release tag
-# ("20250612") didn't exist, GitHub returned a 9-byte error stub instead of a tarball,
-# now resolved dynamically via GitHub's API instead; (2) ffmpeg was a bare TODO stub
-# until this pass, now resolved dynamically via evermeet.cx's info API (see the
-# license note at that section -- it's GPL, not the LGPL builds used elsewhere, and
-# that inconsistency is still open). None of this substitutes for actually running it
-# on a clean Mac account before trusting it -- that is the single highest-value next
-# step for this project, full stop.
+# STATUS: run for real on GitHub Actions' macos-14 (arm64) runner via the Release
+# workflow, 2026-09-05. First attempt failed in ~0.1s with zero log output -- pipefail
+# killed the script on the python-build-standalone URL-resolution line before the
+# friendly "could not resolve a URL" check could ever run (see the `|| true` comment
+# at that line). Fixed and re-tagged; check this repo's Actions tab for the latest
+# release run's actual pass/fail before assuming success from this comment alone.
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 DIST="$ROOT/dist/macos"
 PY_ASSET_PATTERN="aarch64-apple-darwin-install_only.tar.gz"
+# `|| true` on each pipeline: with `pipefail` set, a `grep` that matches nothing exits
+# 1, which would abort the script right here via `set -e` -- BEFORE the friendly
+# `if [ -z ... ]` check below ever runs. Found for real on GitHub Actions' macos-14
+# runner: the job failed in ~0.1s with zero output, because pipefail killed it silently
+# on this exact line before any echo could print. `|| true` lets an empty match reach
+# the intended graceful error message instead of a silent, unexplained failure.
 PY_URL="$(curl -sL https://api.github.com/repos/astral-sh/python-build-standalone/releases/latest \
-    | grep -o "https://[^\"]*cpython-3\.11[^\"]*${PY_ASSET_PATTERN}" | head -1)"
+    | grep -o "https://[^\"]*cpython-3\.11[^\"]*${PY_ASSET_PATTERN}" | head -1 || true)"
 if [ -z "$PY_URL" ]; then
     echo "Could not resolve a python-build-standalone download URL for pattern: $PY_ASSET_PATTERN" >&2
     exit 1
@@ -62,7 +62,7 @@ rm "$DIST/python.tar.gz"
 # rather than implying LGPL applies uniformly across all three platforms.
 mkdir -p "$DIST/ffmpeg"
 FFMPEG_INFO="$(curl -sL https://evermeet.cx/ffmpeg/info/ffmpeg/release)"
-FFMPEG_URL="$(echo "$FFMPEG_INFO" | grep -o '"zip":{"url":"[^"]*"' | grep -o 'https://[^"]*')"
+FFMPEG_URL="$(echo "$FFMPEG_INFO" | grep -o '"zip":{"url":"[^"]*"' | grep -o 'https://[^"]*' || true)"
 if [ -z "$FFMPEG_URL" ]; then
     echo "Could not resolve a macOS ffmpeg download URL from evermeet.cx" >&2
     exit 1
