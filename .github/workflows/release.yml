@@ -5,6 +5,13 @@ on:
     tags: ["v*"]
   workflow_dispatch:  # allow a manual test run before trusting a real tag
 
+# This repo's default GITHUB_TOKEN permissions are read-only (a repo/org setting, not
+# a workflow bug) -- softprops/action-gh-release needs contents: write to create the
+# release itself. Found for real: v0.1.1's publish job failed with "403 Resource not
+# accessible by integration" despite all three platform builds passing.
+permissions:
+  contents: write
+
 jobs:
   windows:
     runs-on: windows-latest
