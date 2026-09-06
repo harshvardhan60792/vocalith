@@ -12,15 +12,55 @@ and know exactly what "done" means for the next task.
 
 ## AT A GLANCE — read this block first, it's the whole status in one place
 
-*Last updated 2026-09-05. Project is shipped. If you're an AI picking this project up
-cold, this block plus §2's table is enough to know where things stand without reading
-the full history below — read the history when you need the *why*.*
+*Last updated 2026-09-06. Project is shipped and has now been run for real outside
+Kaggle/CI — on an actual desktop, by an actual user. If you're an AI picking this
+project up cold, this block plus §2's table is enough to know where things stand
+without reading the full history below — read the history when you need the *why*.*
 
 **Released:** [github.com/harshvardhan60792/vocalith](https://github.com/harshvardhan60792/vocalith),
-latest tag `v0.1.3`. Real installers for Windows, macOS (arm64), and Linux are attached
+latest tag `v0.1.5`. Real installers for Windows, macOS (arm64), and Linux are attached
 to the [GitHub Release](https://github.com/harshvardhan60792/vocalith/releases/latest),
 each built by `release.yml` on GitHub's own hosted runners — not simulated, not just
 Kaggle. `ci.yml` (lint + logic tests) is green on real GitHub Actions too.
+
+**v0.1.5 fixed real bugs found by actually running the app on a real desktop for the
+first time** (installed into a local venv, launched, driven through a real browser —
+not just Kaggle spikes or CI builds, which prove the *build* works but never actually
+exercise the app as a user would). In order of how they were found:
+1. Every pipeline's model cache lived for the whole process lifetime — using TTS then
+   Clone then Dub in one session left Kokoro, Chatterbox, Whisper, and the translation
+   model all resident in RAM simultaneously, enough to crash the server on a normal
+   desktop. Fixed with `models.evict_others()`: only one heavy model stays loaded at a
+   time now; repeat use of the *same* feature stays fast.
+2. Voice cloning was flatly broken: `audio.duration()` derived the ffprobe path via
+   `ffmpeg.replace("ffmpeg", "ffprobe")` on the *whole path*, which corrupts it whenever
+   "ffmpeg" appears in a parent folder too — exactly what a real WinGet ffmpeg install
+   produces (`...\ffmpeg-9.0-full_build\bin\ffmpeg.EXE`). This would have broken Voice
+   Cloning for any real Windows user with ffmpeg installed that way. Fixed to only
+   rename the filename component.
+3. `isolate()`'s error message truncated Demucs' stderr to its last 2000 chars, which on
+   failure showed only download-progress-bar noise and hid the real error. Full output
+   now goes to a log file.
+4. No disk-space preflight check before downloading a model — `huggingface_hub` only
+   *warns* on a too-full drive and proceeds anyway, producing a corrupted download that
+   fails somewhere unrelated downstream. Added a clear up-front check instead.
+5. UI still read as bland despite the earlier dark-theme pass — added a layered gradient
+   background with a grain texture, glass-card tab panels, a gradient headline, and a
+   glowing gradient primary button. Also genericized every "Loading Kokoro/Chatterbox/
+   Demucs" string and UI label that leaked internal model names.
+
+**Open finding, not a code bug — flag this to whoever runs this next:** the test machine
+this was found on had its C: drive at 100% full (200GB drive, ~1-1.5GB free) for most of
+this session. That alone caused several *other* transient, non-reproducible failures
+tonight (a `MemoryError` mid-import, a bare `SystemError` inside `dataclasses.exec()`, an
+OS-level process kill with no output) that had nothing to do with Vocalith's code — they
+went away on retry once nothing else heavy was running concurrently. If "it doesn't work"
+gets reported again, check free disk space and free RAM on that machine *before*
+assuming it's a new code bug. A `.venv` this session created under the repo root
+(~2.4GB) and a stray `~/.cache/huggingface` (~1GB, outside the app's own data dir) are
+still sitting on disk uncleaned — a destructive-action safety check correctly declined
+to delete them autonomously; whoever's at the keyboard should delete both by hand to
+reclaim that space.
 
 **Genuinely done and verified on real infra (not just written):**
 - **Phase 0** — Kokoro, Chatterbox, Demucs, Whisper all load and chain correctly; the
