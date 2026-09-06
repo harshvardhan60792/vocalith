@@ -66,11 +66,17 @@ def mux_audio(video_path: str | Path, audio_path: str | Path, out_path: str | Pa
 
 
 def duration(path: str | Path) -> float:
-    ffmpeg = _ffmpeg_bin()
-    ffprobe = ffmpeg.replace("ffmpeg", "ffprobe")
-    if Path(ffprobe).exists() or shutil.which("ffprobe"):
+    # Real bug this avoids: naively string-replacing "ffmpeg" -> "ffprobe" across the
+    # WHOLE path corrupts it whenever "ffmpeg" appears in a parent directory too --
+    # e.g. WinGet's real install path
+    # ...\ffmpeg-9.0-full_build\bin\ffmpeg.EXE becomes the nonexistent
+    # ...\ffprobe-9.0-full_build\bin\ffprobe.EXE. Only rename the filename component.
+    ffmpeg = Path(_ffmpeg_bin())
+    ffprobe = ffmpeg.with_name(ffmpeg.name.replace("ffmpeg", "ffprobe"))
+    ffprobe_bin = str(ffprobe) if ffprobe.exists() else shutil.which("ffprobe")
+    if ffprobe_bin:
         r = subprocess.run(
-            [ffprobe if shutil.which("ffprobe") else ffprobe, "-v", "error",
+            [ffprobe_bin, "-v", "error",
              "-show_entries", "format=duration", "-of",
              "default=noprint_wrappers=1:nokey=1", str(path)],
             capture_output=True, text=True,

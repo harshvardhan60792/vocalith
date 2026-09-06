@@ -55,6 +55,26 @@ def _marker_path(key: str) -> Path:
     return paths.models_dir() / f".{key}.done"
 
 
+def _check_disk_space(spec: ModelSpec) -> None:
+    """Fail with a clear, actionable message before downloading, instead of letting
+    a too-full drive silently corrupt the download and surface as a confusing crash
+    much later (e.g. a torch import error, or a subprocess failing with no useful
+    message). Found for real: huggingface_hub only *warns* on low disk space and
+    proceeds anyway -- on a drive with less free space than the file being fetched,
+    that produces a truncated/corrupt download whose failure shows up somewhere
+    completely unrelated downstream, not here where the actual cause is."""
+    free_mb = shutil.disk_usage(paths.models_dir()).free / (1024 * 1024)
+    # 1.3x headroom: downloads need temp space alongside the final file during
+    # extraction/hashing, not just room for the finished artifact.
+    needed_mb = spec.size_mb * 1.3
+    if free_mb < needed_mb:
+        raise RuntimeError(
+            f"Not enough disk space to download this feature's model "
+            f"(~{spec.size_mb} MB needed, only {free_mb:.0f} MB free on this drive). "
+            f"Free up some space and try again."
+        )
+
+
 def is_downloaded(model_key: str) -> bool:
     return _marker_path(model_key).exists()
 
@@ -76,6 +96,8 @@ def ensure(model_key: str, progress_cb: ProgressCB = None, lang_pair: tuple[str,
         if progress_cb:
             progress_cb(1.0, f"{model_key} ready")
         return _resolve_path(spec, lang_pair)
+
+    _check_disk_space(spec)
 
     if progress_cb:
         progress_cb(0.0, f"Downloading {model_key} (~{spec.size_mb} MB)…")
@@ -118,8 +140,40 @@ def _resolve_path(spec: ModelSpec, lang_pair: tuple[str, str] | None) -> Path:
     return paths.models_dir() / "torch"
 
 
+_unload_hooks: dict[str, Callable[[], None]] = {}
+
+
+def register_unloader(name: str, unload_fn: Callable[[], None]) -> None:
+    """Each pipeline module with an in-process model cache (tts, clone, transcribe,
+    translate) registers a callback that clears its own cache dict. Lets
+    evict_others() actually free memory instead of only running a no-op gc pass."""
+    _unload_hooks[name] = unload_fn
+
+
+def evict_others(keep: str) -> None:
+    """Drop every cached model except `keep`'s before loading a new heavy model.
+
+    Real bug this fixes: each pipeline's model cache lives for the process's whole
+    lifetime, so using TTS, then Clone, then Dub in one session leaves Kokoro,
+    Chatterbox, Whisper, and the translation model all resident in RAM at once.
+    On a 16GB machine with normal desktop usage that's enough to trigger a
+    MemoryError / OOM kill mid-request -- confirmed for real: a second heavy
+    process alongside a live server hit `MemoryError` loading a few-KB JSON file,
+    which only happens when available memory is already critically low. Capping
+    residency to one feature's model at a time (repeat use of the *same* feature
+    stays fast; switching features pays one reload, not a growing pile) is the
+    fix that doesn't require touching each pipeline's own logic.
+    """
+    for name, fn in _unload_hooks.items():
+        if name != keep:
+            fn()
+    unload_all()
+
+
 def unload_all() -> None:
-    """Free resident GPU model weights. Call when switching tabs under tight VRAM."""
+    """Free resident GPU model weights and run a GC pass. Safe to call any time;
+    only actually frees CPU-resident weights for caches cleared via evict_others()
+    first, since Python can't reclaim memory still referenced by a live cache dict."""
     import gc
 
     import torch

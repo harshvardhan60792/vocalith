@@ -32,7 +32,7 @@ def isolate(
     device = device or pick_device()
     models.ensure("demucs")
     if progress_cb:
-        progress_cb(0.05, "Loading Demucs (first run downloads ~320 MB)…")
+        progress_cb(0.05, "Loading separation model (first run downloads ~320 MB)…")
 
     out_dir = Path(out_dir) if out_dir else paths.outputs_dir() / "demucs"
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -46,7 +46,15 @@ def isolate(
         progress_cb(0.2, "Separating audio…")
     r = subprocess.run(cmd, capture_output=True, text=True)
     if r.returncode != 0:
-        raise RuntimeError(f"Demucs failed:\n{r.stderr[-2000:]}")
+        # Demucs' progress bars alone can run past 2000 chars, burying the actual error
+        # under download-progress noise -- found for real debugging a run that looked
+        # broken but was just truncated before the real traceback. Full output goes to
+        # a log file; only a short, actually-useful tail is shown inline.
+        log_path = paths.logs_dir() / "demucs_error.log"
+        log_path.write_text(f"STDOUT:\n{r.stdout}\n\nSTDERR:\n{r.stderr}", encoding="utf-8")
+        raise RuntimeError(
+            f"Voice separation failed:\n{r.stderr[-500:]}\n\nFull details: {log_path}"
+        )
 
     stem_dir_matches = glob.glob(str(out_dir / "htdemucs" / "*"))
     if not stem_dir_matches:

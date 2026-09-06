@@ -25,9 +25,12 @@ SAMPLE_RATE = 24000
 
 _pipeline_cache: dict[str, object] = {}
 
+models.register_unloader("tts", _pipeline_cache.clear)
+
 
 def _get_pipeline(lang_code: str = "a"):
     if lang_code not in _pipeline_cache:
+        models.evict_others(keep="tts")
         models.ensure("kokoro")
         from kokoro import KPipeline
         _pipeline_cache[lang_code] = KPipeline(lang_code=lang_code)
@@ -47,7 +50,7 @@ def synthesize(
         raise ValueError("No text provided.")
     device = device or pick_device()
     if progress_cb:
-        progress_cb(0.0, "Loading Kokoro…")
+        progress_cb(0.0, "Loading voice model…")
     pipeline = _get_pipeline(lang)
 
     chunks = []

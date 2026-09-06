@@ -42,7 +42,7 @@ def build_app() -> gr.Blocks:
         with gr.Column(elem_classes=["vx-hero"]):
             gr.HTML(
                 '<div class="vx-eyebrow">Local · Private · Free Forever</div>'
-                '<h1>Your voice,<br>kept off the record.</h1>'
+                '<h1>Your voice,<br><span class="vx-gradient-text">kept off the record.</span></h1>'
                 '<p class="vx-tagline">Text to speech, voice cloning, isolation, and dubbing '
                 '— run entirely on <em>this</em> machine. Nothing you speak or upload ever '
                 'reaches a server.</p>'
@@ -61,9 +61,9 @@ def build_app() -> gr.Blocks:
                 _dub_tab()
 
         gr.HTML(
-            '<div class="vx-footnote">Kokoro · Chatterbox · Demucs · Whisper — '
-            'each under a permissive license, each running locally. No account, no API key, '
-            'no upload.</div>'
+            '<div class="vx-footnote">Every model this app uses is permissively licensed '
+            'and runs entirely on this machine — see the full list in the docs. '
+            'No account, no API key, no upload.</div>'
         )
 
     return app
@@ -102,12 +102,12 @@ def _clone_tab():
             with gr.Accordion("Advanced", open=False):
                 exaggeration = gr.Slider(0.0, 1.0, value=0.5, label="Exaggeration")
                 cfg_weight = gr.Slider(0.0, 1.0, value=0.5, label="CFG weight")
-                denoise = gr.Checkbox(value=True, label="Clean reference audio first (Demucs)")
+                denoise = gr.Checkbox(value=True, label="Clean reference audio first")
             run = gr.Button("Generate", variant="primary")
         with gr.Column():
             out_audio = gr.Audio(label="Output", type="filepath")
             status = gr.Markdown()
-            gr.Markdown("_Output is watermarked (Resemble AI Perth watermarker), inherited from Chatterbox._")
+            gr.Markdown("_Output carries an inaudible watermark identifying it as AI-generated._")
 
     def _run(ref, text, exaggeration, cfg_weight, denoise, progress=gr.Progress()):
         if ref is None:

@@ -20,9 +20,12 @@ MAX_USEFUL_REFERENCE_SECONDS = 20.0
 
 _model_cache: dict[str, object] = {}
 
+models.register_unloader("clone", _model_cache.clear)
+
 
 def _get_model(device: str):
     if device not in _model_cache:
+        models.evict_others(keep="clone")
         models.ensure("chatterbox")
         from chatterbox.tts import ChatterboxTTS
         _model_cache[device] = ChatterboxTTS.from_pretrained(device=device)
@@ -66,7 +69,7 @@ def clone(
             pass
 
     if progress_cb:
-        progress_cb(0.2, "Loading Chatterbox…")
+        progress_cb(0.2, "Loading cloning model…")
     model = _get_model(device)
 
     if progress_cb:

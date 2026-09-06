@@ -29,6 +29,17 @@ from pathlib import Path
 
 _STATIC = Path(__file__).parent / "static"
 
+# Broken into short adjacent string literals (Python auto-concatenates them) purely
+# to keep every physical line under ruff's E501 limit -- this is one continuous data
+# URI value, not multiple statements.
+_NOISE_SVG = (
+    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' "
+    "height='90'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' "
+    "baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E"
+    "%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E"
+    "%3C/svg%3E"
+)
+
 
 def head_script() -> str:
     """anime.js (vendored, inlined -- no CDN) plus one small helper it powers:
@@ -87,10 +98,18 @@ body.dark .gradio-container,
     /* background-color + background-image as separate longhands, NOT the `background`
        shorthand -- shorthand followed by a background-image override in the same rule
        silently dropped background-color from the serialized declaration entirely
-       (verified via the live CSSOM, not a guess); this is the fix, not a style choice. */
+       (verified via the live CSSOM, not a guess); this is the fix, not a style choice.
+       Three layered radial gradients ("aurora" background, the Linear/Vercel signature
+       ambient-glow technique) plus a fine noise/grain SVG overlay -- a single flat
+       gradient on pure near-black read as bland; grain specifically is what keeps a
+       dark flat surface from reading as an obviously-AI-generated too-clean gradient. */
     background-color: var(--vx-bg) !important;
     background-image:
-        radial-gradient(ellipse 800px 420px at 85% -15%, rgba(94,106,210,0.10), transparent 60%) !important;
+        radial-gradient(ellipse 900px 500px at 88% -10%, rgba(94,106,210,0.16), transparent 60%),
+        radial-gradient(ellipse 700px 460px at -8% 55%, rgba(140,94,210,0.09), transparent 62%),
+        radial-gradient(ellipse 600px 380px at 60% 105%, rgba(94,180,210,0.05), transparent 60%),
+        url("__VX_NOISE_SVG__") !important;
+    background-repeat: no-repeat, no-repeat, no-repeat, repeat !important;
     color: var(--vx-text) !important;
     font-family: var(--vx-sans) !important;
     max-width: 980px !important;
@@ -133,6 +152,19 @@ body, .gradio-container * {
     animation: vx-rise 0.55s cubic-bezier(.2,.8,.2,1) 0.26s both;
 }
 .vx-hero .vx-tagline em { color: var(--vx-text); font-style: normal; font-weight: 600; }
+
+/* Needs !important: this project has repeatedly found Gradio's own CSS wins
+   ties/specificity on plain-looking rules like `background` on generic elements
+   (same class of bug as the body.dark collision documented above) -- without it,
+   background-image silently stayed "none" while -webkit-text-fill-color still
+   applied, making the headline's second line render fully invisible. */
+.vx-gradient-text {
+    background-image: linear-gradient(100deg,
+        var(--vx-ink) 30%, var(--vx-accent-hover) 75%, var(--vx-accent) 100%) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+}
 
 .vx-banner {
     display: inline-flex;
@@ -190,6 +222,20 @@ body, .gradio-container * {
     border: none !important;
     box-shadow: none !important;
 }
+
+/* The tab content area previously sat directly on the void background with nothing
+   to anchor it -- everything read as loose fields floating in black. A single
+   elevated glass panel per tab (subtle border + soft shadow + faint top highlight,
+   the standard "raised card" language every dark-SaaS reference site uses) gives the
+   working area an actual edge instead of bleeding into the page background. */
+[role="tabpanel"] {
+    background: linear-gradient(180deg, rgba(255,255,255,0.025), rgba(255,255,255,0) 40%),
+        var(--vx-bg-elevated) !important;
+    border: 1px solid var(--vx-border) !important;
+    border-radius: var(--vx-radius-lg) !important;
+    padding: 32px !important;
+    box-shadow: 0 24px 60px -30px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.03) !important;
+}
 label.svelte-1gfkn6j, .gr-form label, label {
     font-size: 0.78rem !important;
     font-weight: 700 !important;
@@ -238,23 +284,23 @@ input:focus, textarea:focus, select:focus {
     border-radius: var(--vx-radius-lg) !important;
 }
 
-/* ---------- Buttons: black pill primary, ElevenLabs-style, not colored --------- */
+/* ---------- Buttons: gradient primary with a soft ambient glow, not flat fill --- */
 button.primary, .gradio-container button.primary {
-    background: var(--vx-accent) !important;
+    background: linear-gradient(135deg, var(--vx-accent-hover), var(--vx-accent) 60%) !important;
     color: var(--vx-accent-ink) !important;
     border: none !important;
     border-radius: var(--vx-radius) !important;
     font-weight: 600 !important;
     letter-spacing: 0.01em;
-    box-shadow: none !important;
-    transition: transform 0.15s cubic-bezier(.2,.9,.3,1.3), background 0.15s ease, box-shadow 0.15s ease;
+    box-shadow: 0 8px 24px -10px rgba(94,106,210,0.45) !important;
+    transition: transform 0.15s cubic-bezier(.2,.9,.3,1.3), box-shadow 0.15s ease, filter 0.15s ease;
 }
 button.primary:hover {
-    background: var(--vx-accent-hover) !important;
+    filter: brightness(1.08);
     transform: translateY(-1px);
-    box-shadow: 0 8px 20px -8px rgba(94,106,210,0.55) !important;
+    box-shadow: 0 10px 28px -8px rgba(94,106,210,0.65) !important;
 }
-button.primary:active { transform: translateY(0); }
+button.primary:active { transform: translateY(0); filter: brightness(0.97); }
 
 button.secondary, .gradio-container button.secondary {
     background: var(--vx-bg-elevated) !important;
@@ -307,3 +353,5 @@ input[type="range"]::-webkit-slider-thumb { background: var(--vx-accent) !import
 ::-webkit-scrollbar-track { background: var(--vx-bg); }
 ::-webkit-scrollbar-thumb { background: var(--vx-border-strong); border-radius: 8px; }
 """
+
+CSS = CSS.replace("__VX_NOISE_SVG__", _NOISE_SVG)

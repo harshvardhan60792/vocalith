@@ -17,11 +17,14 @@ from __future__ import annotations
 
 from typing import Callable, Optional
 
+from .. import models
 from ..device import pick_device
 
 ProgressCB = Optional[Callable[[float, str], None]]
 
 _translator_cache: dict[str, tuple] = {}  # key -> (tokenizer, model, is_m2m100: bool)
+
+models.register_unloader("translate", _translator_cache.clear)
 
 
 def _opus_mt_id(src: str, tgt: str) -> str:
@@ -33,6 +36,7 @@ def _load_translator(src: str, tgt: str, device: str) -> tuple:
     if key in _translator_cache:
         return _translator_cache[key]
 
+    models.evict_others(keep="translate")
     from huggingface_hub.utils import HfHubHTTPError
     from transformers import AutoModelForSeq2SeqLM, AutoTokenizer
 

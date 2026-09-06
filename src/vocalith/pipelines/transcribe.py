@@ -21,10 +21,13 @@ class Segment(TypedDict):
 
 _model_cache: dict[str, object] = {}
 
+models.register_unloader("transcribe", _model_cache.clear)
+
 
 def _get_model(name: str, device: str):
     key = f"{name}:{device}"
     if key not in _model_cache:
+        models.evict_others(keep="transcribe")
         models.ensure("whisper")
         import whisper
 

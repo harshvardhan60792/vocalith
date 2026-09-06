@@ -79,6 +79,20 @@ def main():
                     time.sleep(0.5)
         threading.Thread(target=_open_when_ready, daemon=True).start()
 
+        def _warm_up_tts():
+            # Text-to-Speech is the smallest model (~350MB) and the feature most people
+            # try first -- loading it in the background while the UI is still rendering
+            # means the first real click feels instant instead of paying the "Loading
+            # voice model…" cost live. Deliberately NOT warming Chatterbox/Demucs/Whisper
+            # too: that would slow launch and hold multiple heavy models in RAM at idle,
+            # working against the memory-eviction fix (models.evict_others) elsewhere.
+            try:
+                from vocalith.pipelines import tts
+                tts._get_pipeline("a")
+            except Exception:
+                pass  # best-effort only -- a real click will just load it then instead
+        threading.Thread(target=_warm_up_tts, daemon=True).start()
+
         launch(server_port=port)
     except Exception:
         tb = traceback.format_exc()
