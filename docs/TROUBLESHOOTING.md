@@ -6,6 +6,13 @@ Vocalith ships CPU-only PyTorch and upgrades to CUDA on first run if it detects
 etc.), delete the marker file in the app's cache dir (see Vocalith's data folder,
 `cache/.cuda_torch_checked`) and restart to retry.
 
+**Not enough disk space / C: drive is full**
+Models download into your OS's default per-user data folder (`%LOCALAPPDATA%\Vocalith`
+on Windows), which usually lives on your C: drive. If that drive is low on space, set
+the environment variable `VOCALITH_DATA_DIR` to a folder on a different drive (e.g.
+`D:\Vocalith`) before launching, and everything -- models, outputs, cache, logs -- moves
+there instead. Voice cloning alone needs ~2.2GB free just for its model.
+
 **Port already in use**
 The launcher auto-increments from 7860 up to 7879. If all of those are taken, close
 whatever else is using them or restart your machine.

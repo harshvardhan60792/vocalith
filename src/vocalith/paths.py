@@ -14,6 +14,14 @@ APP_NAME = "Vocalith"
 
 
 def _base_dir() -> Path:
+    # Escape hatch for a full/small system drive -- model downloads alone can run
+    # several GB (Chatterbox is ~2.2GB by itself), which the default OS user-data
+    # location (C: on Windows) may not have room for. Set once, e.g.
+    # VOCALITH_DATA_DIR=D:\Vocalith, to move everything (models, outputs, cache,
+    # logs) onto a different drive.
+    override = os.environ.get("VOCALITH_DATA_DIR")
+    if override:
+        return Path(override)
     if user_data_dir is not None:
         return Path(user_data_dir(APP_NAME, appauthor=False))
     # fallback if platformdirs isn't installed yet (e.g. during bootstrap)
